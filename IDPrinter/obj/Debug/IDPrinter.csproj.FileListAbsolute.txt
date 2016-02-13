@@ -1,0 +1,16 @@
+I:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.exe.config
+I:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.exe
+I:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.pdb
+I:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.FrmMain.resources
+I:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
+I:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
+I:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.exe
+I:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.pdb
+E:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.exe.config
+E:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.exe
+E:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.pdb
+E:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.exe
+E:\IDPrinter\IDPrinter\bin\Debug\IDPrinter.pdb
+E:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.FrmMain.resources
+E:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
+E:\IDPrinter\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
