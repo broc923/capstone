@@ -79,7 +79,7 @@ namespace IDPrinter {
                 }
                 //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
                 if (admin == false){ //Does the user have admin? No
-                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 350, 30, 400, 50, out error) == 0) {
+                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 370, 30, 325, 50, out error) == 0) {
                         msg = "DrawImage method error code: " + error.ToString();
                         return;
                     }
@@ -90,18 +90,23 @@ namespace IDPrinter {
                     }
                 }
                 //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
-                if (graphics.DrawImage(ascii.GetBytes(userPicture), 30, 30, 200, 150, out error) == 0) {
+                if (graphics.DrawImage(ascii.GetBytes(userPicture), 30, 30, 275, 350, out error) == 0) {
                     msg = "DrawImage method error code: " + error.ToString();
                     return;
                 }
                 //DrawText(X Coordinate, Y Coordinate, String, Font type, font size, fontStyle, color, out error)
-                if (graphics.DrawText(35, 575, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0xFF0000, out error) == 0){
+                if (graphics.DrawText(35, 380, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0){
                     msg = "DrawText method error code: " + error.ToString();
                     return;
                 }
                 //DrawBarcode(X Coordinate, Y Coordinate, rotation, barcode type, width ratio, multiplier, height, text under, barcode data, out error)
-                if (graphics.DrawBarcode(35, 500, 0, 0, 3, 6, 90, 0, ascii.GetBytes(userID), out error) == 0){
+                if (graphics.DrawBarcode(365, 570, 0, 0, 2, 4, 85, 0, ascii.GetBytes(userID), out error) == 0){
                     msg = "DrawBarcode method error code: " + error.ToString();
+                    return;
+                }
+                //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
+                if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\logo.png"), 400, 70, 450, 320, out error) == 0) {
+                    msg = "DrawImage method error code: " + error.ToString();
                     return;
                 }
                 if (graphics.PrintGraphics(out error) == 0) {

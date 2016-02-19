@@ -105,7 +105,7 @@ namespace IDPrinter {
                 //need to check first if all forms are filled out
                 //do later
                 graphics = new GraphicCode();
-                graphics.Print(cbPrinters.Text, txtFirstName + " " + txtLastName, "1", userSelectedFilePath, cbAdmin.Checked, out message);
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, out message);
                 if (message == "") {
                     PrinterReadyToStart(cbPrinters.Text, 60);
                     lblStatus.Text = "Printing the ID";
