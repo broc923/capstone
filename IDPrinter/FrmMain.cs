@@ -140,7 +140,7 @@ namespace IDPrinter {
                 readWriter.SendComData(sender, e);
 
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer");
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer. :c");
             } finally {
                 readWriter = null;
             }
