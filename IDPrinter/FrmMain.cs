@@ -81,6 +81,7 @@ namespace IDPrinter {
         private void FrmMain_Load(object sender, EventArgs e) {
             GetSDKVersions();
             CheckForPrinters();
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
         }
         #endregion
 
@@ -145,7 +146,18 @@ namespace IDPrinter {
             }
         }
 
-        
+        private void btnClear_Click(object sender, EventArgs e) {
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtPhone.Clear();
+            txtStreet.Clear();
+            txtCity.Clear();
+            txtZip.Clear();
+            cbAdmin.Checked = false;
+            cbState.SelectedIndex = -1;
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+        }
+
         public FrmMain() {
             InitializeComponent();
         }
