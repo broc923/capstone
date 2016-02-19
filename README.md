@@ -1,3 +1,6 @@
-# capstone
+# Summary
 This project is for the NESCC Capstone group.
-Broc White
+# Broc White
+# Nicole
+# George Shelton
+# Caleb Mann
