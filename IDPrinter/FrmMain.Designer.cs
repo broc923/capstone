@@ -23,13 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.tabAddUser = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblImageLocation = new System.Windows.Forms.Label();
             this.userImageBox = new System.Windows.Forms.PictureBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,8 +57,6 @@
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.lblImageLocation = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -84,7 +83,7 @@
             this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
             this.tabLogin.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogin.Size = new System.Drawing.Size(498, 277);
+            this.tabLogin.Size = new System.Drawing.Size(498, 310);
             this.tabLogin.TabIndex = 0;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
@@ -94,13 +93,13 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(293, 42);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 0;
-            this.label8.Text = "label8";
+            this.label8.Text = "Ayee lmao";
             // 
             // tabAddUser
             // 
-            this.tabAddUser.Controls.Add(this.button2);
+            this.tabAddUser.Controls.Add(this.btnClear);
             this.tabAddUser.Controls.Add(this.groupBox1);
             this.tabAddUser.Controls.Add(this.lblPrinter);
             this.tabAddUser.Controls.Add(this.cbPrinters);
@@ -115,14 +114,15 @@
             this.tabAddUser.Text = "Add User";
             this.tabAddUser.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnClear
             // 
-            this.button2.Location = new System.Drawing.Point(371, 279);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Clear All";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClear.Location = new System.Drawing.Point(371, 279);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 3;
+            this.btnClear.Text = "Clear All";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // groupBox1
             // 
@@ -152,9 +152,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New User Information";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(308, 167);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblImageLocation
+            // 
+            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblImageLocation.AutoSize = true;
+            this.lblImageLocation.Location = new System.Drawing.Point(99, 221);
+            this.lblImageLocation.Name = "lblImageLocation";
+            this.lblImageLocation.Size = new System.Drawing.Size(165, 13);
+            this.lblImageLocation.TabIndex = 46;
+            this.lblImageLocation.Text = "C://path/to/students/picture.png";
+            // 
             // userImageBox
             // 
-            this.userImageBox.Image = ((System.Drawing.Image)(resources.GetObject("userImageBox.Image")));
             this.userImageBox.Location = new System.Drawing.Point(6, 114);
             this.userImageBox.Name = "userImageBox";
             this.userImageBox.Size = new System.Drawing.Size(128, 96);
@@ -407,7 +427,7 @@
             this.tabAbout.Controls.Add(this.lblGraphicsVersion);
             this.tabAbout.Location = new System.Drawing.Point(4, 22);
             this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Size = new System.Drawing.Size(498, 277);
+            this.tabAbout.Size = new System.Drawing.Size(498, 310);
             this.tabAbout.TabIndex = 2;
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
@@ -433,27 +453,6 @@
             // openUserImage
             // 
             this.openUserImage.FileName = "openUserImage";
-            // 
-            // lblImageLocation
-            // 
-            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblImageLocation.AutoSize = true;
-            this.lblImageLocation.Location = new System.Drawing.Point(99, 221);
-            this.lblImageLocation.Name = "lblImageLocation";
-            this.lblImageLocation.Size = new System.Drawing.Size(165, 13);
-            this.lblImageLocation.TabIndex = 46;
-            this.lblImageLocation.Text = "C://path/to/students/picture.png";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(308, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FrmMain
             // 
@@ -508,7 +507,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbAdmin;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox userImageBox;
         private System.Windows.Forms.OpenFileDialog openUserImage;
