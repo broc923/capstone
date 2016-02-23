@@ -6,7 +6,7 @@ using System.Drawing.Printing;
 namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
-        private string graphicsSDKVersion, magneticPrinterSDKVersion;
+        private string graphicsSDKVersion, printerSDKVersion;
         private string userSelectedFilePath;
         #endregion
 
@@ -27,19 +27,16 @@ namespace IDPrinter {
         #region Get SDK Info
         private void GetSDKVersions() {
             GraphicCode graphics;
-            MagneticStripCode printer;
             try {
                 graphics = new GraphicCode();
-                printer = new MagneticStripCode();
                 graphicsSDKVersion = graphics.GetSDKGraphicsVersion();
-                magneticPrinterSDKVersion = printer.GetSDKPrinterVersion();
+                printerSDKVersion = graphics.GetSDKPrinterVersion();
                 lblGraphicsVersion.Text = "Graphics Version: " + graphicsSDKVersion;
-                lblPrinterVersion.Text = "Magnetic Printer Version: " + magneticPrinterSDKVersion;
+                lblPrinterVersion.Text = "Magnetic Printer Version: " + printerSDKVersion;
             } catch (Exception e) {
                 MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber");
             } finally { 
                 graphics = null;
-                printer = null;
             }
         }
         #endregion
