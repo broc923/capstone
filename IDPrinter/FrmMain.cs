@@ -150,6 +150,7 @@ namespace IDPrinter {
         }
         #endregion
 
+        #region Clear form
         private void btnClear_Click(object sender, EventArgs e) {
             txtFirstName.Clear();
             txtLastName.Clear();
@@ -161,5 +162,6 @@ namespace IDPrinter {
             cbState.SelectedIndex = -1;
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
         }
+        #endregion
     }
 }
