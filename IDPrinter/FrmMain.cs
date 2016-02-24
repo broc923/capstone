@@ -133,6 +133,12 @@ namespace IDPrinter {
                 userImageBox.ImageLocation = userSelectedFilePath;
             }
         }
+
+        private void btnPreviewID_Click(object sender, EventArgs e) {
+            FrmPreview preview = new FrmPreview();
+            preview.Show();
+        }
+
         #endregion
 
         #region Testing 

@@ -420,6 +420,7 @@
             this.btnPreviewID.TabIndex = 1;
             this.btnPreviewID.Text = "Preview ID";
             this.btnPreviewID.UseVisualStyleBackColor = true;
+            this.btnPreviewID.Click += new System.EventHandler(this.btnPreviewID_Click);
             // 
             // tabAbout
             // 

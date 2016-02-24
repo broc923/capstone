@@ -7,3 +7,4 @@ I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resourc
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.exe
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.pdb
+I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
