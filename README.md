@@ -4,4 +4,3 @@ This project is for the NESCC Capstone group.
 # Nicole
 # George Shelton
 # Caleb Mann
-# Test

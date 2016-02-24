@@ -6,8 +6,19 @@ using System.Drawing.Printing;
 namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
-        private string graphicsSDKVersion, magneticPrinterSDKVersion;
-        private string userSelectedFilePath;
+        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath;
+        #endregion
+
+        #region Anything that happens on load up
+        public FrmMain() {
+            InitializeComponent();
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e) {
+            GetSDKVersions();
+            CheckForPrinters();
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+        }
         #endregion
 
         #region Grab Printers
@@ -27,19 +38,16 @@ namespace IDPrinter {
         #region Get SDK Info
         private void GetSDKVersions() {
             GraphicCode graphics;
-            MagneticStripCode printer;
             try {
                 graphics = new GraphicCode();
-                printer = new MagneticStripCode();
                 graphicsSDKVersion = graphics.GetSDKGraphicsVersion();
-                magneticPrinterSDKVersion = printer.GetSDKPrinterVersion();
+                printerSDKVersion = graphics.GetSDKPrinterVersion();
                 lblGraphicsVersion.Text = "Graphics Version: " + graphicsSDKVersion;
-                lblPrinterVersion.Text = "Magnetic Printer Version: " + magneticPrinterSDKVersion;
+                lblPrinterVersion.Text = "Printer Version: " + printerSDKVersion;
             } catch (Exception e) {
                 MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber");
             } finally { 
                 graphics = null;
-                printer = null;
             }
         }
         #endregion
@@ -74,14 +82,6 @@ namespace IDPrinter {
                 printer = null;
             }
             return false;
-        }
-        #endregion
-
-        #region Anything that happens on load up
-        private void FrmMain_Load(object sender, EventArgs e) {
-            GetSDKVersions();
-            CheckForPrinters();
-            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
         }
         #endregion
 
@@ -123,6 +123,7 @@ namespace IDPrinter {
         }
         #endregion
 
+        #region User Picture Insert
         private void btnUserPicture_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.DialogResult dr = openUserImage.ShowDialog();
@@ -132,19 +133,22 @@ namespace IDPrinter {
                 userImageBox.ImageLocation = userSelectedFilePath;
             }
         }
+        #endregion
 
+        #region Testing 
         private void button1_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter;
-            try {
-                readWriter = new MagneticStripCode();
-                readWriter.SendComData(sender, e);
+             try {
+                 readWriter = new MagneticStripCode();
+                 readWriter.SendComData();
 
-            } catch (Exception ex) {
-                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer");
-            } finally {
-                readWriter = null;
-            }
+             } catch (Exception ex) {
+                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer. :c");
+             } finally {
+                 readWriter = null;
+             }
         }
+        #endregion
 
         private void btnClear_Click(object sender, EventArgs e) {
             txtFirstName.Clear();
@@ -157,10 +161,5 @@ namespace IDPrinter {
             cbState.SelectedIndex = -1;
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
         }
-
-        public FrmMain() {
-            InitializeComponent();
-        }
-
     }
 }

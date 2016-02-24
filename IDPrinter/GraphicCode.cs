@@ -34,6 +34,26 @@ namespace IDPrinter {
         }
         #endregion
 
+        #region Get SDK DLL Version for Printer
+        public string GetSDKPrinterVersion() {
+            ZBRPrinter printer = null;
+            int major, minor, engLevel;
+            string pVersion = "";
+            try {
+                printer = new ZBRPrinter();
+                printer.GetSDKVer(out major, out minor, out engLevel);
+                if (major > 0 || minor > 0 || engLevel > 0) {
+                    pVersion = major.ToString() + "." + minor.ToString() + "." + engLevel.ToString();
+                }
+            } catch (Exception e) {
+                MessageBox.Show(e.ToString());
+            } finally {
+                printer = null;
+            }
+            return pVersion;
+        }
+        #endregion
+
         #region Is the ID printer busy with something else
         public bool IsPrinterBusy(string driverName, int timeoutInSeconds) {
             bool ready = false;
