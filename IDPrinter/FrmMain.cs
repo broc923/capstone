@@ -88,8 +88,10 @@ namespace IDPrinter {
         #region Print is clicked
         private void btnPrintID_Click(object sender, EventArgs args) {
             string message = "";
-
+            string disclaimer = rtbDisclaimer.Text;
+            label3.Text = disclaimer;
             GraphicCode graphics = null;
+            
 
             lblStatus.Text = "";
             Refresh();
@@ -106,7 +108,8 @@ namespace IDPrinter {
                 //need to check first if all forms are filled out
                 //do later
                 graphics = new GraphicCode();
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, out message);
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, "", out message);
+                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimer, out message);
                 if (message == "") {
                     PrinterReadyToStart(cbPrinters.Text, 60);
                     lblStatus.Text = "Printing the ID";

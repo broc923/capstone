@@ -56,6 +56,9 @@
             this.tabAbout = new System.Windows.Forms.TabPage();
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
+            this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -63,6 +66,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).BeginInit();
             this.tabAbout.SuspendLayout();
+            this.tabDisclaimer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -70,6 +74,7 @@
             this.tabControl1.Controls.Add(this.tabLogin);
             this.tabControl1.Controls.Add(this.tabAddUser);
             this.tabControl1.Controls.Add(this.tabAbout);
+            this.tabControl1.Controls.Add(this.tabDisclaimer);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -79,6 +84,7 @@
             // 
             // tabLogin
             // 
+            this.tabLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabLogin.Controls.Add(this.label8);
             this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
@@ -451,6 +457,32 @@
             this.lblGraphicsVersion.TabIndex = 1;
             this.lblGraphicsVersion.Text = "Graphics Version: 0.0.0";
             // 
+            // tabDisclaimer
+            // 
+            this.tabDisclaimer.Controls.Add(this.label3);
+            this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
+            this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
+            this.tabDisclaimer.Name = "tabDisclaimer";
+            this.tabDisclaimer.Size = new System.Drawing.Size(498, 310);
+            this.tabDisclaimer.TabIndex = 3;
+            this.tabDisclaimer.Text = "Disclaimer";
+            this.tabDisclaimer.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(86, 160);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(309, 126);
+            this.label3.TabIndex = 1;
+            // 
+            // rtbDisclaimer
+            // 
+            this.rtbDisclaimer.Location = new System.Drawing.Point(89, 14);
+            this.rtbDisclaimer.Name = "rtbDisclaimer";
+            this.rtbDisclaimer.Size = new System.Drawing.Size(309, 143);
+            this.rtbDisclaimer.TabIndex = 0;
+            this.rtbDisclaimer.Text = "";
+            // 
             // openUserImage
             // 
             this.openUserImage.FileName = "openUserImage";
@@ -475,6 +507,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).EndInit();
             this.tabAbout.ResumeLayout(false);
             this.tabAbout.PerformLayout();
+            this.tabDisclaimer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -514,6 +547,9 @@
         private System.Windows.Forms.OpenFileDialog openUserImage;
         private System.Windows.Forms.Label lblImageLocation;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabDisclaimer;
+        private System.Windows.Forms.RichTextBox rtbDisclaimer;
+        private System.Windows.Forms.Label label3;
     }
 }
 
