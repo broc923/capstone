@@ -149,7 +149,7 @@ namespace IDPrinter {
                  readWriter.SendComData();
 
              } catch (Exception ex) {
-                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer. Bad Broc.");
+                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer.");
              } finally {
                  readWriter = null;
              }
