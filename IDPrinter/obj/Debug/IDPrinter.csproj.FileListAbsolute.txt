@@ -8,3 +8,13 @@ I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cach
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.exe
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.pdb
 I:\IDPrinter\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
+E:\capstone\IDPrinter\bin\Debug\IDPrinter.exe.config
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.exe
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.pdb
+E:\capstone\IDPrinter\bin\Debug\IDPrinter.exe
+E:\capstone\IDPrinter\bin\Debug\IDPrinter.pdb
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.csprojResolveAssemblyReference.cache
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.FrmMain.resources
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
+E:\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache

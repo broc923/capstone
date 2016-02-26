@@ -16,7 +16,7 @@ namespace IDPrinter {
                     ported.Open();
                     if (ported.IsOpen)
                     {
-                        ported.Write(bytesToSend, 0, bytesToSend.Length);
+                        ported.Write(comTest, 0, comTest.Length);
                     }
                 }
             }

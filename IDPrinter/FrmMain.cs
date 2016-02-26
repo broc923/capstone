@@ -46,14 +46,14 @@ namespace IDPrinter {
                 lblPrinterVersion.Text = "Printer Version: " + printerSDKVersion;
             } catch (Exception e) {
                 MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber");
-            } finally { 
+            } finally {
                 graphics = null;
             }
         }
         #endregion
 
         #region Printer Ready Check
-        private bool PrinterReadyToStart (string driverName, int timeoutInSeconds) {
+        private bool PrinterReadyToStart(string driverName, int timeoutInSeconds) {
             GraphicCode graphics;
             try {
                 graphics = new GraphicCode();
@@ -66,7 +66,7 @@ namespace IDPrinter {
             return false;
         }
 
-        private bool IsPrinterAvailable (string driverName) {
+        private bool IsPrinterAvailable(string driverName) {
             ZBRPrinter printer = null;
             try {
                 printer = new ZBRPrinter();
@@ -88,8 +88,10 @@ namespace IDPrinter {
         #region Print is clicked
         private void btnPrintID_Click(object sender, EventArgs args) {
             string message = "";
-
+            string disclaimer = rtbDisclaimer.Text;
+            label3.Text = disclaimer;
             GraphicCode graphics = null;
+
 
             lblStatus.Text = "";
             Refresh();
@@ -106,7 +108,8 @@ namespace IDPrinter {
                 //need to check first if all forms are filled out
                 //do later
                 graphics = new GraphicCode();
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, out message);
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, "", out message);
+                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimer, out message);
                 if (message == "") {
                     PrinterReadyToStart(cbPrinters.Text, 60);
                     lblStatus.Text = "Printing the ID";
@@ -124,8 +127,7 @@ namespace IDPrinter {
         #endregion
 
         #region User Picture Insert
-        private void btnUserPicture_Click(object sender, EventArgs e)
-        {
+        private void btnUserPicture_Click(object sender, EventArgs e) {
             System.Windows.Forms.DialogResult dr = openUserImage.ShowDialog();
             if (dr == DialogResult.OK) {
                 userSelectedFilePath = openUserImage.InitialDirectory + openUserImage.FileName;
@@ -144,15 +146,15 @@ namespace IDPrinter {
         #region Testing 
         private void button1_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter;
-             try {
-                 readWriter = new MagneticStripCode();
-                 readWriter.SendComData();
+            try {
+                readWriter = new MagneticStripCode();
+                readWriter.SendComData();
 
-             } catch (Exception ex) {
-                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer. :c");
-             } finally {
-                 readWriter = null;
-             }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer.");
+            } finally {
+                readWriter = null;
+            }
         }
         #endregion
 
