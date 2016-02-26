@@ -146,7 +146,6 @@ namespace IDPrinter {
         #region Testing 
         private void button1_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter;
-<<<<<<< HEAD
             try {
                 readWriter = new MagneticStripCode();
                 readWriter.SendComData();
@@ -156,7 +155,6 @@ namespace IDPrinter {
             } finally {
                 readWriter = null;
             }
-=======
              try {
                  readWriter = new MagneticStripCode();
                  readWriter.SendComData();
@@ -166,7 +164,6 @@ namespace IDPrinter {
              } finally {
                  readWriter = null;
              }
->>>>>>> origin/broc
         }
         #endregion
 
