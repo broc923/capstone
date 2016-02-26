@@ -6,22 +6,20 @@ using System.IO.Ports;
 namespace IDPrinter {
     class MagneticStripCode {
         #region send data to com port
-        public bool SendComData() {
+        public void SendComData() {
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports) {
                 Console.WriteLine(port);
-            }
-            return true;
-            /*using (SerialPort port = new SerialPort("COM3", 9600, Parity.None, 8)) {
-                byte[] bytesToSend = new byte[] { 0x1B, 0x85 };
-
-                port.Open();
-                if (port.IsOpen) {
-                    port.Write(bytesToSend, 0, bytesToSend.Length);
-                    return true;
+                using (SerialPort ported = new SerialPort(port, 9600, Parity.None, 8))
+                {
+                    byte[] comTest = new byte[] { 0x1B, 0x65 };
+                    ported.Open();
+                    if (ported.IsOpen)
+                    {
+                        ported.Write(bytesToSend, 0, bytesToSend.Length);
+                    }
                 }
-                return false;
-            }*/
+            }
         }
         #endregion
     }
