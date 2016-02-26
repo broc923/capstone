@@ -23,7 +23,6 @@ namespace IDPrinter {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
@@ -55,6 +54,9 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabAbout = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -62,9 +64,9 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -72,12 +74,14 @@ namespace IDPrinter {
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).BeginInit();
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabDisclaimer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabLogin);
             this.tabControl1.Controls.Add(this.tabAddUser);
+            this.tabControl1.Controls.Add(this.tabDisclaimer);
             this.tabControl1.Controls.Add(this.tabAbout);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -449,6 +453,33 @@ namespace IDPrinter {
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(196, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(302, 157);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 41);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(71, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "Developers";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 134);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(80, 13);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "Nicole Johnson";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -505,33 +536,32 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
-            // label12
+            // tabDisclaimer
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 134);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 13);
-            this.label12.TabIndex = 8;
-            this.label12.Text = "Nicole Johnson";
+            this.tabDisclaimer.Controls.Add(this.label14);
+            this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
+            this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
+            this.tabDisclaimer.Name = "tabDisclaimer";
+            this.tabDisclaimer.Size = new System.Drawing.Size(498, 310);
+            this.tabDisclaimer.TabIndex = 3;
+            this.tabDisclaimer.Text = "Disclaimer";
+            this.tabDisclaimer.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // rtbDisclaimer
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(3, 41);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(71, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "Developers";
+            this.rtbDisclaimer.Location = new System.Drawing.Point(70, 69);
+            this.rtbDisclaimer.Name = "rtbDisclaimer";
+            this.rtbDisclaimer.Size = new System.Drawing.Size(353, 140);
+            this.rtbDisclaimer.TabIndex = 0;
+            this.rtbDisclaimer.Text = "";
             // 
-            // pictureBox1
+            // label14
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(196, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(302, 157);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(70, 238);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(0, 13);
+            this.label14.TabIndex = 1;
             // 
             // FrmMain
             // 
@@ -554,6 +584,8 @@ namespace IDPrinter {
             this.tabAbout.ResumeLayout(false);
             this.tabAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabDisclaimer.ResumeLayout(false);
+            this.tabDisclaimer.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -600,5 +632,8 @@ namespace IDPrinter {
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabPage tabDisclaimer;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.RichTextBox rtbDisclaimer;
     }
 }
