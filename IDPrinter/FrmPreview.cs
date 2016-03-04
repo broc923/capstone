@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IDPrinter {
     public partial class FrmPreview : Form {
+        //public string fullName = "Starting Name";
         public FrmPreview() {
             InitializeComponent();
         }
     }
 }
+    public static void DisplayInfo(frmMain.fullName) {
+        
+    }
+

@@ -140,7 +140,24 @@ namespace IDPrinter {
         private void btnPreviewID_Click(object sender, EventArgs e) {
             FrmPreview preview = new FrmPreview();
             preview.Show();
+            string fullName = txtFirstName.Text + " " + txtLastName.Text;
+            preview.DisplayInfo(fullName);
         }
+
+        /**private void txtFirstName_TextChanged(object sender, EventArgs e) {
+            FrmPreview preview = null;
+            string fullName = txtFirstName.Text + " " + txtLastName.Text;
+            try {
+                preview = new FrmPreview();
+                preview.lblName.Text = fullName;
+                preview.Update();
+
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            } finally {
+                preview = null;
+            }
+        }**/
 
         #endregion
 
