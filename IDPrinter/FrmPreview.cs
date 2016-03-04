@@ -9,7 +9,4 @@ namespace IDPrinter {
         }
     }
 }
-    public static void DisplayInfo(frmMain.fullName) {
-        
-    }
-
+   
