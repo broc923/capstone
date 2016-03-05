@@ -83,7 +83,7 @@ namespace IDPrinter {
         #endregion
 
         #region Print graphics
-        public void Print(string driverName, string name, string userID, string userPicture, bool admin, bool back, string disclaimer, out string msg) {
+        public void Print(string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg) {
             int error;
             ZBRGraphics graphics = null;
             ASCIIEncoding ascii;
@@ -131,11 +131,21 @@ namespace IDPrinter {
                         return;
                     }
                 } else {
-                    //print back
-                    if (graphics.DrawText(35, 380, ascii.GetBytes(disclaimer), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0) {
-                        msg = "DrawText method error code: " + error.ToString();
-                        return;
+                    string test = ""; //
+                    int x = 35;
+                 
+                    foreach (string disclaimer in disclaimerSplit)
+                    {
+                        if (graphics.DrawText(x, 35, ascii.GetBytes(disclaimer), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0)
+                        {
+                            msg = "DrawText method error code: " + error.ToString();
+                            return;
+                        }
+                        x += 10;
+                        test += disclaimer + "\n"; //
                     }
+                    MessageBox.Show(test);//
+                    
                 }
                 if (graphics.PrintGraphics(out error) == 0) {
                     msg = "PrintGraphics Error: " + error.ToString();

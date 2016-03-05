@@ -89,6 +89,9 @@ namespace IDPrinter {
         private void btnPrintID_Click(object sender, EventArgs args) {
             string message = "";
             string disclaimer = rtbDisclaimer.Text;
+
+            string[] disclaimerSplit = disclaimer.Split('|');
+
             label14.Text = disclaimer;
 
             GraphicCode graphics = null;
@@ -108,8 +111,8 @@ namespace IDPrinter {
                 //need to check first if all forms are filled out
                 //do later
                 graphics = new GraphicCode();
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, "", out message);
-                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimer, out message);
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
+                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimerSplit, out message);
                 if (message == "") {
                     PrinterReadyToStart(cbPrinters.Text, 60);
                     lblStatus.Text = "Printing the ID";
@@ -141,7 +144,7 @@ namespace IDPrinter {
             FrmPreview preview = new FrmPreview();
             preview.Show();
             string fullName = txtFirstName.Text + " " + txtLastName.Text;
-            preview.DisplayInfo(fullName);
+            //preview.DisplayInfo(fullName);
         }
 
         /**private void txtFirstName_TextChanged(object sender, EventArgs e) {
