@@ -54,6 +54,10 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblCharCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
             this.tabAbout = new System.Windows.Forms.TabPage();
@@ -88,7 +92,8 @@ namespace IDPrinter {
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(506, 336);
-            this.tabControl1.TabIndex = 1;
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabLogin
             // 
@@ -170,7 +175,7 @@ namespace IDPrinter {
             this.button1.Location = new System.Drawing.Point(308, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 47;
+            this.button1.TabIndex = 8;
             this.button1.Text = "Read/Write Test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -200,7 +205,7 @@ namespace IDPrinter {
             this.txtPhone.Location = new System.Drawing.Point(182, 122);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(141, 20);
-            this.txtPhone.TabIndex = 44;
+            this.txtPhone.TabIndex = 6;
             // 
             // label7
             // 
@@ -216,22 +221,21 @@ namespace IDPrinter {
             this.txtLastName.Location = new System.Drawing.Point(308, 20);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(141, 20);
-            this.txtLastName.TabIndex = 42;
+            this.txtLastName.TabIndex = 1;
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(83, 21);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(141, 20);
-            this.txtFirstName.TabIndex = 41;
-           // this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
+            this.txtFirstName.TabIndex = 0;
             // 
             // txtZip
             // 
             this.txtZip.Location = new System.Drawing.Point(334, 88);
             this.txtZip.Name = "txtZip";
             this.txtZip.Size = new System.Drawing.Size(115, 20);
-            this.txtZip.TabIndex = 40;
+            this.txtZip.TabIndex = 5;
             // 
             // label6
             // 
@@ -309,7 +313,7 @@ namespace IDPrinter {
             this.cbState.Location = new System.Drawing.Point(230, 87);
             this.cbState.Name = "cbState";
             this.cbState.Size = new System.Drawing.Size(56, 21);
-            this.cbState.TabIndex = 38;
+            this.cbState.TabIndex = 4;
             // 
             // label5
             // 
@@ -325,12 +329,12 @@ namespace IDPrinter {
             this.txtCity.Location = new System.Drawing.Point(83, 88);
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(100, 20);
-            this.txtCity.TabIndex = 36;
+            this.txtCity.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(55, 91);
+            this.label4.Location = new System.Drawing.Point(50, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 35;
@@ -341,14 +345,14 @@ namespace IDPrinter {
             this.txtStreet.Location = new System.Drawing.Point(83, 54);
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(366, 20);
-            this.txtStreet.TabIndex = 34;
+            this.txtStreet.TabIndex = 2;
             // 
             // btnUserPicture
             // 
             this.btnUserPicture.Location = new System.Drawing.Point(6, 216);
             this.btnUserPicture.Name = "btnUserPicture";
             this.btnUserPicture.Size = new System.Drawing.Size(87, 23);
-            this.btnUserPicture.TabIndex = 33;
+            this.btnUserPicture.TabIndex = 9;
             this.btnUserPicture.Text = "Insert Photo";
             this.btnUserPicture.UseVisualStyleBackColor = true;
             this.btnUserPicture.Click += new System.EventHandler(this.btnUserPicture_Click);
@@ -356,7 +360,7 @@ namespace IDPrinter {
             // lblStreet
             // 
             this.lblStreet.AutoSize = true;
-            this.lblStreet.Location = new System.Drawing.Point(34, 57);
+            this.lblStreet.Location = new System.Drawing.Point(39, 57);
             this.lblStreet.Name = "lblStreet";
             this.lblStreet.Size = new System.Drawing.Size(38, 13);
             this.lblStreet.TabIndex = 32;
@@ -373,7 +377,7 @@ namespace IDPrinter {
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(21, 23);
+            this.label1.Location = new System.Drawing.Point(16, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 18);
             this.label1.TabIndex = 30;
@@ -385,7 +389,7 @@ namespace IDPrinter {
             this.cbAdmin.Location = new System.Drawing.Point(346, 124);
             this.cbAdmin.Name = "cbAdmin";
             this.cbAdmin.Size = new System.Drawing.Size(103, 17);
-            this.cbAdmin.TabIndex = 29;
+            this.cbAdmin.TabIndex = 7;
             this.cbAdmin.Text = "Admin Privileges";
             this.cbAdmin.UseVisualStyleBackColor = true;
             // 
@@ -405,7 +409,7 @@ namespace IDPrinter {
             this.cbPrinters.Location = new System.Drawing.Point(82, 281);
             this.cbPrinters.Name = "cbPrinters";
             this.cbPrinters.Size = new System.Drawing.Size(121, 21);
-            this.cbPrinters.TabIndex = 4;
+            this.cbPrinters.TabIndex = 0;
             // 
             // lblStatus
             // 
@@ -438,6 +442,10 @@ namespace IDPrinter {
             // 
             // tabDisclaimer
             // 
+            this.tabDisclaimer.Controls.Add(this.button3);
+            this.tabDisclaimer.Controls.Add(this.button2);
+            this.tabDisclaimer.Controls.Add(this.label15);
+            this.tabDisclaimer.Controls.Add(this.lblCharCount);
             this.tabDisclaimer.Controls.Add(this.label14);
             this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
             this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
@@ -446,6 +454,43 @@ namespace IDPrinter {
             this.tabDisclaimer.TabIndex = 3;
             this.tabDisclaimer.Text = "Disclaimer";
             this.tabDisclaimer.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(280, 250);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "Clear";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(143, 250);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Submit";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(111, 37);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(262, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "*Note* This text will be printed on the back of the card";
+            // 
+            // lblCharCount
+            // 
+            this.lblCharCount.AutoSize = true;
+            this.lblCharCount.Location = new System.Drawing.Point(288, 212);
+            this.lblCharCount.Name = "lblCharCount";
+            this.lblCharCount.Size = new System.Drawing.Size(135, 13);
+            this.lblCharCount.TabIndex = 2;
+            this.lblCharCount.Text = "Characters Remaining: 500";
             // 
             // label14
             // 
@@ -574,6 +619,7 @@ namespace IDPrinter {
             this.Name = "FrmMain";
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.tabControl1.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
             this.tabLogin.PerformLayout();
@@ -636,5 +682,9 @@ namespace IDPrinter {
         private System.Windows.Forms.TabPage tabDisclaimer;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RichTextBox rtbDisclaimer;
+        private System.Windows.Forms.Label lblCharCount;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
