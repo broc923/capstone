@@ -136,8 +136,7 @@ namespace IDPrinter {
                  
                     foreach (string disclaimer in disclaimerSplit)
                     {
-                        //Using consolas font as it's a monospaced font
-                        if (graphics.DrawText(x, 35, ascii.GetBytes(disclaimer), ascii.GetBytes("Consolas"), 12, fontStyle, 0x009973, out error) == 0)
+                        if (graphics.DrawText(x, 35, ascii.GetBytes(disclaimer), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0)
                         {
                             msg = "DrawText method error code: " + error.ToString();
                             return;
