@@ -54,6 +54,7 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.lblCharCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
             this.tabAbout = new System.Windows.Forms.TabPage();
@@ -224,7 +225,6 @@ namespace IDPrinter {
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(141, 20);
             this.txtFirstName.TabIndex = 41;
-           // this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // txtZip
             // 
@@ -438,6 +438,7 @@ namespace IDPrinter {
             // 
             // tabDisclaimer
             // 
+            this.tabDisclaimer.Controls.Add(this.lblCharCount);
             this.tabDisclaimer.Controls.Add(this.label14);
             this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
             this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
@@ -446,6 +447,15 @@ namespace IDPrinter {
             this.tabDisclaimer.TabIndex = 3;
             this.tabDisclaimer.Text = "Disclaimer";
             this.tabDisclaimer.UseVisualStyleBackColor = true;
+            // 
+            // lblCharCount
+            // 
+            this.lblCharCount.AutoSize = true;
+            this.lblCharCount.Location = new System.Drawing.Point(288, 212);
+            this.lblCharCount.Name = "lblCharCount";
+            this.lblCharCount.Size = new System.Drawing.Size(135, 13);
+            this.lblCharCount.TabIndex = 2;
+            this.lblCharCount.Text = "Characters Remaining: 700";
             // 
             // label14
             // 
@@ -574,6 +584,7 @@ namespace IDPrinter {
             this.Name = "FrmMain";
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.tabControl1.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
             this.tabLogin.PerformLayout();
@@ -636,5 +647,6 @@ namespace IDPrinter {
         private System.Windows.Forms.TabPage tabDisclaimer;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RichTextBox rtbDisclaimer;
+        private System.Windows.Forms.Label lblCharCount;
     }
 }

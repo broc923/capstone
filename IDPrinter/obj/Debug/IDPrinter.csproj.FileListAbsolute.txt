@@ -18,3 +18,13 @@ E:\Spring 2016\Computer Science Capstone\Capstone Code\capstone\IDPrinter\obj\De
 E:\Spring 2016\Computer Science Capstone\Capstone Code\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
 E:\Spring 2016\Computer Science Capstone\Capstone Code\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
 E:\Spring 2016\Computer Science Capstone\Capstone Code\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\bin\Debug\IDPrinter.exe.config
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.exe
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.pdb
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\bin\Debug\IDPrinter.exe
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\bin\Debug\IDPrinter.pdb
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.csprojResolveAssemblyReference.cache
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.FrmMain.resources
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
+C:\Users\kr4ckl3s\Documents\NESCC\Spring 2016\Capstone\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
