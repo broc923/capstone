@@ -12,6 +12,7 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() {
             InitializeComponent();
+            rtbDisclaimer.TextChanged += new EventHandler(FrmMain_TextChanged);
         }
 
         private void FrmMain_Load(object sender, EventArgs e) {
@@ -147,6 +148,8 @@ namespace IDPrinter {
             //preview.DisplayInfo(fullName);
         }
 
+
+
         /**private void txtFirstName_TextChanged(object sender, EventArgs e) {
             FrmPreview preview = null;
             string fullName = txtFirstName.Text + " " + txtLastName.Text;
@@ -190,6 +193,15 @@ namespace IDPrinter {
             cbAdmin.Checked = false;
             cbState.SelectedIndex = -1;
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+        }
+        #endregion
+
+        #region Disclaimer Character Limit
+        private void FrmMain_TextChanged(object sender, EventArgs e)
+        {
+            rtbDisclaimer.MaxLength = 700; //limits the rtb to 700 characters
+            lblCharCount.Text = "Characters Remaining:" + (700 - rtbDisclaimer.Text.Length).ToString(); 
+            // displays the number of characters remaining in a label below the rtb
         }
         #endregion
     }
