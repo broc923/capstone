@@ -54,6 +54,7 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.lblCharCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
             this.tabAbout = new System.Windows.Forms.TabPage();
@@ -67,6 +68,7 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
+            this.btnDiscClear = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -88,7 +90,8 @@ namespace IDPrinter {
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(506, 336);
-            this.tabControl1.TabIndex = 1;
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabLogin
             // 
@@ -170,7 +173,7 @@ namespace IDPrinter {
             this.button1.Location = new System.Drawing.Point(308, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 47;
+            this.button1.TabIndex = 8;
             this.button1.Text = "Read/Write Test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -200,7 +203,7 @@ namespace IDPrinter {
             this.txtPhone.Location = new System.Drawing.Point(182, 122);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(141, 20);
-            this.txtPhone.TabIndex = 44;
+            this.txtPhone.TabIndex = 6;
             // 
             // label7
             // 
@@ -216,22 +219,21 @@ namespace IDPrinter {
             this.txtLastName.Location = new System.Drawing.Point(308, 20);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(141, 20);
-            this.txtLastName.TabIndex = 42;
+            this.txtLastName.TabIndex = 1;
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(83, 21);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(141, 20);
-            this.txtFirstName.TabIndex = 41;
-           // this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
+            this.txtFirstName.TabIndex = 0;
             // 
             // txtZip
             // 
             this.txtZip.Location = new System.Drawing.Point(334, 88);
             this.txtZip.Name = "txtZip";
             this.txtZip.Size = new System.Drawing.Size(115, 20);
-            this.txtZip.TabIndex = 40;
+            this.txtZip.TabIndex = 5;
             // 
             // label6
             // 
@@ -309,7 +311,7 @@ namespace IDPrinter {
             this.cbState.Location = new System.Drawing.Point(230, 87);
             this.cbState.Name = "cbState";
             this.cbState.Size = new System.Drawing.Size(56, 21);
-            this.cbState.TabIndex = 38;
+            this.cbState.TabIndex = 4;
             // 
             // label5
             // 
@@ -325,7 +327,7 @@ namespace IDPrinter {
             this.txtCity.Location = new System.Drawing.Point(83, 88);
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(100, 20);
-            this.txtCity.TabIndex = 36;
+            this.txtCity.TabIndex = 3;
             // 
             // label4
             // 
@@ -341,14 +343,14 @@ namespace IDPrinter {
             this.txtStreet.Location = new System.Drawing.Point(83, 54);
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(366, 20);
-            this.txtStreet.TabIndex = 34;
+            this.txtStreet.TabIndex = 2;
             // 
             // btnUserPicture
             // 
             this.btnUserPicture.Location = new System.Drawing.Point(6, 216);
             this.btnUserPicture.Name = "btnUserPicture";
             this.btnUserPicture.Size = new System.Drawing.Size(87, 23);
-            this.btnUserPicture.TabIndex = 33;
+            this.btnUserPicture.TabIndex = 9;
             this.btnUserPicture.Text = "Insert Photo";
             this.btnUserPicture.UseVisualStyleBackColor = true;
             this.btnUserPicture.Click += new System.EventHandler(this.btnUserPicture_Click);
@@ -385,7 +387,7 @@ namespace IDPrinter {
             this.cbAdmin.Location = new System.Drawing.Point(346, 124);
             this.cbAdmin.Name = "cbAdmin";
             this.cbAdmin.Size = new System.Drawing.Size(103, 17);
-            this.cbAdmin.TabIndex = 29;
+            this.cbAdmin.TabIndex = 7;
             this.cbAdmin.Text = "Admin Privileges";
             this.cbAdmin.UseVisualStyleBackColor = true;
             // 
@@ -405,7 +407,7 @@ namespace IDPrinter {
             this.cbPrinters.Location = new System.Drawing.Point(82, 281);
             this.cbPrinters.Name = "cbPrinters";
             this.cbPrinters.Size = new System.Drawing.Size(121, 21);
-            this.cbPrinters.TabIndex = 4;
+            this.cbPrinters.TabIndex = 0;
             // 
             // lblStatus
             // 
@@ -438,6 +440,8 @@ namespace IDPrinter {
             // 
             // tabDisclaimer
             // 
+            this.tabDisclaimer.Controls.Add(this.btnDiscClear);
+            this.tabDisclaimer.Controls.Add(this.lblCharCount);
             this.tabDisclaimer.Controls.Add(this.label14);
             this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
             this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
@@ -446,6 +450,15 @@ namespace IDPrinter {
             this.tabDisclaimer.TabIndex = 3;
             this.tabDisclaimer.Text = "Disclaimer";
             this.tabDisclaimer.UseVisualStyleBackColor = true;
+            // 
+            // lblCharCount
+            // 
+            this.lblCharCount.AutoSize = true;
+            this.lblCharCount.Location = new System.Drawing.Point(292, 212);
+            this.lblCharCount.Name = "lblCharCount";
+            this.lblCharCount.Size = new System.Drawing.Size(114, 13);
+            this.lblCharCount.TabIndex = 2;
+            this.lblCharCount.Text = "Characters Remaining:";
             // 
             // label14
             // 
@@ -564,6 +577,16 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
+            // btnDiscClear
+            // 
+            this.btnDiscClear.Location = new System.Drawing.Point(231, 250);
+            this.btnDiscClear.Name = "btnDiscClear";
+            this.btnDiscClear.Size = new System.Drawing.Size(75, 23);
+            this.btnDiscClear.TabIndex = 3;
+            this.btnDiscClear.Text = "Clear";
+            this.btnDiscClear.UseVisualStyleBackColor = true;
+            this.btnDiscClear.Click += new System.EventHandler(this.btnDiscClear_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -574,6 +597,7 @@ namespace IDPrinter {
             this.Name = "FrmMain";
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.tabControl1.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
             this.tabLogin.PerformLayout();
@@ -636,5 +660,7 @@ namespace IDPrinter {
         private System.Windows.Forms.TabPage tabDisclaimer;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RichTextBox rtbDisclaimer;
+        private System.Windows.Forms.Label lblCharCount;
+        private System.Windows.Forms.Button btnDiscClear;
     }
 }

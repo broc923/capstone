@@ -12,6 +12,7 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() {
             InitializeComponent();
+            rtbDisclaimer.TextChanged += new EventHandler(FrmMain_TextChanged);
         }
 
         private void FrmMain_Load(object sender, EventArgs e) {
@@ -180,7 +181,8 @@ namespace IDPrinter {
         #endregion
 
         #region Clear form
-        private void btnClear_Click(object sender, EventArgs e) {
+        private void btnClear_Click(object sender, EventArgs e)
+        {
             txtFirstName.Clear();
             txtLastName.Clear();
             txtPhone.Clear();
@@ -190,7 +192,42 @@ namespace IDPrinter {
             cbAdmin.Checked = false;
             cbState.SelectedIndex = -1;
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+            txtFirstName.Focus();
+        }
+
+        private void btnDiscClear_Click(object sender, EventArgs e)
+        {
+            rtbDisclaimer.Clear();
+            rtbDisclaimer.Focus();
+        }
+
+        #endregion
+
+        #region Disclaimer Character Limit
+        //***If number is changed, remember to change the label text as well***
+        private void FrmMain_TextChanged(object sender, EventArgs e)
+        {
+            rtbDisclaimer.MaxLength = 500; //limits the rtb to 700 characters
+            lblCharCount.Text = "Characters Remaining:" + (500 - rtbDisclaimer.Text.Length).ToString();
+            // displays the number of characters remaining in a label below the rtb
+
         }
         #endregion
+
+        #region Set initial focus for different tabs
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabAddUser)
+            {   //if AddUser tab is selected, set focus to First Name textbox
+                txtFirstName.Focus();
+            }
+            if (tabControl1.SelectedTab == tabDisclaimer)
+            {   //if Disclaimer tab is selected, set focus to Disclaimer textbox
+                rtbDisclaimer.Focus();
+            }
+
+        }
+        #endregion
+
     }
 }
