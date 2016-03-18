@@ -1,16 +1,18 @@
 ﻿using System;
-using nsZBRPrinter;
 using System.Windows.Forms;
+using System.Text;
 using System.IO.Ports;
+using System.Threading;
 
 namespace IDPrinter {
     class MagneticStripCode {
+        public static AutoResetEvent signalEvent = new AutoResetEvent(false);
         #region send data to com port
         public void SendComData() {
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports) {
                 Console.WriteLine(port);
-                using (SerialPort ported = new SerialPort(port, 9600, Parity.None, 8)) {
+                using (SerialPort sp = new SerialPort(port, 9600, Parity.None, 8)) {
                     byte[] comTest = new byte[] { 0x1B, 0x65 };
                     byte[] resetBuffer = new byte[] { 0x1B, 0x61 };
                     byte[] read = new byte[] { 0x1B, 0x72 };
@@ -37,12 +39,35 @@ namespace IDPrinter {
                     byte[] getHiCoLowCo = new byte[] { 0x1B, 0x64 };
                     byte[] detectEZWriter = new byte[] { 0x39 };
 
-                    ported.Open();
-                    if (ported.IsOpen) {
-                        ported.Write(comTest, 0, comTest.Length);
+                    sp.ReadTimeout = 500;
+                    sp.WriteTimeout = 1000;
+                    sp.DataReceived += readSerialPort;
+
+                    sp.Open();
+                    if(sp.IsOpen) {
+                        //sp.Write(greenLEDOn, 0, greenLEDOn.Length);
+                        sp.Write(read, 0, read.Length);
+                        signalEvent.WaitOne();
+                        sp.Close();
+                        sp.Dispose();
                     }
+
                 }
             }
+        }
+
+        static void readSerialPort(object sender, SerialDataReceivedEventArgs e) {
+            var sp = (SerialPort)sender;
+            var data = "";
+            try {
+                data = sp.ReadTo("?");
+            } catch(Exception error) {
+                Console.WriteLine(error);
+            }
+            Console.WriteLine(data);
+            sp.Close();
+            sp.Dispose();
+            signalEvent.Set();
         }
         #endregion
     }
