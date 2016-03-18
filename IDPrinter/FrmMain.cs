@@ -12,7 +12,6 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() {
             InitializeComponent();
-            rtbDisclaimer.TextChanged += new EventHandler(FrmMain_TextChanged);
         }
 
         private void FrmMain_Load(object sender, EventArgs e) {
@@ -181,8 +180,7 @@ namespace IDPrinter {
         #endregion
 
         #region Clear form
-        private void btnClear_Click(object sender, EventArgs e)
-        {
+        private void btnClear_Click(object sender, EventArgs e) {
             txtFirstName.Clear();
             txtLastName.Clear();
             txtPhone.Clear();
@@ -195,8 +193,7 @@ namespace IDPrinter {
             txtFirstName.Focus();
         }
 
-        private void btnDiscClear_Click(object sender, EventArgs e)
-        {
+        private void btnDiscClear_Click(object sender, EventArgs e) {
             rtbDisclaimer.Clear();
             rtbDisclaimer.Focus();
         }
@@ -205,8 +202,7 @@ namespace IDPrinter {
 
         #region Disclaimer Character Limit
         //***If number is changed, remember to change the label text as well***
-        private void FrmMain_TextChanged(object sender, EventArgs e)
-        {
+        private void disclaimerTextChanged(object sender, EventArgs e) {
             rtbDisclaimer.MaxLength = 500; //limits the rtb to 700 characters
             lblCharCount.Text = "Characters Remaining:" + (500 - rtbDisclaimer.Text.Length).ToString();
             // displays the number of characters remaining in a label below the rtb
