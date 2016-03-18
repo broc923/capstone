@@ -54,6 +54,7 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabDisclaimer = new System.Windows.Forms.TabPage();
+            this.btnDiscClear = new System.Windows.Forms.Button();
             this.lblCharCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
@@ -68,7 +69,6 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.btnDiscClear = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -451,14 +451,24 @@ namespace IDPrinter {
             this.tabDisclaimer.Text = "Disclaimer";
             this.tabDisclaimer.UseVisualStyleBackColor = true;
             // 
+            // btnDiscClear
+            // 
+            this.btnDiscClear.Location = new System.Drawing.Point(231, 250);
+            this.btnDiscClear.Name = "btnDiscClear";
+            this.btnDiscClear.Size = new System.Drawing.Size(75, 23);
+            this.btnDiscClear.TabIndex = 3;
+            this.btnDiscClear.Text = "Clear";
+            this.btnDiscClear.UseVisualStyleBackColor = true;
+            this.btnDiscClear.Click += new System.EventHandler(this.btnDiscClear_Click);
+            // 
             // lblCharCount
             // 
             this.lblCharCount.AutoSize = true;
             this.lblCharCount.Location = new System.Drawing.Point(292, 212);
             this.lblCharCount.Name = "lblCharCount";
-            this.lblCharCount.Size = new System.Drawing.Size(114, 13);
+            this.lblCharCount.Size = new System.Drawing.Size(135, 13);
             this.lblCharCount.TabIndex = 2;
-            this.lblCharCount.Text = "Characters Remaining:";
+            this.lblCharCount.Text = "Characters Remaining: 500";
             // 
             // label14
             // 
@@ -475,6 +485,7 @@ namespace IDPrinter {
             this.rtbDisclaimer.Size = new System.Drawing.Size(353, 140);
             this.rtbDisclaimer.TabIndex = 0;
             this.rtbDisclaimer.Text = "";
+            this.rtbDisclaimer.TextChanged += new System.EventHandler(this.disclaimerTextChanged);
             // 
             // tabAbout
             // 
@@ -577,16 +588,6 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
-            // btnDiscClear
-            // 
-            this.btnDiscClear.Location = new System.Drawing.Point(231, 250);
-            this.btnDiscClear.Name = "btnDiscClear";
-            this.btnDiscClear.Size = new System.Drawing.Size(75, 23);
-            this.btnDiscClear.TabIndex = 3;
-            this.btnDiscClear.Text = "Clear";
-            this.btnDiscClear.UseVisualStyleBackColor = true;
-            this.btnDiscClear.Click += new System.EventHandler(this.btnDiscClear_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,7 +598,6 @@ namespace IDPrinter {
             this.Name = "FrmMain";
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
-            this.TextChanged += new System.EventHandler(this.FrmMain_TextChanged);
             this.tabControl1.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
             this.tabLogin.PerformLayout();
