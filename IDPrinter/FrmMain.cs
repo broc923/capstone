@@ -225,9 +225,9 @@ namespace IDPrinter {
 
         #region Set initial focus for different tabs
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {//click events for tabControl to set focus depending upon which tab is selected
+        { //click events for tabControl to set focus depending upon which tab is selected
             if (tabControl1.SelectedTab == tabAddUser)
-            {   //if AddUser tab is selected, set focus to First Name textbox
+            { //if AddUser tab is selected, set focus to First Name textbox
                 txtFirstName.Focus(); //sets focus to txtFirstName
             }
             if (tabControl1.SelectedTab == tabDisclaimer)

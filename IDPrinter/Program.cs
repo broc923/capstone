@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System; //allows direct access to the console type system
+using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
 
 namespace IDPrinter {
     static class Program {
