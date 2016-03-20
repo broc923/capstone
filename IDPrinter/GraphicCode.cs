@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
-using nsZBRPrinter;
+﻿using System; //allows direct access to the console type system
+using System.Text; // contains classes that represent ASCII and Unicode character encoding
+using System.Threading; //Creates and controls a thread, sets its priority, and gets its status
+using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
+using nsZBRPrinter; //allows access to zebra-specific controls
 
 namespace IDPrinter {
     class GraphicCode {
