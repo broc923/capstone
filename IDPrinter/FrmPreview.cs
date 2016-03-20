@@ -5,7 +5,7 @@ namespace IDPrinter {
     public partial class FrmPreview : Form {
         //public string fullName = "Starting Name";
         public FrmPreview() {
-            InitializeComponent();
+            InitializeComponent(); //handles the initialization of the forms controls on load up
         }
     }
 }

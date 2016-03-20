@@ -8,49 +8,51 @@ namespace IDPrinter {
     class GraphicCode {
    
         #region Text Styling Constants
-        const int BOLD = 0x01;
-        const int ITALICS = 0x02;
-        const int UNDERLINE = 0x04;
-        const int STRIKE = 0x08;
+        const int BOLD = 0x01; //extended formatting hex stored as bold variable (used to make text bold)
+        const int ITALICS = 0x02; //extended formatting hex stored as italics variable (used to italicize text)
+        const int UNDERLINE = 0x04;  //extended formatting hex stored as underline variable (used to underline text)
+        const int STRIKE = 0x08;  //extended formatting hex stored as strike variable (used to strike through text)
         #endregion
 
         #region Get SDK DLL Version for Graphics
-        public string GetSDKGraphicsVersion() {
-            ZBRGraphics graphics = null;
-            int major, minor, engLevel;
-            string gVersion = "";
+        public string GetSDKGraphicsVersion() {// method called on FrmMain.cs in order to obtain graphics version
+            ZBRGraphics graphics = null; //creates graphics variable from the ZBRGraphics.cs class initialized to null
+            int major, minor, engLevel; //integers to hold major, minor, and engine level DLL values of the ZBRGraphics class
+            string gVersion = ""; //creates gVersion string initialized to an empty string, used to hold final graphics version numerical data
             try {
-                graphics = new ZBRGraphics();
-                graphics.GetSDKVer(out major, out minor, out engLevel);
-                if (major > 0 || minor > 0 || engLevel > 0) {
-                    gVersion = major.ToString() + "." + minor.ToString() + "." + engLevel.ToString();
+                graphics = new ZBRGraphics();  //creates new ZBRGraphics object and stores in graphics
+                graphics.GetSDKVer(out major, out minor, out engLevel); //calls to the getSDKVer method of graphics, passing major, minor, and engine level variables by reference
+                if (major > 0 || minor > 0 || engLevel > 0) { //if major, minor, or engine levels have values that's greater than their default values of 0...
+                    gVersion = major.ToString() + "." + minor.ToString() + "." + engLevel.ToString(); 
+                    //convert all three values to string, concatenated with a period seperating each, and store the whole string value in gVersion variable - it will appear in label on About page
                 }
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString());
-            } finally { 
-                graphics = null;
+            } catch (Exception e) { //exceotion handler
+                MessageBox.Show(e.ToString()); //catches and displays resulting errors to prevent program crash
+            } finally {  //finally block runs whether there is an exception or not
+                graphics = null; //sets graphics object to null after it has been used
             }
-            return gVersion;
+            return gVersion; //return resulting graphics DLL version string
         }
         #endregion
 
         #region Get SDK DLL Version for Printer
-        public string GetSDKPrinterVersion() {
-            ZBRPrinter printer = null;
-            int major, minor, engLevel;
-            string pVersion = "";
+        public string GetSDKPrinterVersion() { // method called on FrmMain.cs in order to obtain printer version
+            ZBRPrinter printer = null;  //creates printer variable from the ZBRPrinter.cs class initialized to null
+            int major, minor, engLevel;  //integers to hold major, minor, and engine level DLL values of the ZBRPrinter class
+            string pVersion = "";  //creates pVersion string initialized to an empty string, used to hold final printer version numerical data
             try {
-                printer = new ZBRPrinter();
-                printer.GetSDKVer(out major, out minor, out engLevel);
-                if (major > 0 || minor > 0 || engLevel > 0) {
+                printer = new ZBRPrinter();   //creates new ZBRPrinter object and stores in printer
+                printer.GetSDKVer(out major, out minor, out engLevel); //calls to the getSDKVer method of printer, passing major, minor, and engine level variables by reference
+                if (major > 0 || minor > 0 || engLevel > 0) { //if major, minor, or engine levels have values that's greater than their default values of 0...
                     pVersion = major.ToString() + "." + minor.ToString() + "." + engLevel.ToString();
+                    //convert all three values to string, concatenated with a period seperating each, and store the whole string value in pVersion variable - it will appear in label on About page
                 }
-            } catch (Exception e) {
+            } catch (Exception e) { //exception handler
                 MessageBox.Show(e.ToString());
-            } finally {
-                printer = null;
+            } finally {  //finally block runs whether there is an exception or not
+                printer = null; //sets printer object to null after it has been used
             }
-            return pVersion;
+            return pVersion; //return resulting printer DLL version string
         }
         #endregion
 
