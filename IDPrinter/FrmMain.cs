@@ -1,149 +1,161 @@
-﻿using System;
-using System.Windows.Forms;
-using nsZBRPrinter;
-using System.Drawing.Printing;
+﻿using System; //allows direct access to the console type system
+using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
+using nsZBRPrinter; //allows access to zebra-specific controls
+using System.Drawing.Printing; //Defines a reusable object that sends output to a printer, when printing from a Windows Forms application
 
 namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
+        //variables to display the current graphics and printer software versions & to hold the file path location for stored user images for import
         private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath;
         #endregion
 
         #region Anything that happens on load up
-        public FrmMain() {
-            InitializeComponent();
+        public FrmMain() { //no-arg constructor
+            InitializeComponent(); //handles the initialization of the forms controls on load up
         }
 
-        private void FrmMain_Load(object sender, EventArgs e) {
-            GetSDKVersions();
-            CheckForPrinters();
+        private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
+            GetSDKVersions(); //calls to method to retrieve current SDK software versions
+            CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+            //loads default 'anonymous' photo on the Add User form
         }
         #endregion
 
         #region Grab Printers
-        private void CheckForPrinters() {
+        private void CheckForPrinters() { //method to check for any printers available for use
             try {
-                cbPrinters.Items.Clear();
-                foreach (String printerName in PrinterSettings.InstalledPrinters)
-                    cbPrinters.Items.Add(printerName);
-                cbPrinters.Sorted = true;
-                cbPrinters.SelectedIndex = -1;
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString());
+                cbPrinters.Items.Clear();//clears the listed printers drop-down box
+                foreach (String printerName in PrinterSettings.InstalledPrinters) //loops through all located printers, storing the retrieved information in array elements
+                    cbPrinters.Items.Add(printerName); //populates the drop-down list with all available printers found
+                cbPrinters.Sorted = true; //sorts the items in the drop-down menu in case-insensitive and alphabetically ascending order
+                cbPrinters.SelectedIndex = -1; //The index of first item in the current selection. The default value is -1
+            } catch (Exception e) { //exception handler
+                MessageBox.Show(e.ToString()); //catches and displays resulting errors to prevent program crash
             }
         }
         #endregion
 
         #region Get SDK Info
         private void GetSDKVersions() {
-            GraphicCode graphics;
+            GraphicCode graphics; //creates graphics variable from the GraphicsCode.cs class
             try {
-                graphics = new GraphicCode();
+                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics
                 graphicsSDKVersion = graphics.GetSDKGraphicsVersion();
+                //calls the getSDKGraphicsVersion method of graphics object to determine graphics major, minor and engine level DLL versions and stores results in graphicsSDKVersion
                 printerSDKVersion = graphics.GetSDKPrinterVersion();
-                lblGraphicsVersion.Text = "Graphics Version: " + graphicsSDKVersion;
-                lblPrinterVersion.Text = "Printer Version: " + printerSDKVersion;
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber");
-            } finally { 
-                graphics = null;
+                //calls the getSDKPrinterVersion method of graphics object to determine printer major, minor, and engine level DLL version and stores results in printerSDKVersion
+                lblGraphicsVersion.Text = "Graphics Version: " + graphicsSDKVersion; //displays the information stored in graphisSDKVersion in lblGraphicsVersion on About tab
+                lblPrinterVersion.Text = "Printer Version: " + printerSDKVersion; //displays the information stored in printerSDKVersion in lblPrinterVersion on About tab
+            } catch (Exception e) { //exception handler
+                MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber"); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                graphics = null; //sets graphics object to null after it has been used to obtain graphics and printer verion information
             }
         }
         #endregion
 
         #region Printer Ready Check
-        private bool PrinterReadyToStart (string driverName, int timeoutInSeconds) {
-            GraphicCode graphics;
+        private bool PrinterReadyToStart(string driverName, int timeoutInSeconds) {
+            //boolean method to test whether the printer is ready to start using driverName and timeoutInSeconds parameters
+            GraphicCode graphics;//creates graphics variable from the GraphicsCode.cs class
             try {
-                graphics = new GraphicCode();
+                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics
                 return graphics.IsPrinterBusy(driverName, timeoutInSeconds); //returns true or false
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString());
-            } finally {
-                graphics = null;
+            } catch (Exception e) { //exception handler
+                MessageBox.Show(e.ToString());//catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                graphics = null; //sets graphics object to null after it has finished being used
             }
             return false;
         }
 
-        private bool IsPrinterAvailable (string driverName) {
-            ZBRPrinter printer = null;
+        private bool IsPrinterAvailable(string driverName) {
+            //boolean method to test whether the printer is available using driverName parameter
+            ZBRPrinter printer = null; //creates printer variable from the ZBRPrinter.cs class initialized to null
             try {
-                printer = new ZBRPrinter();
-                int error = 0;
+                printer = new ZBRPrinter(); //creates new ZBRPrinter object and stores in printer
+                int error = 0; //initial value of errors is 0 meaning printer is available, but will change if errors are detected
 
-                int result = printer.Open(driverName, out error);
-                if ((result == 1) && (error == 0)) {
-                    return true;
+                int result = printer.Open(driverName, out error); //passes IsPrinterAvailable method param as an argument to Open method of printer object and stores in result variable
+                if ((result == 1) && (error == 0)) { //if the result variable is set to 1 and there are no errors...
+                    return true; //return true - the printer is available
                 }
-            } catch (Exception e) {
-                MessageBox.Show(e.ToString());
-            } finally {
-                printer = null;
+            } catch (Exception e) { //exception handler
+                MessageBox.Show(e.ToString()); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                printer = null; //sets printer object to null after it has been used to determine if printer is available
             }
-            return false;
+            return false; //else return false - the printer is unavailable
         }
         #endregion
 
         #region Print is clicked
-        private void btnPrintID_Click(object sender, EventArgs args) {
-            string message = "";
-            string disclaimer = rtbDisclaimer.Text;
+        private void btnPrintID_Click(object sender, EventArgs args) { //click event for Print ID button on Add User tab
+            string message = ""; //string variable message initialized to an empty string
+            string disclaimer = rtbDisclaimer.Text; //string variable disclaimer initialized to store disclaimer rtb user input
 
-            string[] disclaimerSplit = disclaimer.Split('|');
+            string[] disclaimerSplit = disclaimer.Split('|'); //array of strings variable disclaimerSprit initialized to split disclaimer text using pipespace delimiter
 
-            label14.Text = disclaimer;
+            label14.Text = disclaimer; //label used for testing purposes to display disclaimer variable
 
-            GraphicCode graphics = null;
+            GraphicCode graphics = null; //creates graphics variable from the GraphicsCode.cs class initialized to null
 
-            lblStatus.Text = "";
-            Refresh();
-            Application.DoEvents();
+            lblStatus.Text = ""; //on Add User tab - initializes Status label text property to an empty string
+            Refresh(); //call the base class's refresh method so the control and its child controls are invalidated and redrawn
+            Application.DoEvents(); //Application provides static methods and properties to manage an application. Begins running a standard application message loop on the...
+                                    //...current thread, which enables the form to receive Windows messages to allow it to appear responsive and have interaction with the user
             try {
-                if (cbPrinters.SelectedIndex < 0) {
-                    message = "No printer selected.";
-                    return;
+                if (cbPrinters.SelectedIndex < 0) {//check the selected index of printers dropdown box on Add User tab, if less than 0...
+                    message = "No printer selected."; //store string "No printer selected" in message variable
+                    return; //return results displaying message that no printer is selected
                 }
-                if (!IsPrinterAvailable(cbPrinters.Text)) {
-                    message = "Printer is not available.";
-                    return;
+                if (!IsPrinterAvailable(cbPrinters.Text)) { //check text of cbPrinters drop-down, if the not of printers available...
+                    message = "Printer is not available."; //store string "Printer is not available" in message variable
+                    return;  //return results displaying message that no printer is available
                 }
-                //need to check first if all forms are filled out
-                //do later
-                graphics = new GraphicCode();
+
+                //~~~~~~~(NOTE)~~~~~~~~~~~~
+                //~~~***!!!*** need to check first if all forms are filled out
+                //~~~***!!!*** do later
+                //~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
                 graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
+                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
                 graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimerSplit, out message);
-                if (message == "") {
-                    PrinterReadyToStart(cbPrinters.Text, 60);
-                    lblStatus.Text = "Printing the ID";
+                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
+                    PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
+                    lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
                 }
-            } catch (Exception e) {
-                message += e.Message;
-                MessageBox.Show(e.ToString());
-            } finally {
-                if (message != "") {
-                    lblStatus.Text = message;
+            } catch (Exception e) { //exception handler
+                message += e.Message; //add the value of e.message to message string
+                MessageBox.Show(e.ToString()); //use a message box to display the results of exception variable e as a string
+            } finally { //finally block runs whether there is an exception or not
+                if (message != "") { //if message string variable has changed to anything other than the initialized empty string...
+                    lblStatus.Text = message; //set the Status label to display the contents of message string
                 }
-                graphics = null;
+                graphics = null; //sets graphics object to null after it has finished being used
             }
         }
         #endregion
 
         #region User Picture Insert
-        private void btnUserPicture_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.DialogResult dr = openUserImage.ShowDialog();
-            if (dr == DialogResult.OK) {
-                userSelectedFilePath = openUserImage.InitialDirectory + openUserImage.FileName;
-                lblImageLocation.Text = userSelectedFilePath;
-                userImageBox.ImageLocation = userSelectedFilePath;
+        private void btnUserPicture_Click(object sender, EventArgs e) { //click event for Insert Picture button on Add User tab
+            System.Windows.Forms.DialogResult dr = openUserImage.ShowDialog(); //dr variable represents the result of the form when used as a dialog box with ShowDialog method of openUserImage
+            if (dr == DialogResult.OK) {//if OK button is selected
+                userSelectedFilePath = openUserImage.InitialDirectory + openUserImage.FileName; //obtain and store the image filepath into userSelectedFilePath variable
+                lblImageLocation.Text = userSelectedFilePath; //display the contents of userSelectedFilePath as a string in lblImagelocation label on Add User tab
+                userImageBox.ImageLocation = userSelectedFilePath; //display the user selected image in the image box in place of the default 'anonymous' image
             }
         }
 
-        private void btnPreviewID_Click(object sender, EventArgs e) {
-            FrmPreview preview = new FrmPreview();
-            preview.Show();
-            string fullName = txtFirstName.Text + " " + txtLastName.Text;
+        private void btnPreviewID_Click(object sender, EventArgs e) { //click event for Preview ID button on Add User tab
+            FrmPreview preview = new FrmPreview(); //creates new FrmPreview object and stores in FrmPreview variable preview
+            preview.Show(); //displays the control to the user
+            string fullName = txtFirstName.Text + " " + txtLastName.Text; //stores first name and last name user input entered on Add User tab into string variable fullName
             //preview.DisplayInfo(fullName);
         }
 
@@ -154,7 +166,6 @@ namespace IDPrinter {
                 preview = new FrmPreview();
                 preview.lblName.Text = fullName;
                 preview.Update();
-
             } catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
             } finally {
@@ -164,62 +175,60 @@ namespace IDPrinter {
 
         #endregion
 
-        #region Testing 
-        private void button1_Click(object sender, EventArgs e) {
-            MagneticStripCode readWriter;
-             try {
-                 readWriter = new MagneticStripCode();
-                 readWriter.SendComData();
+        #region Testing
+        //***NOTE*** This is solely for testing purposes
+        private void button1_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
+            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            try {
+                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+                readWriter.SendComData(); //calls the SendComData method of readWriter object
 
-             } catch (Exception ex) {
-                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer.");
-             } finally {
-                 readWriter = null;
-             }
+            } catch (Exception ex) { //exception handler
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                readWriter = null; //sets readWriter object to null after it has been used
+            }
         }
         #endregion
 
         #region Clear form
-        private void btnClear_Click(object sender, EventArgs e) {
-            txtFirstName.Clear();
-            txtLastName.Clear();
-            txtPhone.Clear();
-            txtStreet.Clear();
-            txtCity.Clear();
-            txtZip.Clear();
-            cbAdmin.Checked = false;
-            cbState.SelectedIndex = -1;
-            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
-            txtFirstName.Focus();
+        private void btnClear_Click(object sender, EventArgs e) { //clear button on Add User tab
+            txtFirstName.Clear(); //clears the first name textbox
+            txtLastName.Clear(); //clears the last name textbox
+            txtPhone.Clear(); //clears the phone number textbox
+            txtStreet.Clear(); //clears the street textbox
+            txtCity.Clear(); //clears the city textbox
+            txtZip.Clear(); //clears the zipcode textbox
+            cbAdmin.Checked = false; //unckecks the admin checkbox
+            cbState.SelectedIndex = -1; //Resets the index of first item in the current selection to the default value of -1
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png"; //resets the image to the default 'anonymous' image
+            txtFirstName.Focus(); //resets the focus to the First Name textbox if she form clear button is clicked
         }
 
-        private void btnDiscClear_Click(object sender, EventArgs e) {
-            rtbDisclaimer.Clear();
-            rtbDisclaimer.Focus();
+        private void btnDiscClear_Click(object sender, EventArgs e) { //clear button on Disclaimer tab
+            rtbDisclaimer.Clear(); //clears the disclaimer rtb
+            rtbDisclaimer.Focus(); //resets the focus to the disclaimer rtb if the form clear button is clicked
         }
 
         #endregion
 
         #region Disclaimer Character Limit
-        //***If number is changed, remember to change the label text as well***
+        //***If number is changed, remember to change the label text as well to display initial # of chars***
         private void disclaimerTextChanged(object sender, EventArgs e) {
-            rtbDisclaimer.MaxLength = 500; //limits the rtb to 700 characters
+            rtbDisclaimer.MaxLength = 500; //limits the disclaimer rtb to 500 characters max length
             lblCharCount.Text = "Characters Remaining:" + (500 - rtbDisclaimer.Text.Length).ToString();
-            // displays the number of characters remaining in a label below the rtb
+            // displays the number of characters remaining in a label below the rtb by subtracting input text length from max length value
 
         }
         #endregion
 
         #region Set initial focus for different tabs
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedTab == tabAddUser)
-            {   //if AddUser tab is selected, set focus to First Name textbox
-                txtFirstName.Focus();
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) { //click events for tabControl to set focus depending upon which tab is selected
+            if (tabControl1.SelectedTab == tabAddUser) { //if AddUser tab is selected, set focus to First Name textbox
+                txtFirstName.Focus(); //sets focus to txtFirstName
             }
-            if (tabControl1.SelectedTab == tabDisclaimer)
-            {   //if Disclaimer tab is selected, set focus to Disclaimer textbox
-                rtbDisclaimer.Focus();
+            if (tabControl1.SelectedTab == tabDisclaimer) {   //if Disclaimer tab is selected, set focus to Disclaimer textbox
+                rtbDisclaimer.Focus(); //sets focus to rtbDisclaimer
             }
 
         }
