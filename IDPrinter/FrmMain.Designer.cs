@@ -28,7 +28,6 @@ namespace IDPrinter {
             this.tabAddUser = new System.Windows.Forms.TabPage();
             this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblImageLocation = new System.Windows.Forms.Label();
             this.userImageBox = new System.Windows.Forms.PictureBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
@@ -70,6 +69,9 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -97,6 +99,9 @@ namespace IDPrinter {
             // 
             // tabLogin
             // 
+            this.tabLogin.Controls.Add(this.button4);
+            this.tabLogin.Controls.Add(this.button3);
+            this.tabLogin.Controls.Add(this.button1);
             this.tabLogin.Controls.Add(this.label8);
             this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
@@ -144,7 +149,6 @@ namespace IDPrinter {
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lblImageLocation);
             this.groupBox1.Controls.Add(this.userImageBox);
             this.groupBox1.Controls.Add(this.txtPhone);
@@ -170,19 +174,9 @@ namespace IDPrinter {
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New User Information";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(308, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Read/Write Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lblImageLocation
             // 
-            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImageLocation.AutoSize = true;
             this.lblImageLocation.Location = new System.Drawing.Point(99, 221);
@@ -610,6 +604,36 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 258);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 28);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(131, 258);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 28);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Read";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(252, 258);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 28);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Write";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -671,7 +695,6 @@ namespace IDPrinter {
         private System.Windows.Forms.PictureBox userImageBox;
         private System.Windows.Forms.OpenFileDialog openUserImage;
         private System.Windows.Forms.Label lblImageLocation;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -686,5 +709,8 @@ namespace IDPrinter {
         private System.Windows.Forms.Button btnDiscClear;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }

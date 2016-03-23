@@ -181,8 +181,29 @@ namespace IDPrinter {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                readWriter.SendComData(); //calls the SendComData method of readWriter object
-
+                readWriter.eraseCardData();
+            } catch (Exception ex) { //exception handler
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                readWriter = null; //sets readWriter object to null after it has been used
+            }
+        }
+        private void button3_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
+            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            try {
+                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+                readWriter.readCardData();
+            } catch (Exception ex) { //exception handler
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                readWriter = null; //sets readWriter object to null after it has been used
+            }
+        }
+        private void button4_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
+            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            try {
+                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+                readWriter.writeCardData();
             } catch (Exception ex) { //exception handler
                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
