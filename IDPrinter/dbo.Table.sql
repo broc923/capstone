@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[Table]
+(
+	[ID] INT NOT NULL PRIMARY KEY IDENTITY(1000000000, 1), 
+    [firstName] NVARCHAR(50) NOT NULL, 
+    [lastName] NVARCHAR(50) NOT NULL, 
+    [street] NVARCHAR(100) NOT NULL, 
+    [city] NVARCHAR(100) NOT NULL, 
+    [state] NVARCHAR(2) NOT NULL, 
+    [zip] NVARCHAR(15) NOT NULL, 
+    [phone] NVARCHAR(15) NOT NULL, 
+    [photo] VARBINARY(MAX) NOT NULL, 
+    [admin] TINYINT NOT NULL DEFAULT 0
+)

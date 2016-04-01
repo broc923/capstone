@@ -102,34 +102,38 @@ namespace IDPrinter {
                 if (!back) {
                     //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
                     if (admin == false) { //Does the user have admin? No
-                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 370, 30, 325, 50, out error) == 0) {
-                            msg = "DrawImage method error code: " + error.ToString();
+                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 400, 30, 325, 50, out error) == 0) {
+                            msg = "DrawImage method student error code: " + error.ToString();
                             return;
                         }
                     } else { //They do have admin
-                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Admin.png"), 350, 30, 400, 50, out error) == 0) {
-                            msg = "DrawImage method error code: " + error.ToString();
+                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Admin.png"), 380, 30, 400, 50, out error) == 0) {
+                            msg = "DrawImage method admin error code: " + error.ToString();
                             return;
                         }
                     }
                     //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
                     if (graphics.DrawImage(ascii.GetBytes(userPicture), 30, 30, 275, 350, out error) == 0) {
-                        msg = "DrawImage method error code: " + error.ToString();
+                        msg = "DrawImage method user image error code: " + error.ToString();
                         return;
                     }
                     //DrawText(X Coordinate, Y Coordinate, String, Font type, font size, fontStyle, color, out error)
-                    if (graphics.DrawText(35, 380, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0) {
+                    if (graphics.DrawText(35, 390, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0x000000, out error) == 0) {
                         msg = "DrawText method error code: " + error.ToString();
                         return;
                     }
                     //DrawBarcode(X Coordinate, Y Coordinate, rotation, barcode type, width ratio, multiplier, height, text under, barcode data, out error)
-                    if (graphics.DrawBarcode(365, 570, 0, 0, 2, 4, 85, 0, ascii.GetBytes(userID), out error) == 0) {
+                    if (graphics.DrawBarcode(515, 550, 0, 0, 1, 3, 100, 1, ascii.GetBytes(userID), out error) == 0) {
                         msg = "DrawBarcode method error code: " + error.ToString();
                         return;
                     }
                     //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
-                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\logo.png"), 400, 70, 450, 320, out error) == 0) {
-                        msg = "DrawImage method error code: " + error.ToString();
+                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\logo.png"), 400, 85, 450, 320, out error) == 0) {
+                        msg = "DrawImage method logo error code: " + error.ToString();
+                        return;
+                    }
+                    if (graphics.PrintGraphics(out error) == 0) {
+                        msg = "PrintGraphics Error: " + error.ToString();
                         return;
                     }
                 } else {
@@ -147,10 +151,7 @@ namespace IDPrinter {
                     MessageBox.Show(test);//
 
                 }
-                if (graphics.PrintGraphics(out error) == 0) {
-                    msg = "PrintGraphics Error: " + error.ToString();
-                    return;
-                }
+             
             } catch (Exception e) {
                 MessageBox.Show(e.ToString());
             } finally {
