@@ -122,9 +122,9 @@ namespace IDPrinter {
                 //~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimerSplit, out message);
+                //graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimerSplit, out message);
                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
                 if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
                     PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
@@ -229,6 +229,17 @@ namespace IDPrinter {
         private void btnDiscClear_Click(object sender, EventArgs e) { //clear button on Disclaimer tab
             rtbDisclaimer.Clear(); //clears the disclaimer rtb
             rtbDisclaimer.Focus(); //resets the focus to the disclaimer rtb if the form clear button is clicked
+        }
+
+        private void btnCheckForUser_Click(object sender, EventArgs e) {
+            string userID = tbCheckForUser.Text;
+            try {
+                Database.checkUser(userID);
+            } catch (Exception er) {
+                MessageBox.Show(er.ToString());
+            } finally {
+                //
+            }
         }
 
         #endregion

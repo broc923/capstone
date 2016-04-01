@@ -24,6 +24,9 @@ namespace IDPrinter {
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tabAddUser = new System.Windows.Forms.TabPage();
             this.btnClear = new System.Windows.Forms.Button();
@@ -69,9 +72,8 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnCheckForUser = new System.Windows.Forms.Button();
+            this.tbCheckForUser = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -99,6 +101,8 @@ namespace IDPrinter {
             // 
             // tabLogin
             // 
+            this.tabLogin.Controls.Add(this.tbCheckForUser);
+            this.tabLogin.Controls.Add(this.btnCheckForUser);
             this.tabLogin.Controls.Add(this.button4);
             this.tabLogin.Controls.Add(this.button3);
             this.tabLogin.Controls.Add(this.button1);
@@ -110,6 +114,36 @@ namespace IDPrinter {
             this.tabLogin.TabIndex = 0;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(252, 258);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 28);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "Write";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(131, 258);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 28);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Read";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(8, 258);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 28);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
@@ -604,35 +638,22 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
-            // button1
+            // btnCheckForUser
             // 
-            this.button1.Location = new System.Drawing.Point(8, 258);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCheckForUser.Location = new System.Drawing.Point(9, 22);
+            this.btnCheckForUser.Name = "btnCheckForUser";
+            this.btnCheckForUser.Size = new System.Drawing.Size(137, 23);
+            this.btnCheckForUser.TabIndex = 12;
+            this.btnCheckForUser.Text = "Check For User";
+            this.btnCheckForUser.UseVisualStyleBackColor = true;
+            this.btnCheckForUser.Click += new System.EventHandler(this.btnCheckForUser_Click);
             // 
-            // button3
+            // tbCheckForUser
             // 
-            this.button3.Location = new System.Drawing.Point(131, 258);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 28);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Read";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(252, 258);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 28);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Write";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.tbCheckForUser.Location = new System.Drawing.Point(153, 22);
+            this.tbCheckForUser.Name = "tbCheckForUser";
+            this.tbCheckForUser.Size = new System.Drawing.Size(100, 20);
+            this.tbCheckForUser.TabIndex = 13;
             // 
             // FrmMain
             // 
@@ -712,5 +733,7 @@ namespace IDPrinter {
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox tbCheckForUser;
+        private System.Windows.Forms.Button btnCheckForUser;
     }
 }
