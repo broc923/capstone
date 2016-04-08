@@ -2,6 +2,7 @@
 using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
 using nsZBRPrinter; //allows access to zebra-specific controls
 using System.Drawing.Printing; //Defines a reusable object that sends output to a printer, when printing from a Windows Forms application
+using System.Linq;
 
 namespace IDPrinter {
     public partial class FrmMain : Form {
@@ -13,6 +14,7 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() { //no-arg constructor
             InitializeComponent(); //handles the initialization of the forms controls on load up
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
         }
 
         private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
@@ -94,11 +96,16 @@ namespace IDPrinter {
         #region Print is clicked
         private void btnPrintID_Click(object sender, EventArgs args) { //click event for Print ID button on Add User tab
             string message = ""; //string variable message initialized to an empty string
-            string disclaimer = rtbDisclaimer.Text; //string variable disclaimer initialized to store disclaimer rtb user input
+            var userDisclaimer = rtbDisclaimer.Text;
+            var charCount = 0;
+            int max = 30;
 
-            string[] disclaimerSplit = disclaimer.Split('|'); //array of strings variable disclaimerSprit initialized to split disclaimer text using pipespace delimiter
-
-            label14.Text = disclaimer; //label used for testing purposes to display disclaimer variable
+            var lines = userDisclaimer.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] array = lines.GroupBy(w => (charCount += (((charCount % max) + w.Length + 1 >= max)
+                        ? max - (charCount % max) : 0) + w.Length + 1) / max)
+                    .Select(g => string.Join(" ", g.ToArray()))
+                    .ToArray();
+            
 
             GraphicCode graphics = null; //creates graphics variable from the GraphicsCode.cs class initialized to null
 
@@ -124,7 +131,7 @@ namespace IDPrinter {
                 graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
                 graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                //graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, disclaimerSplit, out message);
+                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, array, out message);
                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
                 if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
                     PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
@@ -241,6 +248,22 @@ namespace IDPrinter {
                 //
             }
         }
+
+        private void button5_Click(object sender, EventArgs e) {
+            var userDisclaimer = rtbDisclaimer.Text;
+            var charCount = 0;
+            int max = 30;
+
+            var lines = userDisclaimer.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] array = lines.GroupBy(w => (charCount += (((charCount % max) + w.Length + 1 >= max)
+                        ? max - (charCount % max) : 0) + w.Length + 1) / max)
+                    .Select(g => string.Join(" ", g.ToArray()))
+                    .ToArray();
+                foreach (string disclaimer in array) {
+                    Console.WriteLine(disclaimer);
+                }
+            }
+
 
         #endregion
 
