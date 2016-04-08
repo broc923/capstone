@@ -241,11 +241,13 @@ namespace IDPrinter {
         private void btnCheckForUser_Click(object sender, EventArgs e) {
             string userID = tbCheckForUser.Text;
             try {
-                Database.checkUser(userID);
+                //string value = Database.updateUser("1000000002", "Calebdddd", "Mann", "your moms house", "Blountville", "TN", "37617", "4234161471", "","1");
+                int value = Database.updateUser("1000000002", "Broc");
+                Console.WriteLine(value.ToString());
             } catch (Exception er) {
                 MessageBox.Show(er.ToString());
             } finally {
-                //
+                
             }
         }
 
