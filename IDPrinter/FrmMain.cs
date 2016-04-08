@@ -13,6 +13,7 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() { //no-arg constructor
             InitializeComponent(); //handles the initialization of the forms controls on load up
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
         }
 
         private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
@@ -234,11 +235,13 @@ namespace IDPrinter {
         private void btnCheckForUser_Click(object sender, EventArgs e) {
             string userID = tbCheckForUser.Text;
             try {
-                Database.checkUser(userID);
+                //string value = Database.updateUser("1000000002", "Calebdddd", "Mann", "your moms house", "Blountville", "TN", "37617", "4234161471", "","1");
+                int value = Database.updateUser("1000000002", "Broc");
+                Console.WriteLine(value.ToString());
             } catch (Exception er) {
                 MessageBox.Show(er.ToString());
             } finally {
-                //
+                
             }
         }
 
