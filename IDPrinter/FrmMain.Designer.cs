@@ -57,17 +57,11 @@ namespace IDPrinter {
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabEditUser = new System.Windows.Forms.TabPage();
+            this.lblDeleteUser = new System.Windows.Forms.Label();
+            this.txtDeleteUser = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.lbl14 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTableColPhone = new System.Windows.Forms.Label();
-            this.lblTableColZip = new System.Windows.Forms.Label();
-            this.lblTableColState = new System.Windows.Forms.Label();
-            this.lblTableColCity = new System.Windows.Forms.Label();
-            this.lblTableColStreet = new System.Windows.Forms.Label();
-            this.lblTableColID = new System.Windows.Forms.Label();
-            this.lblTableColFirstName = new System.Windows.Forms.Label();
-            this.lblTableColLastName = new System.Windows.Forms.Label();
             this.tabDisclaimer = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
@@ -86,15 +80,13 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.lblTableColAdmin = new System.Windows.Forms.Label();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).BeginInit();
             this.tabEditUser.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tabDisclaimer.SuspendLayout();
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -504,16 +496,43 @@ namespace IDPrinter {
             // 
             // tabEditUser
             // 
+            this.tabEditUser.Controls.Add(this.btnDeleteUser);
+            this.tabEditUser.Controls.Add(this.lblDeleteUser);
+            this.tabEditUser.Controls.Add(this.txtDeleteUser);
             this.tabEditUser.Controls.Add(this.btnSearch);
             this.tabEditUser.Controls.Add(this.comboBox1);
             this.tabEditUser.Controls.Add(this.lbl14);
-            this.tabEditUser.Controls.Add(this.tableLayoutPanel1);
             this.tabEditUser.Location = new System.Drawing.Point(4, 22);
             this.tabEditUser.Name = "tabEditUser";
             this.tabEditUser.Size = new System.Drawing.Size(498, 310);
             this.tabEditUser.TabIndex = 4;
-            this.tabEditUser.Text = "Edit User";
+            this.tabEditUser.Text = "Delete User";
             this.tabEditUser.UseVisualStyleBackColor = true;
+            // 
+            // lblDeleteUser
+            // 
+            this.lblDeleteUser.AutoSize = true;
+            this.lblDeleteUser.Location = new System.Drawing.Point(8, 13);
+            this.lblDeleteUser.Name = "lblDeleteUser";
+            this.lblDeleteUser.Size = new System.Drawing.Size(320, 13);
+            this.lblDeleteUser.TabIndex = 20;
+            this.lblDeleteUser.Text = "Enter the User ID of the Uer you want to delete from the database.";
+            // 
+            // txtDeleteUser
+            // 
+            this.txtDeleteUser.Location = new System.Drawing.Point(11, 40);
+            this.txtDeleteUser.Name = "txtDeleteUser";
+            this.txtDeleteUser.Size = new System.Drawing.Size(100, 20);
+            this.txtDeleteUser.TabIndex = 19;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(148, 281);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 18;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -538,125 +557,6 @@ namespace IDPrinter {
             this.lbl14.Size = new System.Drawing.Size(62, 13);
             this.lbl14.TabIndex = 16;
             this.lbl14.Text = "Search For:";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoScroll = true;
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 9;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColAdmin, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColPhone, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColZip, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColState, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColCity, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColStreet, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColID, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColFirstName, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblTableColLastName, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 259);
-            this.tableLayoutPanel1.TabIndex = 15;
-            // 
-            // lblTableColPhone
-            // 
-            this.lblTableColPhone.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColPhone.Location = new System.Drawing.Point(376, 2);
-            this.lblTableColPhone.Name = "lblTableColPhone";
-            this.lblTableColPhone.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColPhone.TabIndex = 14;
-            this.lblTableColPhone.Text = "Phone";
-            this.lblTableColPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColZip
-            // 
-            this.lblTableColZip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColZip.Location = new System.Drawing.Point(323, 2);
-            this.lblTableColZip.Name = "lblTableColZip";
-            this.lblTableColZip.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColZip.TabIndex = 13;
-            this.lblTableColZip.Text = "Zip";
-            this.lblTableColZip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColState
-            // 
-            this.lblTableColState.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColState.Location = new System.Drawing.Point(270, 2);
-            this.lblTableColState.Name = "lblTableColState";
-            this.lblTableColState.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColState.TabIndex = 12;
-            this.lblTableColState.Text = "State";
-            this.lblTableColState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColCity
-            // 
-            this.lblTableColCity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColCity.Location = new System.Drawing.Point(217, 2);
-            this.lblTableColCity.Name = "lblTableColCity";
-            this.lblTableColCity.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColCity.TabIndex = 11;
-            this.lblTableColCity.Text = "City";
-            this.lblTableColCity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColStreet
-            // 
-            this.lblTableColStreet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColStreet.Location = new System.Drawing.Point(164, 2);
-            this.lblTableColStreet.Name = "lblTableColStreet";
-            this.lblTableColStreet.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColStreet.TabIndex = 10;
-            this.lblTableColStreet.Text = "Street";
-            this.lblTableColStreet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColID
-            // 
-            this.lblTableColID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColID.Location = new System.Drawing.Point(5, 2);
-            this.lblTableColID.Name = "lblTableColID";
-            this.lblTableColID.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColID.TabIndex = 0;
-            this.lblTableColID.Text = "ID";
-            this.lblTableColID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColFirstName
-            // 
-            this.lblTableColFirstName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColFirstName.Location = new System.Drawing.Point(58, 2);
-            this.lblTableColFirstName.Name = "lblTableColFirstName";
-            this.lblTableColFirstName.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColFirstName.TabIndex = 1;
-            this.lblTableColFirstName.Text = "First Name";
-            this.lblTableColFirstName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblTableColLastName
-            // 
-            this.lblTableColLastName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColLastName.Location = new System.Drawing.Point(111, 2);
-            this.lblTableColLastName.Name = "lblTableColLastName";
-            this.lblTableColLastName.Size = new System.Drawing.Size(45, 46);
-            this.lblTableColLastName.TabIndex = 2;
-            this.lblTableColLastName.Text = "Last Name";
-            this.lblTableColLastName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabDisclaimer
             // 
@@ -830,24 +730,14 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
-            // btnSearch
+            // btnDeleteUser
             // 
-            this.btnSearch.Location = new System.Drawing.Point(148, 281);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 18;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // lblTableColAdmin
-            // 
-            this.lblTableColAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTableColAdmin.Location = new System.Drawing.Point(429, 2);
-            this.lblTableColAdmin.Name = "lblTableColAdmin";
-            this.lblTableColAdmin.Size = new System.Drawing.Size(61, 46);
-            this.lblTableColAdmin.TabIndex = 15;
-            this.lblTableColAdmin.Text = "Admin";
-            this.lblTableColAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnDeleteUser.Location = new System.Drawing.Point(148, 36);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteUser.TabIndex = 21;
+            this.btnDeleteUser.Text = "Delete User";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
@@ -869,7 +759,6 @@ namespace IDPrinter {
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).EndInit();
             this.tabEditUser.ResumeLayout(false);
             this.tabEditUser.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.tabDisclaimer.ResumeLayout(false);
             this.tabDisclaimer.PerformLayout();
             this.tabAbout.ResumeLayout(false);
@@ -933,18 +822,11 @@ namespace IDPrinter {
         private System.Windows.Forms.Button btnCheckForUser;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabPage tabEditUser;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblTableColPhone;
-        private System.Windows.Forms.Label lblTableColZip;
-        private System.Windows.Forms.Label lblTableColState;
-        private System.Windows.Forms.Label lblTableColCity;
-        private System.Windows.Forms.Label lblTableColStreet;
-        private System.Windows.Forms.Label lblTableColID;
-        private System.Windows.Forms.Label lblTableColFirstName;
-        private System.Windows.Forms.Label lblTableColLastName;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lbl14;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Label lblTableColAdmin;
+        private System.Windows.Forms.Label lblDeleteUser;
+        private System.Windows.Forms.TextBox txtDeleteUser;
+        private System.Windows.Forms.Button btnDeleteUser;
     }
 }
