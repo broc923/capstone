@@ -114,29 +114,39 @@ namespace IDPrinter {
             Application.DoEvents(); //Application provides static methods and properties to manage an application. Begins running a standard application message loop on the...
                                     //...current thread, which enables the form to receive Windows messages to allow it to appear responsive and have interaction with the user
             try {
-                if (cbPrinters.SelectedIndex < 0) {//check the selected index of printers dropdown box on Add User tab, if less than 0...
-                    message = "No printer selected."; //store string "No printer selected" in message variable
-                    return; //return results displaying message that no printer is selected
-                }
-                if (!IsPrinterAvailable(cbPrinters.Text)) { //check text of cbPrinters drop-down, if the not of printers available...
-                    message = "Printer is not available."; //store string "Printer is not available" in message variable
-                    return;  //return results displaying message that no printer is available
-                }
+                /* if (cbPrinters.SelectedIndex < 0) {//check the selected index of printers dropdown box on Add User tab, if less than 0...
+                     message = "No printer selected."; //store string "No printer selected" in message variable
+                     return; //return results displaying message that no printer is selected
+                 }
+                 if (!IsPrinterAvailable(cbPrinters.Text)) { //check text of cbPrinters drop-down, if the not of printers available...
+                     message = "Printer is not available."; //store string "Printer is not available" in message variable
+                     return;  //return results displaying message that no printer is available
+                 }
 
-                //~~~~~~~(NOTE)~~~~~~~~~~~~
-                //~~~***!!!*** need to check first if all forms are filled out
-                //~~~***!!!*** do later
-                //~~~~~~~~~~~~~~~~~~~~~~~~~
+                 //~~~~~~~(NOTE)~~~~~~~~~~~~
+                 //~~~***!!!*** need to check first if all forms are filled out
+                 //~~~***!!!*** do later
+                 //~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
-                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, array, out message);
-                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
-                    PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
-                    lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
+                 graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
+                 graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
+                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                 //graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, array, out message);
+                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                 if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
+                     PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
+                     lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
+                 }
+                 */
+                string isAdmin;
+
+                if(cbAdmin.Checked == true) {
+                    isAdmin = "1";
+                } else {
+                    isAdmin = "0";
                 }
+                Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, isAdmin);
+                Console.WriteLine("add query was ran");
             } catch (Exception e) { //exception handler
                 message += e.Message; //add the value of e.message to message string
                 MessageBox.Show(e.ToString()); //use a message box to display the results of exception variable e as a string
@@ -147,6 +157,17 @@ namespace IDPrinter {
                 graphics = null; //sets graphics object to null after it has finished being used
             }
         }
+        #endregion
+
+        #region Delete User is Clicked
+        private void btnDeleteUser_click(object sender, EventArgs e) {
+
+            Database.deleteUser(txtDeleteUser.Text);
+            Refresh();
+        }
+
+
+
         #endregion
 
         #region User Picture Insert
