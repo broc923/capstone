@@ -143,25 +143,26 @@ namespace IDPrinter {
 
                 if (nullMessage != "") {
                     MessageBox.Show(nullMessage);
-                }
-
-                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, out message);
-                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
-                    PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
-                    lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
-                }
-
-                string isAdmin;
-
-                if (cbAdmin.Checked == true) {
-                    isAdmin = "1";
                 } else {
-                    isAdmin = "0";
+
+                    graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
+                    graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, out message);
+                    //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                    if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
+                        PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
+                        lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
+                    }
+
+                    string isAdmin;
+
+                    if (cbAdmin.Checked == true) {
+                        isAdmin = "1";
+                    } else {
+                        isAdmin = "0";
+                    }
+                    Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, isAdmin);
+                    Console.WriteLine("add query was ran");
                 }
-                Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, isAdmin);
-                Console.WriteLine("add query was ran");
             } catch (Exception e) { //exception handler
                 message += e.Message; //add the value of e.message to message string
                 MessageBox.Show(e.ToString()); //use a message box to display the results of exception variable e as a string
@@ -203,27 +204,6 @@ namespace IDPrinter {
                 userImageBox.ImageLocation = userSelectedFilePath; //display the user selected image in the image box in place of the default 'anonymous' image
             }
         }
-
-        private void btnPreviewID_Click(object sender, EventArgs e) { //click event for Preview ID button on Add User tab
-            FrmPreview preview = new FrmPreview(); //creates new FrmPreview object and stores in FrmPreview variable preview
-            preview.Show(); //displays the control to the user
-            string fullName = txtFirstName.Text + " " + txtLastName.Text; //stores first name and last name user input entered on Add User tab into string variable fullName
-            //preview.DisplayInfo(fullName);
-        }
-
-        /**private void txtFirstName_TextChanged(object sender, EventArgs e) {
-            FrmPreview preview = null;
-            string fullName = txtFirstName.Text + " " + txtLastName.Text;
-            try {
-                preview = new FrmPreview();
-                preview.lblName.Text = fullName;
-                preview.Update();
-            } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
-            } finally {
-                preview = null;
-            }
-        }**/
 
         #endregion
 
@@ -307,5 +287,42 @@ namespace IDPrinter {
         }
         #endregion
 
+        private void btnLogin_Click(object sender, EventArgs e) {
+            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            try {
+                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+                string cardID = readWriter.readCardData();
+                string dbID = Database.checkUser(cardID)[0];
+                if (cardID == dbID) { //User does exist
+                    //login
+                    lbUserLog.Items.Add("User " + cardID + " logged in.");
+                } else { //User doesn't exist
+                    lbUserLog.Items.Add("User " + cardID + " not found. Contact an administrator.");
+                }
+            } catch (Exception ex) { //exception handler
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the login."); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                readWriter = null; //sets readWriter object to null after it has been used
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e) {
+            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            try {
+                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+                string cardID = readWriter.readCardData();
+                string dbID = Database.checkUser(cardID)[0];
+                if (cardID == dbID) { //User does exist
+                    //logout
+                    lbUserLog.Items.Add("User " + cardID + " logged out.");
+                } else { //User doesn't exist
+                    lbUserLog.Items.Add("User " + cardID + " not found. Contact an administrator.");
+                }
+            } catch (Exception ex) { //exception handler
+                MessageBox.Show(ex.ToString(), "Broc Screwed up the logout."); //catches and displays resulting errors to prevent program crash
+            } finally { //finally block runs whether there is an exception or not
+                readWriter = null; //sets readWriter object to null after it has been used
+            }
+        }
     }
 }

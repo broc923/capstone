@@ -24,6 +24,9 @@ namespace IDPrinter {
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
+            this.lbUserLog = new System.Windows.Forms.ListBox();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.tabAddUser = new System.Windows.Forms.TabPage();
             this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,7 +52,6 @@ namespace IDPrinter {
             this.cbPrinters = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnPrintID = new System.Windows.Forms.Button();
-            this.btnPreviewID = new System.Windows.Forms.Button();
             this.tabDeleteUser = new System.Windows.Forms.TabPage();
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.lblDeleteUser = new System.Windows.Forms.Label();
@@ -76,6 +78,7 @@ namespace IDPrinter {
             this.label8 = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
+            this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).BeginInit();
@@ -103,6 +106,9 @@ namespace IDPrinter {
             // 
             // tabLogin
             // 
+            this.tabLogin.Controls.Add(this.lbUserLog);
+            this.tabLogin.Controls.Add(this.btnLogout);
+            this.tabLogin.Controls.Add(this.btnLogin);
             this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
             this.tabLogin.Padding = new System.Windows.Forms.Padding(3);
@@ -110,6 +116,34 @@ namespace IDPrinter {
             this.tabLogin.TabIndex = 0;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
+            // 
+            // lbUserLog
+            // 
+            this.lbUserLog.FormattingEnabled = true;
+            this.lbUserLog.Location = new System.Drawing.Point(9, 143);
+            this.lbUserLog.Name = "lbUserLog";
+            this.lbUserLog.Size = new System.Drawing.Size(481, 160);
+            this.lbUserLog.TabIndex = 2;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(268, 6);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(222, 131);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(6, 6);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(231, 131);
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // tabAddUser
             // 
@@ -119,7 +153,6 @@ namespace IDPrinter {
             this.tabAddUser.Controls.Add(this.cbPrinters);
             this.tabAddUser.Controls.Add(this.lblStatus);
             this.tabAddUser.Controls.Add(this.btnPrintID);
-            this.tabAddUser.Controls.Add(this.btnPreviewID);
             this.tabAddUser.Location = new System.Drawing.Point(4, 22);
             this.tabAddUser.Name = "tabAddUser";
             this.tabAddUser.Padding = new System.Windows.Forms.Padding(3);
@@ -130,7 +163,7 @@ namespace IDPrinter {
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(371, 279);
+            this.btnClear.Location = new System.Drawing.Point(343, 281);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 3;
@@ -167,7 +200,7 @@ namespace IDPrinter {
             // 
             // lblImageLocation
             // 
-            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImageLocation.AutoSize = true;
             this.lblImageLocation.Location = new System.Drawing.Point(99, 221);
@@ -407,23 +440,13 @@ namespace IDPrinter {
             // 
             // btnPrintID
             // 
-            this.btnPrintID.Location = new System.Drawing.Point(290, 279);
+            this.btnPrintID.Location = new System.Drawing.Point(262, 281);
             this.btnPrintID.Name = "btnPrintID";
             this.btnPrintID.Size = new System.Drawing.Size(75, 23);
             this.btnPrintID.TabIndex = 2;
             this.btnPrintID.Text = "&Print ID";
             this.btnPrintID.UseVisualStyleBackColor = true;
             this.btnPrintID.Click += new System.EventHandler(this.btnPrintID_Click);
-            // 
-            // btnPreviewID
-            // 
-            this.btnPreviewID.Location = new System.Drawing.Point(209, 279);
-            this.btnPreviewID.Name = "btnPreviewID";
-            this.btnPreviewID.Size = new System.Drawing.Size(75, 23);
-            this.btnPreviewID.TabIndex = 1;
-            this.btnPreviewID.Text = "Pre&view ID";
-            this.btnPreviewID.UseVisualStyleBackColor = true;
-            this.btnPreviewID.Click += new System.EventHandler(this.btnPreviewID_Click);
             // 
             // tabDeleteUser
             // 
@@ -678,6 +701,7 @@ namespace IDPrinter {
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.tabControl1.ResumeLayout(false);
+            this.tabLogin.ResumeLayout(false);
             this.tabAddUser.ResumeLayout(false);
             this.tabAddUser.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -701,7 +725,6 @@ namespace IDPrinter {
         private System.Windows.Forms.TabPage tabAbout;
         private System.Windows.Forms.Label lblGraphicsVersion;
         private System.Windows.Forms.Label lblPrinterVersion;
-        private System.Windows.Forms.Button btnPreviewID;
         private System.Windows.Forms.Button btnPrintID;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblPrinter;
@@ -748,5 +771,8 @@ namespace IDPrinter {
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox lbUserLog;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
