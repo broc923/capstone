@@ -85,7 +85,7 @@ namespace IDPrinter {
         #endregion
 
         #region Print graphics
-        public void Print(string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg) {
+        public void Print(string driverName, string name, string userID, string userPicture, bool admin, out string msg) {
             int error;
             ZBRGraphics graphics = null;
             ASCIIEncoding ascii;
@@ -99,7 +99,6 @@ namespace IDPrinter {
                     msg = "InitGraphics method error code: " + error.ToString();
                     return;
                 }
-                if (!back) {
                     //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
                     if (admin == false) { //Does the user have admin? No
                         if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 400, 30, 325, 50, out error) == 0) {
@@ -136,21 +135,6 @@ namespace IDPrinter {
                         msg = "PrintGraphics Error: " + error.ToString();
                         return;
                     }
-                } else {
-                    string test = ""; //
-                    int x = 35;
-
-                    foreach (string disclaimer in disclaimerSplit) {
-                        if (graphics.DrawText(x, 35, ascii.GetBytes(disclaimer), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0) {
-                            msg = "DrawText method error code: " + error.ToString();
-                            return;
-                        }
-                        x += 10;
-                        test += disclaimer + "\n"; //
-                    }
-                    MessageBox.Show(test);//
-
-                }
              
             } catch (Exception e) {
                 MessageBox.Show(e.ToString());
