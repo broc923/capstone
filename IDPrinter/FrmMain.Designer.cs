@@ -24,12 +24,6 @@ namespace IDPrinter {
         private void InitializeComponent() {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
-            this.tbCheckForUser = new System.Windows.Forms.TextBox();
-            this.btnCheckForUser = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabAddUser = new System.Windows.Forms.TabPage();
             this.btnClear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,19 +50,13 @@ namespace IDPrinter {
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnPrintID = new System.Windows.Forms.Button();
             this.btnPreviewID = new System.Windows.Forms.Button();
-            this.tabEditUser = new System.Windows.Forms.TabPage();
+            this.tabDeleteUser = new System.Windows.Forms.TabPage();
+            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.lblDeleteUser = new System.Windows.Forms.Label();
             this.txtDeleteUser = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.lbl14 = new System.Windows.Forms.Label();
-            this.tabDisclaimer = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnDiscClear = new System.Windows.Forms.Button();
-            this.lblCharCount = new System.Windows.Forms.Label();
-            this.rtbDisclaimer = new System.Windows.Forms.RichTextBox();
             this.tabAbout = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -79,26 +67,31 @@ namespace IDPrinter {
             this.label3 = new System.Windows.Forms.Label();
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
+            this.tabTesting = new System.Windows.Forms.TabPage();
+            this.tbCheckForUser = new System.Windows.Forms.TextBox();
+            this.btnCheckForUser = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.btnDeleteUser = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).BeginInit();
-            this.tabEditUser.SuspendLayout();
-            this.tabDisclaimer.SuspendLayout();
+            this.tabDeleteUser.SuspendLayout();
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabTesting.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabLogin);
             this.tabControl1.Controls.Add(this.tabAddUser);
-            this.tabControl1.Controls.Add(this.tabEditUser);
-            this.tabControl1.Controls.Add(this.tabDisclaimer);
+            this.tabControl1.Controls.Add(this.tabDeleteUser);
             this.tabControl1.Controls.Add(this.tabAbout);
+            this.tabControl1.Controls.Add(this.tabTesting);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -110,12 +103,6 @@ namespace IDPrinter {
             // 
             // tabLogin
             // 
-            this.tabLogin.Controls.Add(this.tbCheckForUser);
-            this.tabLogin.Controls.Add(this.btnCheckForUser);
-            this.tabLogin.Controls.Add(this.button4);
-            this.tabLogin.Controls.Add(this.button3);
-            this.tabLogin.Controls.Add(this.button1);
-            this.tabLogin.Controls.Add(this.label8);
             this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
             this.tabLogin.Padding = new System.Windows.Forms.Padding(3);
@@ -123,62 +110,6 @@ namespace IDPrinter {
             this.tabLogin.TabIndex = 0;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
-            // 
-            // tbCheckForUser
-            // 
-            this.tbCheckForUser.Location = new System.Drawing.Point(153, 22);
-            this.tbCheckForUser.Name = "tbCheckForUser";
-            this.tbCheckForUser.Size = new System.Drawing.Size(100, 20);
-            this.tbCheckForUser.TabIndex = 13;
-            // 
-            // btnCheckForUser
-            // 
-            this.btnCheckForUser.Location = new System.Drawing.Point(9, 22);
-            this.btnCheckForUser.Name = "btnCheckForUser";
-            this.btnCheckForUser.Size = new System.Drawing.Size(137, 23);
-            this.btnCheckForUser.TabIndex = 12;
-            this.btnCheckForUser.Text = "Check For User";
-            this.btnCheckForUser.UseVisualStyleBackColor = true;
-            this.btnCheckForUser.Click += new System.EventHandler(this.btnCheckForUser_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(252, 258);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 28);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Write";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(131, 258);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 28);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Read";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(8, 258);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(293, 42);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "label8";
             // 
             // tabAddUser
             // 
@@ -236,7 +167,7 @@ namespace IDPrinter {
             // 
             // lblImageLocation
             // 
-            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblImageLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImageLocation.AutoSize = true;
             this.lblImageLocation.Location = new System.Drawing.Point(99, 221);
@@ -494,35 +425,45 @@ namespace IDPrinter {
             this.btnPreviewID.UseVisualStyleBackColor = true;
             this.btnPreviewID.Click += new System.EventHandler(this.btnPreviewID_Click);
             // 
-            // tabEditUser
+            // tabDeleteUser
             // 
-            this.tabEditUser.Controls.Add(this.btnDeleteUser);
-            this.tabEditUser.Controls.Add(this.lblDeleteUser);
-            this.tabEditUser.Controls.Add(this.txtDeleteUser);
-            this.tabEditUser.Controls.Add(this.btnSearch);
-            this.tabEditUser.Controls.Add(this.comboBox1);
-            this.tabEditUser.Controls.Add(this.lbl14);
-            this.tabEditUser.Location = new System.Drawing.Point(4, 22);
-            this.tabEditUser.Name = "tabEditUser";
-            this.tabEditUser.Size = new System.Drawing.Size(498, 310);
-            this.tabEditUser.TabIndex = 4;
-            this.tabEditUser.Text = "Delete User";
-            this.tabEditUser.UseVisualStyleBackColor = true;
+            this.tabDeleteUser.Controls.Add(this.btnDeleteUser);
+            this.tabDeleteUser.Controls.Add(this.lblDeleteUser);
+            this.tabDeleteUser.Controls.Add(this.txtDeleteUser);
+            this.tabDeleteUser.Controls.Add(this.btnSearch);
+            this.tabDeleteUser.Controls.Add(this.comboBox1);
+            this.tabDeleteUser.Controls.Add(this.lbl14);
+            this.tabDeleteUser.Location = new System.Drawing.Point(4, 22);
+            this.tabDeleteUser.Name = "tabDeleteUser";
+            this.tabDeleteUser.Size = new System.Drawing.Size(498, 310);
+            this.tabDeleteUser.TabIndex = 4;
+            this.tabDeleteUser.Text = "Delete User";
+            this.tabDeleteUser.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteUser
+            // 
+            this.btnDeleteUser.Location = new System.Drawing.Point(148, 36);
+            this.btnDeleteUser.Name = "btnDeleteUser";
+            this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteUser.TabIndex = 21;
+            this.btnDeleteUser.Text = "Delete User";
+            this.btnDeleteUser.UseVisualStyleBackColor = true;
+            this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_click);
             // 
             // lblDeleteUser
             // 
             this.lblDeleteUser.AutoSize = true;
             this.lblDeleteUser.Location = new System.Drawing.Point(8, 13);
             this.lblDeleteUser.Name = "lblDeleteUser";
-            this.lblDeleteUser.Size = new System.Drawing.Size(320, 13);
+            this.lblDeleteUser.Size = new System.Drawing.Size(325, 13);
             this.lblDeleteUser.TabIndex = 20;
-            this.lblDeleteUser.Text = "Enter the User ID of the Uer you want to delete from the database.";
+            this.lblDeleteUser.Text = "Enter the User ID of the User you want to delete from the database.";
             // 
             // txtDeleteUser
             // 
             this.txtDeleteUser.Location = new System.Drawing.Point(11, 40);
             this.txtDeleteUser.Name = "txtDeleteUser";
-            this.txtDeleteUser.Size = new System.Drawing.Size(100, 20);
+            this.txtDeleteUser.Size = new System.Drawing.Size(130, 20);
             this.txtDeleteUser.TabIndex = 19;
             // 
             // btnSearch
@@ -557,77 +498,6 @@ namespace IDPrinter {
             this.lbl14.Size = new System.Drawing.Size(62, 13);
             this.lbl14.TabIndex = 16;
             this.lbl14.Text = "Search For:";
-            // 
-            // tabDisclaimer
-            // 
-            this.tabDisclaimer.Controls.Add(this.button5);
-            this.tabDisclaimer.Controls.Add(this.label15);
-            this.tabDisclaimer.Controls.Add(this.button2);
-            this.tabDisclaimer.Controls.Add(this.btnDiscClear);
-            this.tabDisclaimer.Controls.Add(this.lblCharCount);
-            this.tabDisclaimer.Controls.Add(this.rtbDisclaimer);
-            this.tabDisclaimer.Location = new System.Drawing.Point(4, 22);
-            this.tabDisclaimer.Name = "tabDisclaimer";
-            this.tabDisclaimer.Size = new System.Drawing.Size(498, 310);
-            this.tabDisclaimer.TabIndex = 3;
-            this.tabDisclaimer.Text = "Disclaimer";
-            this.tabDisclaimer.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(46, 238);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(108, 36);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(279, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "*The following text will be printed on the back of the card*";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(166, 238);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "&Save";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btnDiscClear
-            // 
-            this.btnDiscClear.Location = new System.Drawing.Point(266, 238);
-            this.btnDiscClear.Name = "btnDiscClear";
-            this.btnDiscClear.Size = new System.Drawing.Size(75, 23);
-            this.btnDiscClear.TabIndex = 2;
-            this.btnDiscClear.Text = "&Clear";
-            this.btnDiscClear.UseVisualStyleBackColor = true;
-            this.btnDiscClear.Click += new System.EventHandler(this.btnDiscClear_Click);
-            // 
-            // lblCharCount
-            // 
-            this.lblCharCount.AutoSize = true;
-            this.lblCharCount.Location = new System.Drawing.Point(288, 212);
-            this.lblCharCount.Name = "lblCharCount";
-            this.lblCharCount.Size = new System.Drawing.Size(135, 13);
-            this.lblCharCount.TabIndex = 2;
-            this.lblCharCount.Text = "Characters Remaining: 500";
-            // 
-            // rtbDisclaimer
-            // 
-            this.rtbDisclaimer.Location = new System.Drawing.Point(70, 69);
-            this.rtbDisclaimer.Name = "rtbDisclaimer";
-            this.rtbDisclaimer.Size = new System.Drawing.Size(353, 140);
-            this.rtbDisclaimer.TabIndex = 0;
-            this.rtbDisclaimer.Text = "";
-            this.rtbDisclaimer.TextChanged += new System.EventHandler(this.disclaimerTextChanged);
             // 
             // tabAbout
             // 
@@ -726,18 +596,76 @@ namespace IDPrinter {
             this.lblGraphicsVersion.TabIndex = 1;
             this.lblGraphicsVersion.Text = "Graphics Version: 0.0.0";
             // 
+            // tabTesting
+            // 
+            this.tabTesting.Controls.Add(this.tbCheckForUser);
+            this.tabTesting.Controls.Add(this.btnCheckForUser);
+            this.tabTesting.Controls.Add(this.button4);
+            this.tabTesting.Controls.Add(this.button3);
+            this.tabTesting.Controls.Add(this.button1);
+            this.tabTesting.Controls.Add(this.label8);
+            this.tabTesting.Location = new System.Drawing.Point(4, 22);
+            this.tabTesting.Name = "tabTesting";
+            this.tabTesting.Size = new System.Drawing.Size(498, 310);
+            this.tabTesting.TabIndex = 5;
+            this.tabTesting.Text = "Testing";
+            this.tabTesting.UseVisualStyleBackColor = true;
+            // 
+            // tbCheckForUser
+            // 
+            this.tbCheckForUser.Location = new System.Drawing.Point(220, 23);
+            this.tbCheckForUser.Name = "tbCheckForUser";
+            this.tbCheckForUser.Size = new System.Drawing.Size(100, 20);
+            this.tbCheckForUser.TabIndex = 19;
+            // 
+            // btnCheckForUser
+            // 
+            this.btnCheckForUser.Location = new System.Drawing.Point(76, 23);
+            this.btnCheckForUser.Name = "btnCheckForUser";
+            this.btnCheckForUser.Size = new System.Drawing.Size(137, 23);
+            this.btnCheckForUser.TabIndex = 18;
+            this.btnCheckForUser.Text = "Check For User";
+            this.btnCheckForUser.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(319, 259);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 28);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "Write";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(198, 259);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 28);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Read";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(75, 259);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 28);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(360, 43);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "label8";
+            // 
             // openUserImage
             // 
             this.openUserImage.FileName = "openUserImage";
-            // 
-            // btnDeleteUser
-            // 
-            this.btnDeleteUser.Location = new System.Drawing.Point(148, 36);
-            this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteUser.TabIndex = 21;
-            this.btnDeleteUser.Text = "Delete User";
-            this.btnDeleteUser.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
@@ -750,20 +678,18 @@ namespace IDPrinter {
             this.Text = "ID Printer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabLogin.ResumeLayout(false);
-            this.tabLogin.PerformLayout();
             this.tabAddUser.ResumeLayout(false);
             this.tabAddUser.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userImageBox)).EndInit();
-            this.tabEditUser.ResumeLayout(false);
-            this.tabEditUser.PerformLayout();
-            this.tabDisclaimer.ResumeLayout(false);
-            this.tabDisclaimer.PerformLayout();
+            this.tabDeleteUser.ResumeLayout(false);
+            this.tabDeleteUser.PerformLayout();
             this.tabAbout.ResumeLayout(false);
             this.tabAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabTesting.ResumeLayout(false);
+            this.tabTesting.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -798,7 +724,6 @@ namespace IDPrinter {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cbAdmin;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox userImageBox;
         private System.Windows.Forms.OpenFileDialog openUserImage;
         private System.Windows.Forms.Label lblImageLocation;
@@ -809,24 +734,19 @@ namespace IDPrinter {
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TabPage tabDisclaimer;
-        private System.Windows.Forms.RichTextBox rtbDisclaimer;
-        private System.Windows.Forms.Label lblCharCount;
-        private System.Windows.Forms.Button btnDiscClear;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox tbCheckForUser;
-        private System.Windows.Forms.Button btnCheckForUser;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TabPage tabEditUser;
+        private System.Windows.Forms.TabPage tabDeleteUser;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label lbl14;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblDeleteUser;
         private System.Windows.Forms.TextBox txtDeleteUser;
         private System.Windows.Forms.Button btnDeleteUser;
+        private System.Windows.Forms.TabPage tabTesting;
+        private System.Windows.Forms.TextBox tbCheckForUser;
+        private System.Windows.Forms.Button btnCheckForUser;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label8;
     }
 }

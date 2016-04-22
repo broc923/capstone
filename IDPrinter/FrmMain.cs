@@ -1,4 +1,4 @@
-﻿using System; //allows direct access to the console type system
+﻿﻿using System; //allows direct access to the console type system
 using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
 using nsZBRPrinter; //allows access to zebra-specific controls
 using System.Drawing.Printing; //Defines a reusable object that sends output to a printer, when printing from a Windows Forms application
@@ -8,7 +8,7 @@ namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
         //variables to display the current graphics and printer software versions & to hold the file path location for stored user images for import
-        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath = "";
+        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath;
         #endregion
 
         #region Anything that happens on load up
@@ -96,91 +96,66 @@ namespace IDPrinter {
         #region Print is clicked
         private void btnPrintID_Click(object sender, EventArgs args) { //click event for Print ID button on Add User tab
             string message = ""; //string variable message initialized to an empty string
-            var userDisclaimer = rtbDisclaimer.Text;
-            var charCount = 0;
-            int max = 30;
 
-            var lines = userDisclaimer.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] array = lines.GroupBy(w => (charCount += (((charCount % max) + w.Length + 1 >= max)
-                        ? max - (charCount % max) : 0) + w.Length + 1) / max)
-                    .Select(g => string.Join(" ", g.ToArray()))
-                    .ToArray();
-            
 
             GraphicCode graphics = null; //creates graphics variable from the GraphicsCode.cs class initialized to null
 
             lblStatus.Text = ""; //on Add User tab - initializes Status label text property to an empty string
             Refresh(); //call the base class's refresh method so the control and its child controls are invalidated and redrawn
             Application.DoEvents(); //Application provides static methods and properties to manage an application. Begins running a standard application message loop on the...
-                                    //...current thread, which enables the form to receive Windows messages to allow it to appear responsive and have interaction with the user
+            //...current thread, which enables the form to receive Windows messages to allow it to appear responsive and have interaction with the user
             try {
-                /* if (cbPrinters.SelectedIndex < 0) {//check the selected index of printers dropdown box on Add User tab, if less than 0...
-                     message = "No printer selected."; //store string "No printer selected" in message variable
-                     return; //return results displaying message that no printer is selected
-                 }
-                 if (!IsPrinterAvailable(cbPrinters.Text)) { //check text of cbPrinters drop-down, if the not of printers available...
-                     message = "Printer is not available."; //store string "Printer is not available" in message variable
-                     return;  //return results displaying message that no printer is available
-                 }
+                if (cbPrinters.SelectedIndex < 0) {//check the selected index of printers dropdown box on Add User tab, if less than 0...
+                    message = "No printer selected."; //store string "No printer selected" in message variable
+                    return; //return results displaying message that no printer is selected
+                }
+                if (!IsPrinterAvailable(cbPrinters.Text)) { //check text of cbPrinters drop-down, if the not of printers available...
+                    message = "Printer is not available."; //store string "Printer is not available" in message variable
+                    return;  //return results displaying message that no printer is available
+                }
 
-                 //~~~~~~~(NOTE)~~~~~~~~~~~~
-                 //~~~***!!!*** need to check first if all forms are filled out
-                 //~~~***!!!*** do later
-                 //~~~~~~~~~~~~~~~~~~~~~~~~~
-
-                 graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                 graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, false, new string[0], out message);
-                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                 //graphics.Print(cbPrinters.Text, "", "1", "", cbAdmin.Checked, true, array, out message);
-                 //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
-                 if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
-                     PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
-                     lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
-                 }
-                 */
                 string nullMessage = "";
 
-                if (txtFirstName.Text == "")
-                {
+                if (txtFirstName.Text == "") {
                     nullMessage += "No data has been entered for First Name.\n";
                 }
-                if (txtLastName.Text == "")
-                {
+                if (txtLastName.Text == "") {
                     nullMessage += "No data has been entered for Last Name.\n";
                 }
-                if (txtStreet.Text == "")
-                {
+                if (txtStreet.Text == "") {
                     nullMessage += "No data has been entered for Street.\n";
                 }
-                if (txtCity.Text == "")
-                {
+                if (txtCity.Text == "") {
                     nullMessage += "No data has been entered for City.\n";
                 }
-                if (cbState.Text == "")
-                {
+                if (cbState.Text == "") {
                     nullMessage += "No State has been selected.\n";
                 }
-                if (txtZip.Text == "")
-                {
+                if (txtZip.Text == "") {
                     nullMessage += "No data has been entered for Zip Code.\n";
                 }
-                if (txtPhone.Text == "")
-                {
+                if (txtPhone.Text == "") {
                     nullMessage += "No data has been entered for Phone Number.\n";
                 }
-                if (userSelectedFilePath == "")
-                {
+                if (userSelectedFilePath == "") {
                     nullMessage += "No image has been selected.\n";
                 }
 
-                if (nullMessage != "")
-                {
+                if (nullMessage != "") {
                     MessageBox.Show(nullMessage);
+                }
+
+                graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
+                graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, out message);
+                //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
+                    PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
+                    lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
                 }
 
                 string isAdmin;
 
-                if(cbAdmin.Checked == true) {
+                if (cbAdmin.Checked == true) {
                     isAdmin = "1";
                 } else {
                     isAdmin = "0";
@@ -201,9 +176,18 @@ namespace IDPrinter {
 
         #region Delete User is Clicked
         private void btnDeleteUser_click(object sender, EventArgs e) {
-
-            Database.deleteUser(txtDeleteUser.Text);
-            Refresh();
+            string[] data = Database.checkUser(txtDeleteUser.Text);
+            DialogResult result = MessageBox.Show("Do you want to delete the user:\n" + data[0] + " - " + data[1] + " " + data[2] + "?", "Confirmation", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) {
+                if (data[0] == txtDeleteUser.Text) {
+                    Database.deleteUser(txtDeleteUser.Text);
+                    Refresh();
+                } else {
+                    MessageBox.Show("User does not exist.");
+                }
+            } else {
+                MessageBox.Show("User deletion canceled.");
+            }
         }
 
 
@@ -294,10 +278,6 @@ namespace IDPrinter {
             txtFirstName.Focus(); //resets the focus to the First Name textbox if she form clear button is clicked
         }
 
-        private void btnDiscClear_Click(object sender, EventArgs e) { //clear button on Disclaimer tab
-            rtbDisclaimer.Clear(); //clears the disclaimer rtb
-            rtbDisclaimer.Focus(); //resets the focus to the disclaimer rtb if the form clear button is clicked
-        }
 
         private void btnCheckForUser_Click(object sender, EventArgs e) {
             string userID = tbCheckForUser.Text;
@@ -308,36 +288,11 @@ namespace IDPrinter {
             } catch (Exception er) {
                 MessageBox.Show(er.ToString());
             } finally {
-                
+
             }
         }
 
-        private void button5_Click(object sender, EventArgs e) {
-            var userDisclaimer = rtbDisclaimer.Text;
-            var charCount = 0;
-            int max = 30;
 
-            var lines = userDisclaimer.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] array = lines.GroupBy(w => (charCount += (((charCount % max) + w.Length + 1 >= max)
-                        ? max - (charCount % max) : 0) + w.Length + 1) / max)
-                    .Select(g => string.Join(" ", g.ToArray()))
-                    .ToArray();
-                foreach (string disclaimer in array) {
-                    Console.WriteLine(disclaimer);
-                }
-            }
-
-
-        #endregion
-
-        #region Disclaimer Character Limit
-        //***If number is changed, remember to change the label text as well to display initial # of chars***
-        private void disclaimerTextChanged(object sender, EventArgs e) {
-            rtbDisclaimer.MaxLength = 500; //limits the disclaimer rtb to 500 characters max length
-            lblCharCount.Text = "Characters Remaining:" + (500 - rtbDisclaimer.Text.Length).ToString();
-            // displays the number of characters remaining in a label below the rtb by subtracting input text length from max length value
-
-        }
         #endregion
 
         #region Set initial focus for different tabs
@@ -345,8 +300,8 @@ namespace IDPrinter {
             if (tabControl1.SelectedTab == tabAddUser) { //if AddUser tab is selected, set focus to First Name textbox
                 txtFirstName.Focus(); //sets focus to txtFirstName
             }
-            if (tabControl1.SelectedTab == tabDisclaimer) {   //if Disclaimer tab is selected, set focus to Disclaimer textbox
-                rtbDisclaimer.Focus(); //sets focus to rtbDisclaimer
+            if (tabControl1.SelectedTab == tabDeleteUser) {   //if Disclaimer tab is selected, set focus to Disclaimer textbox
+                txtDeleteUser.Focus(); //sets focus to rtbDsisclaimer
             }
 
         }
