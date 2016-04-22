@@ -7,7 +7,7 @@ using System.Threading;
 namespace IDPrinter {
     class MagneticStripCode {
         public static AutoResetEvent signalEvent = new AutoResetEvent(false);
-        public static SerialPort sp = new SerialPort("COM4", 9600, Parity.None, 8);
+        public static SerialPort sp = new SerialPort(getComPort(), 9600, Parity.None, 8);
         public static byte[] comTest = new byte[] { 0x1B, 0x65 };
         public static byte[] resetBuffer = new byte[] { 0x1B, 0x61 };
         public static byte[] read = new byte[] { 0x1B, 0x72 };
@@ -33,12 +33,13 @@ namespace IDPrinter {
         byte[] setLowCo = new byte[] { 0x1B, 0x79 };
         byte[] getHiCoLowCo = new byte[] { 0x1B, 0x64 };
         byte[] detectEZWriter = new byte[] { 0x39 };
+        public static string returnString = "";
         #region read card data
-        public void readCardData() {
+        public string readCardData() {
             sp.ReadTimeout = 5000;
             sp.WriteTimeout = 500;
             sp.DataReceived += readDataReceived;
-
+            
             sp.Open();
             if (sp.IsOpen) {
                 sp.Write(read, 0, read.Length);
@@ -47,12 +48,14 @@ namespace IDPrinter {
                 sp.Close();
                 sp.Dispose();
             }
+            return returnString;
         }
         static void readDataReceived(object sender, SerialDataReceivedEventArgs e) {
             var sp = (SerialPort)sender;
             var data = "";
             try {
                 data = sp.ReadTo("?");
+                returnString = data;
             } catch (Exception error) {
                 Console.WriteLine(error);
             }
@@ -91,27 +94,37 @@ namespace IDPrinter {
         }
         #endregion
 
-        #region erase card data
-        public void eraseCardData() {
-            sp.ReadTimeout = 500;
-            sp.WriteTimeout = 5000;
-            sp.DataReceived += clearDataHandler;
-            sp.Open();
-            if (sp.IsOpen) {
-                Console.WriteLine("Clear started\n");
-                sp.Write(selectTrack1, 0, selectTrack1.Length);
-                sp.Write(eraseCard, 0, eraseCard.Length);
-                signalEvent.WaitOne();
-                Console.WriteLine("Clear finished\n");
-                sp.Close();
-                sp.Dispose();
+        public static string getComPort() {
+            String[] str = SerialPort.GetPortNames();
+
+            if (!(sp.IsOpen)) {
+                for (int i = 0; i < str.Length; i++) {
+                    if (!(sp.IsOpen)) {
+                        sp.PortName = str[i];
+                    }
+                    try {
+                        sp.Open();
+                        sp.Write(comTest, 0, comTest.Length);
+                        Thread.Sleep(100);
+                        string received = sp.ReadExisting();
+                        received = received.Trim();
+                        if (received.Equals("\u001by")) {
+
+                            sp.Close();
+                            sp.Dispose();
+                            return str[i];
+                        } else {
+                            sp.Close();
+
+                        }
+                    } catch {
+                        Console.WriteLine("Something messed up");
+                    }
+
+                }
             }
+
+            return "Didn't Work";
         }
-        static void clearDataHandler(object sender, SerialDataReceivedEventArgs e) {
-            sp.Close();
-            sp.Dispose();
-            signalEvent.Set();
-        }
-        #endregion
     }
 }
