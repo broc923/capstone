@@ -1,4 +1,4 @@
-﻿using System; //allows direct access to the console type system
+﻿﻿using System; //allows direct access to the console type system
 using System.Text; // contains classes that represent ASCII and Unicode character encoding
 using System.Threading; //Creates and controls a thread, sets its priority, and gets its status
 using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
@@ -85,7 +85,7 @@ namespace IDPrinter {
         #endregion
 
         #region Print graphics
-        public void Print(string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg) {
+        public void Print(string driverName, string name, string userID, string userPicture, bool admin, out string msg) {
             int error;
             ZBRGraphics graphics = null;
             ASCIIEncoding ascii;
@@ -99,59 +99,43 @@ namespace IDPrinter {
                     msg = "InitGraphics method error code: " + error.ToString();
                     return;
                 }
-                if (!back) {
-                    //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
-                    if (admin == false) { //Does the user have admin? No
-                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 400, 30, 325, 50, out error) == 0) {
-                            msg = "DrawImage method student error code: " + error.ToString();
-                            return;
-                        }
-                    } else { //They do have admin
-                        if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Admin.png"), 380, 30, 400, 50, out error) == 0) {
-                            msg = "DrawImage method admin error code: " + error.ToString();
-                            return;
-                        }
-                    }
-                    //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
-                    if (graphics.DrawImage(ascii.GetBytes(userPicture), 30, 30, 275, 350, out error) == 0) {
-                        msg = "DrawImage method user image error code: " + error.ToString();
+                //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
+                if (admin == false) { //Does the user have admin? No
+                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Student.png"), 400, 30, 325, 50, out error) == 0) {
+                        msg = "DrawImage method student error code: " + error.ToString();
                         return;
                     }
-                    //DrawText(X Coordinate, Y Coordinate, String, Font type, font size, fontStyle, color, out error)
-                    if (graphics.DrawText(35, 390, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0x000000, out error) == 0) {
-                        msg = "DrawText method error code: " + error.ToString();
+                } else { //They do have admin
+                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\Admin.png"), 380, 30, 400, 50, out error) == 0) {
+                        msg = "DrawImage method admin error code: " + error.ToString();
                         return;
                     }
-                    //DrawBarcode(X Coordinate, Y Coordinate, rotation, barcode type, width ratio, multiplier, height, text under, barcode data, out error)
-                    if (graphics.DrawBarcode(515, 550, 0, 0, 1, 3, 100, 1, ascii.GetBytes(userID), out error) == 0) {
-                        msg = "DrawBarcode method error code: " + error.ToString();
-                        return;
-                    }
-                    //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
-                    if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\logo.png"), 400, 85, 450, 320, out error) == 0) {
-                        msg = "DrawImage method logo error code: " + error.ToString();
-                        return;
-                    }
-                    if (graphics.PrintGraphics(out error) == 0) {
-                        msg = "PrintGraphics Error: " + error.ToString();
-                        return;
-                    }
-                } else {
-                    string test = ""; //
-                    int x = 35;
-
-                    foreach (string disclaimer in disclaimerSplit) {
-                        if (graphics.DrawText(x, 35, ascii.GetBytes(disclaimer), ascii.GetBytes("Arial"), 12, fontStyle, 0x009973, out error) == 0) {
-                            msg = "DrawText method error code: " + error.ToString();
-                            return;
-                        }
-                        x += 10;
-                        test += disclaimer + "\n"; //
-                    }
-                    MessageBox.Show(test);//
-
                 }
-             
+                //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
+                if (graphics.DrawImage(ascii.GetBytes(userPicture), 30, 30, 275, 350, out error) == 0) {
+                    msg = "DrawImage method user image error code: " + error.ToString();
+                    return;
+                }
+                //DrawText(X Coordinate, Y Coordinate, String, Font type, font size, fontStyle, color, out error)
+                if (graphics.DrawText(35, 390, ascii.GetBytes(name), ascii.GetBytes("Arial"), 12, fontStyle, 0x000000, out error) == 0) {
+                    msg = "DrawText method error code: " + error.ToString();
+                    return;
+                }
+                //DrawBarcode(X Coordinate, Y Coordinate, rotation, barcode type, width ratio, multiplier, height, text under, barcode data, out error)
+                if (graphics.DrawBarcode(515, 550, 0, 0, 1, 3, 100, 1, ascii.GetBytes(userID), out error) == 0) {
+                    msg = "DrawBarcode method error code: " + error.ToString();
+                    return;
+                }
+                //DrawImage(location of image, X coordinate, Y coordinate, length, width, out error)
+                if (graphics.DrawImage(ascii.GetBytes(Application.StartupPath + "\\logo.png"), 400, 85, 450, 320, out error) == 0) {
+                    msg = "DrawImage method logo error code: " + error.ToString();
+                    return;
+                }
+                if (graphics.PrintGraphics(out error) == 0) {
+                    msg = "PrintGraphics Error: " + error.ToString();
+                    return;
+                }
+
             } catch (Exception e) {
                 MessageBox.Show(e.ToString());
             } finally {
