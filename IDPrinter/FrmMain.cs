@@ -8,7 +8,7 @@ namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
         //variables to display the current graphics and printer software versions & to hold the file path location for stored user images for import
-        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath;
+        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath = "";
         #endregion
 
         #region Anything that happens on load up
@@ -138,6 +138,46 @@ namespace IDPrinter {
                      lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
                  }
                  */
+                string nullMessage = "";
+
+                if (txtFirstName.Text == "")
+                {
+                    nullMessage += "No data has been entered for First Name.\n";
+                }
+                if (txtLastName.Text == "")
+                {
+                    nullMessage += "No data has been entered for Last Name.\n";
+                }
+                if (txtStreet.Text == "")
+                {
+                    nullMessage += "No data has been entered for Street.\n";
+                }
+                if (txtCity.Text == "")
+                {
+                    nullMessage += "No data has been entered for City.\n";
+                }
+                if (cbState.Text == "")
+                {
+                    nullMessage += "No State has been selected.\n";
+                }
+                if (txtZip.Text == "")
+                {
+                    nullMessage += "No data has been entered for Zip Code.\n";
+                }
+                if (txtPhone.Text == "")
+                {
+                    nullMessage += "No data has been entered for Phone Number.\n";
+                }
+                if (userSelectedFilePath == "")
+                {
+                    nullMessage += "No image has been selected.\n";
+                }
+
+                if (nullMessage != "")
+                {
+                    MessageBox.Show(nullMessage);
+                }
+
                 string isAdmin;
 
                 if(cbAdmin.Checked == true) {
@@ -263,8 +303,8 @@ namespace IDPrinter {
             string userID = tbCheckForUser.Text;
             try {
                 //string value = Database.updateUser("1000000002", "Calebdddd", "Mann", "your moms house", "Blountville", "TN", "37617", "4234161471", "","1");
-                int value = Database.updateUser("1000000002", "Broc");
-                Console.WriteLine(value.ToString());
+                //int value = Database.updateUser("1000000002", "Broc");
+                //Console.WriteLine(value.ToString());
             } catch (Exception er) {
                 MessageBox.Show(er.ToString());
             } finally {
