@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
+using System.Collections;
 
 namespace IDPrinter {
     class Database {
@@ -41,9 +38,9 @@ namespace IDPrinter {
                 SqlCommand command = new SqlCommand(sql, connection);
                 //command.Parameters.AddWithValue("@userID", userID);
                 connection.Open();
-                    //int numVal = Int32.Parse("-105");
-                    int data = (Int32)command.ExecuteScalar();
-                    return data;
+                //int numVal = Int32.Parse("-105");
+                int data = (Int32)command.ExecuteScalar();
+                return data;
             }
         }
         #endregion
@@ -86,6 +83,65 @@ namespace IDPrinter {
                 return userDeleted;
             }
         }
+        #endregion
+
+        #region timeSelect
+
+        public static ArrayList selectUser() {
+            string sql = "SELECT * FROM [dbo].[TimeTable]";
+            ArrayList data = new ArrayList();
+            //Console.WriteLine(userID);
+            using (SqlConnection connection = new SqlConnection(connect)) {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                using (SqlDataReader dataReader = command.ExecuteReader()) {
+                    while (dataReader.Read()) {
+                        data.Add(dataReader["time"].ToString());
+                        data.Add(dataReader["loggingIn"].ToString());
+                    }
+                }
+            }
+            return data;
+        }
+        #endregion
+
+        #region newLog
+
+        public static string data(string ID, bool loggingIn) {
+            string sql = "INSERT INTO [dbo].[TimeTable] (ID, time, loggingIn) VALUES (@ID,@time,@loggingIn)";
+            using (SqlConnection connection = new SqlConnection(connect)) {
+                DateTime currentTime = DateTime.Now;
+
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@time", currentTime);
+                command.Parameters.AddWithValue("@loggingIn", loggingIn);
+
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+                connection.Close();
+
+                string userAdded = "The user has been added.";
+                return userAdded;
+            }
+        }
+       #endregion
+
+       #region clear Timetable
+
+        public static string clearTimeTable() {
+            string sql = "DELETE FROM [dbo].[Table]";
+            using (SqlConnection connection = new SqlConnection(connect)) {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+                connection.Close();
+
+                string userDeleted = "The Time Table has been cleared.";
+                return userDeleted;
+            }
+        }
+
         #endregion
     }
 }
