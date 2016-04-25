@@ -70,12 +70,8 @@ namespace IDPrinter {
             this.lblPrinterVersion = new System.Windows.Forms.Label();
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.tabTesting = new System.Windows.Forms.TabPage();
-            this.tbCheckForUser = new System.Windows.Forms.TextBox();
-            this.btnCheckForUser = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -120,10 +116,10 @@ namespace IDPrinter {
             // lbUserLog
             // 
             this.lbUserLog.FormattingEnabled = true;
-            this.lbUserLog.Location = new System.Drawing.Point(9, 143);
+            this.lbUserLog.Location = new System.Drawing.Point(6, 142);
             this.lbUserLog.Name = "lbUserLog";
             this.lbUserLog.Size = new System.Drawing.Size(481, 160);
-            this.lbUserLog.TabIndex = 2;
+            this.lbUserLog.TabIndex = 2; 
             // 
             // btnLogout
             // 
@@ -621,34 +617,14 @@ namespace IDPrinter {
             // 
             // tabTesting
             // 
-            this.tabTesting.Controls.Add(this.tbCheckForUser);
-            this.tabTesting.Controls.Add(this.btnCheckForUser);
             this.tabTesting.Controls.Add(this.button4);
             this.tabTesting.Controls.Add(this.button3);
-            this.tabTesting.Controls.Add(this.button1);
-            this.tabTesting.Controls.Add(this.label8);
             this.tabTesting.Location = new System.Drawing.Point(4, 22);
             this.tabTesting.Name = "tabTesting";
             this.tabTesting.Size = new System.Drawing.Size(498, 310);
             this.tabTesting.TabIndex = 5;
             this.tabTesting.Text = "Testing";
             this.tabTesting.UseVisualStyleBackColor = true;
-            // 
-            // tbCheckForUser
-            // 
-            this.tbCheckForUser.Location = new System.Drawing.Point(220, 23);
-            this.tbCheckForUser.Name = "tbCheckForUser";
-            this.tbCheckForUser.Size = new System.Drawing.Size(100, 20);
-            this.tbCheckForUser.TabIndex = 19;
-            // 
-            // btnCheckForUser
-            // 
-            this.btnCheckForUser.Location = new System.Drawing.Point(76, 23);
-            this.btnCheckForUser.Name = "btnCheckForUser";
-            this.btnCheckForUser.Size = new System.Drawing.Size(137, 23);
-            this.btnCheckForUser.TabIndex = 18;
-            this.btnCheckForUser.Text = "Check For User";
-            this.btnCheckForUser.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -658,6 +634,7 @@ namespace IDPrinter {
             this.button4.TabIndex = 17;
             this.button4.Text = "Write";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -667,24 +644,7 @@ namespace IDPrinter {
             this.button3.TabIndex = 16;
             this.button3.Text = "Read";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(75, 259);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Clear";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(360, 43);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "label8";
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // openUserImage
             // 
@@ -713,7 +673,6 @@ namespace IDPrinter {
             this.tabAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabTesting.ResumeLayout(false);
-            this.tabTesting.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -765,12 +724,8 @@ namespace IDPrinter {
         private System.Windows.Forms.TextBox txtDeleteUser;
         private System.Windows.Forms.Button btnDeleteUser;
         private System.Windows.Forms.TabPage tabTesting;
-        private System.Windows.Forms.TextBox tbCheckForUser;
-        private System.Windows.Forms.Button btnCheckForUser;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox lbUserLog;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnLogin;

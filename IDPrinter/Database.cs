@@ -17,7 +17,7 @@ namespace IDPrinter {
         #region checkForUser
         public static string[] checkUser(string userID) {
             string sql = "SELECT * FROM [dbo].[Table] WHERE (ID=@userID)";
-            Console.WriteLine(userID);
+            //Console.WriteLine(userID);
             using (SqlConnection connection = new SqlConnection(connect)) {
                 SqlCommand command = new SqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@userID", userID);
@@ -25,11 +25,25 @@ namespace IDPrinter {
                 using (SqlDataReader dataReader = command.ExecuteReader()) {
                     while (dataReader.Read()) {
                         Console.WriteLine(dataReader["firstName"].ToString());
+                        string[] data = { dataReader["ID"].ToString(), dataReader["firstName"].ToString(), dataReader["lastName"].ToString(), dataReader["street"].ToString(), dataReader["city"].ToString(), dataReader["userState"].ToString(), dataReader["zip"].ToString(), dataReader["phone"].ToString(), dataReader["photo"].ToString(), dataReader["isAdmin"].ToString() };
+                        return data;
                     }
-                    string[] data = { dataReader["ID"].ToString(), dataReader["firstName"].ToString(), dataReader["lastName"].ToString(), dataReader["street"].ToString(), dataReader["city"].ToString(), dataReader["userState"].ToString(), dataReader["zip"].ToString(), dataReader["phone"].ToString(), dataReader["photo"].ToString(), dataReader["isAdmin"].ToString() };
-                    return data;
                 }
-
+                return new string[0];
+            }
+        }
+        #endregion
+        #region newUser
+        public static int newUser() {
+            string sql = "SELECT MAX(ID) AS userMax FROM [dbo].[Table]";
+            //Console.WriteLine(userID);
+            using (SqlConnection connection = new SqlConnection(connect)) {
+                SqlCommand command = new SqlCommand(sql, connection);
+                //command.Parameters.AddWithValue("@userID", userID);
+                connection.Open();
+                    //int numVal = Int32.Parse("-105");
+                    int data = (Int32)command.ExecuteScalar();
+                    return data;
             }
         }
         #endregion

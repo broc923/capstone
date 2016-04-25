@@ -1,20 +1,21 @@
-﻿﻿using System; //allows direct access to the console type system
+﻿using System; //allows direct access to the console type system
 using System.Windows.Forms; //access the classes which create Windows-based applications incorporating rich user interfaces 
 using nsZBRPrinter; //allows access to zebra-specific controls
 using System.Drawing.Printing; //Defines a reusable object that sends output to a printer, when printing from a Windows Forms application
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
         //variables to display the current graphics and printer software versions & to hold the file path location for stored user images for import
-        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath;
+        private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath = "";
+        public static string comPort = "";
         #endregion
 
         #region Anything that happens on load up
         public FrmMain() { //no-arg constructor
             InitializeComponent(); //handles the initialization of the forms controls on load up
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
+            AppDomain.CurrentDomain.SetData("DataDirectory", Application.StartupPath + "\\Database.mdf");
         }
 
         private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
@@ -22,6 +23,9 @@ namespace IDPrinter {
             CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
             //loads default 'anonymous' photo on the Add User form
+            comPort = MagneticStripCode.getComPort();
+            
+            Console.WriteLine("Ready");
         }
         #endregion
 
@@ -209,17 +213,6 @@ namespace IDPrinter {
 
         #region Testing
         //***NOTE*** This is solely for testing purposes
-        private void button1_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
-            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
-            try {
-                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                readWriter.eraseCardData();
-            } catch (Exception ex) { //exception handler
-                MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
-            } finally { //finally block runs whether there is an exception or not
-                readWriter = null; //sets readWriter object to null after it has been used
-            }
-        }
         private void button3_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
@@ -235,7 +228,8 @@ namespace IDPrinter {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                readWriter.writeCardData();
+                int userID = Database.newUser();
+                readWriter.writeCardData(userID.ToString());
             } catch (Exception ex) { //exception handler
                 MessageBox.Show(ex.ToString(), "Broc Screwed up the card writer."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
@@ -259,18 +253,7 @@ namespace IDPrinter {
         }
 
 
-        private void btnCheckForUser_Click(object sender, EventArgs e) {
-            string userID = tbCheckForUser.Text;
-            try {
-                //string value = Database.updateUser("1000000002", "Calebdddd", "Mann", "your moms house", "Blountville", "TN", "37617", "4234161471", "","1");
-                //int value = Database.updateUser("1000000002", "Broc");
-                //Console.WriteLine(value.ToString());
-            } catch (Exception er) {
-                MessageBox.Show(er.ToString());
-            } finally {
-
-            }
-        }
+       
 
 
         #endregion
@@ -287,22 +270,35 @@ namespace IDPrinter {
         }
         #endregion
 
+
+
+       
+
         private void btnLogin_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                string cardID = readWriter.readCardData();
-                string dbID = Database.checkUser(cardID)[0];
-                if (cardID == dbID) { //User does exist
+                string cardID = readWriter.readCardData().ToString();
+                Console.WriteLine(cardID);
+                //string last = cardID.Substring(cardID.LastIndexOf('%') + 1);
+                string last = Regex.Replace(cardID, "[^0-9]", "");
+                Console.WriteLine("Fixed String: " + last);
+                string dbID = Database.checkUser(last)[0];
+                Console.WriteLine("DB ID: " + dbID);
+                if (last == dbID) { //User does exist
                     //login
-                    lbUserLog.Items.Add("User " + cardID + " logged in.");
+                    Console.WriteLine("User exists");
+                    //call method to add to database
+
+                    lbUserLog.Items.Add("User " + last + " logged in.");
                 } else { //User doesn't exist
-                    lbUserLog.Items.Add("User " + cardID + " not found. Contact an administrator.");
+                    lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
                 }
             } catch (Exception ex) { //exception handler
                 MessageBox.Show(ex.ToString(), "Broc Screwed up the login."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 readWriter = null; //sets readWriter object to null after it has been used
+                MagneticStripCode.clearBuffer();
             }
         }
 
@@ -310,18 +306,27 @@ namespace IDPrinter {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                string cardID = readWriter.readCardData();
-                string dbID = Database.checkUser(cardID)[0];
-                if (cardID == dbID) { //User does exist
-                    //logout
-                    lbUserLog.Items.Add("User " + cardID + " logged out.");
+                string cardID = readWriter.readCardData().ToString();
+                Console.WriteLine(cardID);
+                //string last = cardID.Substring(cardID.LastIndexOf('%') + 1);
+                string last = Regex.Replace(cardID, "[^0-9]", "");
+                Console.WriteLine("Fixed String: " + last);
+                string dbID = Database.checkUser(last)[0];
+                Console.WriteLine("DB ID: " + dbID);
+                if (last == dbID) { //User does exist
+                    //login
+                    Console.WriteLine("User exists");
+                    //call method to add to database
+
+                    lbUserLog.Items.Add("User " + last + " logged out.");
                 } else { //User doesn't exist
-                    lbUserLog.Items.Add("User " + cardID + " not found. Contact an administrator.");
+                    lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
                 }
             } catch (Exception ex) { //exception handler
                 MessageBox.Show(ex.ToString(), "Broc Screwed up the logout."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 readWriter = null; //sets readWriter object to null after it has been used
+                MagneticStripCode.clearBuffer();
             }
         }
     }
