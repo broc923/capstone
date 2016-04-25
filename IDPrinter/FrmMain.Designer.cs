@@ -56,9 +56,6 @@ namespace IDPrinter {
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.lblDeleteUser = new System.Windows.Forms.Label();
             this.txtDeleteUser = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.lbl14 = new System.Windows.Forms.Label();
             this.tabAbout = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -73,6 +70,14 @@ namespace IDPrinter {
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.btnLookup = new System.Windows.Forms.Button();
+            this.lblID = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -119,7 +124,7 @@ namespace IDPrinter {
             this.lbUserLog.Location = new System.Drawing.Point(6, 142);
             this.lbUserLog.Name = "lbUserLog";
             this.lbUserLog.Size = new System.Drawing.Size(481, 160);
-            this.lbUserLog.TabIndex = 2; 
+            this.lbUserLog.TabIndex = 2;
             // 
             // btnLogout
             // 
@@ -446,12 +451,17 @@ namespace IDPrinter {
             // 
             // tabDeleteUser
             // 
+            this.tabDeleteUser.Controls.Add(this.label15);
+            this.tabDeleteUser.Controls.Add(this.label14);
+            this.tabDeleteUser.Controls.Add(this.label8);
+            this.tabDeleteUser.Controls.Add(this.lblID);
+            this.tabDeleteUser.Controls.Add(this.btnLookup);
+            this.tabDeleteUser.Controls.Add(this.txtNumber);
+            this.tabDeleteUser.Controls.Add(this.txtAddress);
+            this.tabDeleteUser.Controls.Add(this.txtName);
             this.tabDeleteUser.Controls.Add(this.btnDeleteUser);
             this.tabDeleteUser.Controls.Add(this.lblDeleteUser);
             this.tabDeleteUser.Controls.Add(this.txtDeleteUser);
-            this.tabDeleteUser.Controls.Add(this.btnSearch);
-            this.tabDeleteUser.Controls.Add(this.comboBox1);
-            this.tabDeleteUser.Controls.Add(this.lbl14);
             this.tabDeleteUser.Location = new System.Drawing.Point(4, 22);
             this.tabDeleteUser.Name = "tabDeleteUser";
             this.tabDeleteUser.Size = new System.Drawing.Size(498, 310);
@@ -461,7 +471,7 @@ namespace IDPrinter {
             // 
             // btnDeleteUser
             // 
-            this.btnDeleteUser.Location = new System.Drawing.Point(148, 36);
+            this.btnDeleteUser.Location = new System.Drawing.Point(415, 279);
             this.btnDeleteUser.Name = "btnDeleteUser";
             this.btnDeleteUser.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteUser.TabIndex = 21;
@@ -480,43 +490,10 @@ namespace IDPrinter {
             // 
             // txtDeleteUser
             // 
-            this.txtDeleteUser.Location = new System.Drawing.Point(11, 40);
+            this.txtDeleteUser.Location = new System.Drawing.Point(11, 29);
             this.txtDeleteUser.Name = "txtDeleteUser";
             this.txtDeleteUser.Size = new System.Drawing.Size(130, 20);
             this.txtDeleteUser.TabIndex = 19;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(148, 281);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 18;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "ID",
-            "First Name",
-            "Last Name",
-            "Street",
-            "Phone Number"});
-            this.comboBox1.Location = new System.Drawing.Point(20, 281);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 17;
-            // 
-            // lbl14
-            // 
-            this.lbl14.AutoSize = true;
-            this.lbl14.Location = new System.Drawing.Point(17, 265);
-            this.lbl14.Name = "lbl14";
-            this.lbl14.Size = new System.Drawing.Size(62, 13);
-            this.lbl14.TabIndex = 16;
-            this.lbl14.Text = "Search For:";
             // 
             // tabAbout
             // 
@@ -628,7 +605,7 @@ namespace IDPrinter {
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(319, 259);
+            this.button4.Location = new System.Drawing.Point(148, 103);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 28);
             this.button4.TabIndex = 17;
@@ -638,7 +615,7 @@ namespace IDPrinter {
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(198, 259);
+            this.button3.Location = new System.Drawing.Point(272, 103);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(105, 28);
             this.button3.TabIndex = 16;
@@ -649,6 +626,73 @@ namespace IDPrinter {
             // openUserImage
             // 
             this.openUserImage.FileName = "openUserImage";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(102, 88);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(244, 20);
+            this.txtName.TabIndex = 22;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(102, 114);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(244, 20);
+            this.txtAddress.TabIndex = 23;
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(102, 140);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(244, 20);
+            this.txtNumber.TabIndex = 24;
+            // 
+            // btnLookup
+            // 
+            this.btnLookup.Location = new System.Drawing.Point(147, 29);
+            this.btnLookup.Name = "btnLookup";
+            this.btnLookup.Size = new System.Drawing.Size(100, 23);
+            this.btnLookup.TabIndex = 25;
+            this.btnLookup.Text = "Lookup User";
+            this.btnLookup.UseVisualStyleBackColor = true;
+            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(169, 72);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(103, 13);
+            this.lblID.TabIndex = 26;
+            this.lblID.Text = "User ID: 000000000";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(55, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Name: ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(45, 117);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Address: ";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(45, 143);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "Phone #:";
             // 
             // FrmMain
             // 
@@ -717,9 +761,6 @@ namespace IDPrinter {
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabDeleteUser;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label lbl14;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label lblDeleteUser;
         private System.Windows.Forms.TextBox txtDeleteUser;
         private System.Windows.Forms.Button btnDeleteUser;
@@ -729,5 +770,13 @@ namespace IDPrinter {
         private System.Windows.Forms.ListBox lbUserLog;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Button btnLookup;
+        private System.Windows.Forms.Label lblID;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label8;
     }
 }

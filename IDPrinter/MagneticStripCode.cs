@@ -87,7 +87,7 @@ namespace IDPrinter {
         #endregion
 
         #region write card data
-        public void writeCardData(string userID) {
+        public static void writeCardData(string userID) {
             byte[] data = Encoding.ASCII.GetBytes(userID);
             if (!sp.IsOpen) {
                 sp.PortName = FrmMain.comPort;
@@ -120,31 +120,36 @@ namespace IDPrinter {
         #endregion
 
         public static string getComPort() {
-            string[] str = SerialPort.GetPortNames();
-            string recieved = "";
-            foreach (string value in str) {
-                Console.WriteLine(value);
+            try {
+                string[] str = SerialPort.GetPortNames();
+                string recieved = "";
+                string com = "";
                 serialPort = new SerialPort();
-                serialPort.PortName = value;
-                serialPort.BaudRate = 9600;
-                serialPort.Parity = 0;
-                serialPort.DataBits = 8;
-                serialPort.ReadTimeout = 5000;
-                serialPort.WriteTimeout = 500;
-                sp.Write(comTest, 0, comTest.Length);
-                Thread.Sleep(100);
-                recieved = serialPort.ReadExisting();
-                if (recieved.Equals("\u001by"))
-                {
+                foreach (string value in str) {
                     Console.WriteLine(value);
-                    return value;
+                    serialPort.PortName = value;
+                    serialPort.BaudRate = 9600;
+                    serialPort.Parity = 0;
+                    serialPort.DataBits = 8;
+                    serialPort.ReadTimeout = 5000;
+                    serialPort.WriteTimeout = 500;
+                    serialPort.Open();
+                    serialPort.Write(comTest, 0, comTest.Length);
+                    Thread.Sleep(100);
+                    recieved = serialPort.ReadExisting();
+                    if (recieved.Equals("\u001by")) {
+                        Console.WriteLine(value);
+                        com = value;
+                    }
+                    serialPort.Close();
                 }
-                Console.WriteLine(recieved);
-                //Console.WriteLine(recieved);
-
+                return com;
+            } catch(Exception e) {
+                Console.WriteLine(e);
+                return "";
             }
-            return recieved;
         }
+
         public static void clearBuffer() {
             sp.PortName = FrmMain.comPort;
             sp.BaudRate = 9600;
