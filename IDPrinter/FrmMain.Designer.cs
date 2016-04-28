@@ -78,6 +78,8 @@ namespace IDPrinter {
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pbUserPic = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -87,6 +89,7 @@ namespace IDPrinter {
             this.tabAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabTesting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUserPic)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -174,6 +177,7 @@ namespace IDPrinter {
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lblImageLocation);
             this.groupBox1.Controls.Add(this.userImageBox);
             this.groupBox1.Controls.Add(this.txtPhone);
@@ -451,6 +455,7 @@ namespace IDPrinter {
             // 
             // tabDeleteUser
             // 
+            this.tabDeleteUser.Controls.Add(this.pbUserPic);
             this.tabDeleteUser.Controls.Add(this.label15);
             this.tabDeleteUser.Controls.Add(this.label14);
             this.tabDeleteUser.Controls.Add(this.label8);
@@ -507,7 +512,7 @@ namespace IDPrinter {
             // 
             // btnLookup
             // 
-            this.btnLookup.Location = new System.Drawing.Point(147, 29);
+            this.btnLookup.Location = new System.Drawing.Point(203, 35);
             this.btnLookup.Name = "btnLookup";
             this.btnLookup.Size = new System.Drawing.Size(100, 23);
             this.btnLookup.TabIndex = 25;
@@ -519,6 +524,7 @@ namespace IDPrinter {
             // 
             this.txtNumber.Location = new System.Drawing.Point(102, 140);
             this.txtNumber.Name = "txtNumber";
+            this.txtNumber.ReadOnly = true;
             this.txtNumber.Size = new System.Drawing.Size(244, 20);
             this.txtNumber.TabIndex = 24;
             // 
@@ -526,6 +532,7 @@ namespace IDPrinter {
             // 
             this.txtAddress.Location = new System.Drawing.Point(102, 114);
             this.txtAddress.Name = "txtAddress";
+            this.txtAddress.ReadOnly = true;
             this.txtAddress.Size = new System.Drawing.Size(244, 20);
             this.txtAddress.TabIndex = 23;
             // 
@@ -533,6 +540,7 @@ namespace IDPrinter {
             // 
             this.txtName.Location = new System.Drawing.Point(102, 88);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(244, 20);
             this.txtName.TabIndex = 22;
             // 
@@ -549,7 +557,7 @@ namespace IDPrinter {
             // lblDeleteUser
             // 
             this.lblDeleteUser.AutoSize = true;
-            this.lblDeleteUser.Location = new System.Drawing.Point(8, 13);
+            this.lblDeleteUser.Location = new System.Drawing.Point(64, 19);
             this.lblDeleteUser.Name = "lblDeleteUser";
             this.lblDeleteUser.Size = new System.Drawing.Size(325, 13);
             this.lblDeleteUser.TabIndex = 20;
@@ -557,7 +565,7 @@ namespace IDPrinter {
             // 
             // txtDeleteUser
             // 
-            this.txtDeleteUser.Location = new System.Drawing.Point(11, 29);
+            this.txtDeleteUser.Location = new System.Drawing.Point(67, 35);
             this.txtDeleteUser.Name = "txtDeleteUser";
             this.txtDeleteUser.Size = new System.Drawing.Size(130, 20);
             this.txtDeleteUser.TabIndex = 19;
@@ -694,6 +702,24 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(375, 211);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Generate Report";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // pbUserPic
+            // 
+            this.pbUserPic.Location = new System.Drawing.Point(147, 166);
+            this.pbUserPic.Name = "pbUserPic";
+            this.pbUserPic.Size = new System.Drawing.Size(140, 136);
+            this.pbUserPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUserPic.TabIndex = 30;
+            this.pbUserPic.TabStop = false;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -717,6 +743,7 @@ namespace IDPrinter {
             this.tabAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabTesting.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbUserPic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -778,5 +805,7 @@ namespace IDPrinter {
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pbUserPic;
     }
 }

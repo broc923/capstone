@@ -100,7 +100,7 @@ namespace IDPrinter {
                         data.Add(dataReader["ID"].ToString());
                         data.Add(dataReader["time"].ToString());
                         data.Add(dataReader["loggingIn"].ToString());
-                        data.Add("=IF($C2=0,$B3-$B2,0)");
+                        //data.Add("=IF($C2=0,$B3-$B2,0)");
                     }
                     Console.WriteLine(data[0]);
                     return data;
