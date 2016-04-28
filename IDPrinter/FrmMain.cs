@@ -18,7 +18,6 @@ namespace IDPrinter {
         #region Anything that happens on load up
         public FrmMain() { //no-arg constructor
             InitializeComponent(); //handles the initialization of the forms controls on load up
-            AppDomain.CurrentDomain.SetData("DataDirectory", Application.StartupPath);
         }
 
         private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
@@ -26,7 +25,7 @@ namespace IDPrinter {
             CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
             //loads default 'anonymous' photo on the Add User form
-            //comPort = MagneticStripCode.getComPort();
+            comPort = MagneticStripCode.getComPort();
             
             Console.WriteLine(comPort);
             
@@ -154,7 +153,7 @@ namespace IDPrinter {
                 } else {
 
                     graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                    graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, "1234567890", userSelectedFilePath, cbAdmin.Checked, out message);
+                    graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, (Database.newUser() + 1).ToString(), userSelectedFilePath, cbAdmin.Checked, out message);
                     //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
                     if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
                         PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
@@ -200,6 +199,7 @@ namespace IDPrinter {
                 lblID.Text = "User ID: " + data[0];
                 txtAddress.Text = data[3] + " " + data[4] + ", " + data[5] + " " + data[6];
                 txtNumber.Text = data[7];
+                pbUserPic.ImageLocation = data[8];
             }
 
         }
@@ -281,13 +281,9 @@ namespace IDPrinter {
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
             xlWorkSheet.Cells[1, 1] = "Student ID";
-            //xlWorkSheet.Cells[1, 2] = "Name";
-            //xlWorkSheet.Cells[1, 3] = "Address";
-            //xlWorkSheet.Cells[1, 4] = "Picture";
             xlWorkSheet.Cells[1, 2] = "Time Logged";
             xlWorkSheet.Cells[1, 3] = "Login / Out";
             xlWorkSheet.Cells[1, 4] = "Total Time";
-            //xlWorkSheet.Columns.AutoFit();
             Excel.Range er = xlWorkSheet.get_Range("A:D", System.Type.Missing);
 
             er.EntireColumn.ColumnWidth = 35;
@@ -298,16 +294,20 @@ namespace IDPrinter {
             int userCount = 0;
             //Console.WriteLine(userData[0]);
             foreach (var value in userData) {
-                Console.WriteLine(value);
-                if (userCount < 4) {
+                Console.WriteLine(userCount);
+                if (userCount < 3) {
                     xlWorkSheet.Cells[rowCount, colCount] = value;
                     colCount++;
                     userCount++;
                 }
-                if (userCount >= 4) {
+                Console.WriteLine(userCount);
+                if (userCount == 3) {
+                    int temp = rowCount + 1;
+                    //xlWorkSheet.Cells[rowCount, colCount] = value;
+                    xlWorkSheet.Cells[rowCount,colCount].NumberFormat = "hh:mm:ss";
+                    xlWorkSheet.Cells[rowCount, colCount] = "=IF($C"+ rowCount + "=0,$B" + temp + "-$B" + rowCount + ",0)";
                     rowCount++;
                     colCount = 1;
-                    xlWorkSheet.Cells[rowCount, colCount] = value;
                     userCount = 0;
                 }
             }

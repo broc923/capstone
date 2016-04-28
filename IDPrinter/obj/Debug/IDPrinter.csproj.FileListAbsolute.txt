@@ -28,3 +28,14 @@ C:\Users\kr4ckl3s\Desktop\capstone\IDPrinter\obj\Debug\IDPrinter.FrmMain.resourc
 C:\Users\kr4ckl3s\Desktop\capstone\IDPrinter\obj\Debug\IDPrinter.FrmPreview.resources
 C:\Users\kr4ckl3s\Desktop\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
 C:\Users\kr4ckl3s\Desktop\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\IDPrinter.exe.config
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.ResolveComReference.cache
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.exe
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.pdb
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.FrmMain.resources
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.Properties.Resources.resources
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.csproj.GenerateResource.Cache
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\Database.mdf
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\Database_log.ldf
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\IDPrinter.exe
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\IDPrinter.pdb

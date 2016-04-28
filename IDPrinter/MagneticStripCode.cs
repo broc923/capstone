@@ -151,13 +151,13 @@ namespace IDPrinter {
         }
 
         public static void clearBuffer() {
-            sp.PortName = FrmMain.comPort;
-            sp.BaudRate = 9600;
-            sp.Parity = 0;
-            sp.DataBits = 8;
-            sp.ReadTimeout = 500;
-            sp.WriteTimeout = 5000;
             if (!sp.IsOpen) {
+                sp.PortName = FrmMain.comPort;
+                sp.BaudRate = 9600;
+                sp.Parity = 0;
+                sp.DataBits = 8;
+                sp.ReadTimeout = 500;
+                sp.WriteTimeout = 5000;
                 sp.Open();
             }
             if (sp.IsOpen) {
