@@ -4,6 +4,8 @@ using nsZBRPrinter; //allows access to zebra-specific controls
 using System.Drawing.Printing; //Defines a reusable object that sends output to a printer, when printing from a Windows Forms application
 using System.Text.RegularExpressions;
 using System.Collections;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace IDPrinter {
     public partial class FrmMain : Form {
@@ -24,7 +26,7 @@ namespace IDPrinter {
             CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
             //loads default 'anonymous' photo on the Add User form
-            comPort = MagneticStripCode.getComPort();
+            //comPort = MagneticStripCode.getComPort();
             
             Console.WriteLine(comPort);
             
@@ -238,12 +240,12 @@ namespace IDPrinter {
         #region Testing
         //***NOTE*** This is solely for testing purposes
         private void button3_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
-            
+
             /*IEnumerable data = Database.selectUser();
             foreach (Object obj in data)
                 Console.Write("   {0}", obj);*/
 
-            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
+            /*MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
                 readWriter.readCardData();
@@ -251,21 +253,84 @@ namespace IDPrinter {
                 MessageBox.Show(ex.ToString(), "Error with reading from card."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 readWriter = null; //sets readWriter object to null after it has been used
-            }
+            }*/
+            Database.data("1000000000", false);
         }
         private void button4_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
 
             //Database.data("1000000000", true);
             //Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, "1");
-            MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
-            try {
-                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
+            /*try {
                 int userID = Database.newUser();
-                readWriter.writeCardData(userID.ToString());
+                MagneticStripCode.writeCardData(userID.ToString());
             } catch (Exception ex) { //exception handler
                 MessageBox.Show(ex.ToString(), "Error with writing to card."); //catches and displays resulting errors to prevent program crash
-            } finally { //finally block runs whether there is an exception or not
-                readWriter = null; //sets readWriter object to null after it has been used
+            } */
+            Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+            if (xlApp == null) {
+                MessageBox.Show("Excel is not installed!!");
+                return;
+            }
+
+
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            xlWorkSheet.Cells[1, 1] = "Student ID";
+            //xlWorkSheet.Cells[1, 2] = "Name";
+            //xlWorkSheet.Cells[1, 3] = "Address";
+            //xlWorkSheet.Cells[1, 4] = "Picture";
+            xlWorkSheet.Cells[1, 2] = "Time Logged";
+            xlWorkSheet.Cells[1, 3] = "Login / Out";
+            xlWorkSheet.Cells[1, 4] = "Total Time";
+            //xlWorkSheet.Columns.AutoFit();
+            Excel.Range er = xlWorkSheet.get_Range("A:D", System.Type.Missing);
+
+            er.EntireColumn.ColumnWidth = 35;
+            //Dynamic
+            ArrayList userData = Database.selectUser();
+            int rowCount = 2;
+            int colCount = 1;
+            int userCount = 0;
+            //Console.WriteLine(userData[0]);
+            foreach (var value in userData) {
+                Console.WriteLine(value);
+                if (userCount < 4) {
+                    xlWorkSheet.Cells[rowCount, colCount] = value;
+                    colCount++;
+                    userCount++;
+                }
+                if (userCount >= 4) {
+                    rowCount++;
+                    colCount = 1;
+                    xlWorkSheet.Cells[rowCount, colCount] = value;
+                    userCount = 0;
+                }
+            }
+
+            xlWorkBook.SaveAs(Application.StartupPath + "\\report\\DBReport.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlShared, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+            MessageBox.Show("Excel file created , you can find the file in " + Application.StartupPath + "\\report\\DBReport.xls");
+        }
+        private void releaseObject(object obj) {
+            try {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            } catch (Exception ex) {
+                obj = null;
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            } finally {
+                GC.Collect();
             }
         }
         #endregion

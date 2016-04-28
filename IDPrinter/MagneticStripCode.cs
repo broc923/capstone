@@ -31,7 +31,7 @@ namespace IDPrinter {
         byte[] getDeviceData = new byte[] { 0x1B, 0x74 };
         byte[] getFirmwareVersion = new byte[] { 0x1B, 0x75 };
         byte[] getCompatibleFirmwareVersion = new byte[] { 0x1B, 0x76 };
-        byte[] setHiCo = new byte[] { 0x1B, 0x78 };
+        public static byte[] setHiCo = new byte[] { 0x1B, 0x78 };
         byte[] setLowCo = new byte[] { 0x1B, 0x79 };
         byte[] getHiCoLowCo = new byte[] { 0x1B, 0x64 };
         public static byte[] detectEZWriter = new byte[] { 0x39 };

@@ -53,6 +53,14 @@ namespace IDPrinter {
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnPrintID = new System.Windows.Forms.Button();
             this.tabDeleteUser = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblID = new System.Windows.Forms.Label();
+            this.btnLookup = new System.Windows.Forms.Button();
+            this.txtNumber = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.btnDeleteUser = new System.Windows.Forms.Button();
             this.lblDeleteUser = new System.Windows.Forms.Label();
             this.txtDeleteUser = new System.Windows.Forms.TextBox();
@@ -70,14 +78,6 @@ namespace IDPrinter {
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtNumber = new System.Windows.Forms.TextBox();
-            this.btnLookup = new System.Windows.Forms.Button();
-            this.lblID = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -469,6 +469,73 @@ namespace IDPrinter {
             this.tabDeleteUser.Text = "Delete User";
             this.tabDeleteUser.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(45, 143);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "Phone #:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(45, 117);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Address: ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(55, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Name: ";
+            // 
+            // lblID
+            // 
+            this.lblID.AutoSize = true;
+            this.lblID.Location = new System.Drawing.Point(169, 72);
+            this.lblID.Name = "lblID";
+            this.lblID.Size = new System.Drawing.Size(103, 13);
+            this.lblID.TabIndex = 26;
+            this.lblID.Text = "User ID: 000000000";
+            // 
+            // btnLookup
+            // 
+            this.btnLookup.Location = new System.Drawing.Point(147, 29);
+            this.btnLookup.Name = "btnLookup";
+            this.btnLookup.Size = new System.Drawing.Size(100, 23);
+            this.btnLookup.TabIndex = 25;
+            this.btnLookup.Text = "Lookup User";
+            this.btnLookup.UseVisualStyleBackColor = true;
+            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.Location = new System.Drawing.Point(102, 140);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(244, 20);
+            this.txtNumber.TabIndex = 24;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(102, 114);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(244, 20);
+            this.txtAddress.TabIndex = 23;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(102, 88);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(244, 20);
+            this.txtName.TabIndex = 22;
+            // 
             // btnDeleteUser
             // 
             this.btnDeleteUser.Location = new System.Drawing.Point(415, 279);
@@ -605,7 +672,7 @@ namespace IDPrinter {
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(148, 103);
+            this.button4.Location = new System.Drawing.Point(8, 21);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 28);
             this.button4.TabIndex = 17;
@@ -626,73 +693,6 @@ namespace IDPrinter {
             // openUserImage
             // 
             this.openUserImage.FileName = "openUserImage";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(102, 88);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(244, 20);
-            this.txtName.TabIndex = 22;
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Location = new System.Drawing.Point(102, 114);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(244, 20);
-            this.txtAddress.TabIndex = 23;
-            // 
-            // txtNumber
-            // 
-            this.txtNumber.Location = new System.Drawing.Point(102, 140);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(244, 20);
-            this.txtNumber.TabIndex = 24;
-            // 
-            // btnLookup
-            // 
-            this.btnLookup.Location = new System.Drawing.Point(147, 29);
-            this.btnLookup.Name = "btnLookup";
-            this.btnLookup.Size = new System.Drawing.Size(100, 23);
-            this.btnLookup.TabIndex = 25;
-            this.btnLookup.Text = "Lookup User";
-            this.btnLookup.UseVisualStyleBackColor = true;
-            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
-            // 
-            // lblID
-            // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(169, 72);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(103, 13);
-            this.lblID.TabIndex = 26;
-            this.lblID.Text = "User ID: 000000000";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(55, 91);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Name: ";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(45, 117);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 13);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "Address: ";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(45, 143);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "Phone #:";
             // 
             // FrmMain
             // 

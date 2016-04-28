@@ -8,7 +8,8 @@ namespace IDPrinter {
         #region connectToDatabase
 
         public static string connect = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
-
+        //Data Source =.\SQLEXPRESS;AttachDbFilename=C:\\Users\brocw\\Documents\\Visual Studio Projects\\capstone\\IDPrinter\\Database.mdf;Integrated Security = True; User Instance = True
+        //public static string connect = "Data Source =.\\SQLEXPRESS;AttachDbFilename=C:\\Users\brocw\\Documents\\Visual Studio Projects\\capstone\\IDPrinter\\Database.mdf;Integrated Security = True; User Instance = True";
         #endregion
 
         #region checkForUser
@@ -88,7 +89,7 @@ namespace IDPrinter {
         #region timeSelect
 
         public static ArrayList selectUser() {
-            string sql = "SELECT * FROM [dbo].[TimeTable]";
+            string sql = "SELECT * FROM [dbo].[TimeTable] ORDER BY ID";
             ArrayList data = new ArrayList();
             //Console.WriteLine(userID);
             using (SqlConnection connection = new SqlConnection(connect)) {
@@ -96,12 +97,16 @@ namespace IDPrinter {
                 connection.Open();
                 using (SqlDataReader dataReader = command.ExecuteReader()) {
                     while (dataReader.Read()) {
+                        data.Add(dataReader["ID"].ToString());
                         data.Add(dataReader["time"].ToString());
                         data.Add(dataReader["loggingIn"].ToString());
+                        data.Add("=IF($C2=0,$B3-$B2,0)");
                     }
+                    Console.WriteLine(data[0]);
+                    return data;
                 }
             }
-            return data;
+            //return data;
         }
         #endregion
 
