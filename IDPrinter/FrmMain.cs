@@ -370,7 +370,7 @@ namespace IDPrinter {
 
 
         #endregion
-
+        #region login/out
         private void btnLogin_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
@@ -462,5 +462,6 @@ namespace IDPrinter {
                 //MagneticStripCode.clearBuffer();
             }
         }
+        #endregion
     }
 }
