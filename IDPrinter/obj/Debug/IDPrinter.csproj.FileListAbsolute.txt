@@ -39,3 +39,4 @@ C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\Database.mdf
 C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\Database_log.ldf
 C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\IDPrinter.exe
 C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\bin\Debug\IDPrinter.pdb
+C:\Users\ad1\Documents\GitHub\capstone\IDPrinter\obj\Debug\IDPrinter.csprojResolveAssemblyReference.cache
