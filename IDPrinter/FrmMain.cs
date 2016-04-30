@@ -11,8 +11,9 @@ namespace IDPrinter {
     public partial class FrmMain : Form {
         #region Global Variables
         //variables to display the current graphics and printer software versions & to hold the file path location for stored user images for import
+        //holds the deletion ID variable for users to be deleted
         private string graphicsSDKVersion, printerSDKVersion, userSelectedFilePath = "", deletionID;
-        public static string comPort = "";
+        public static string comPort = ""; //Public com port name
         #endregion
 
         #region Anything that happens on load up
@@ -23,16 +24,16 @@ namespace IDPrinter {
         private void FrmMain_Load(object sender, EventArgs e) { //parameterized load event
             GetSDKVersions(); //calls to method to retrieve current SDK software versions
             CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
-            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
-            pbUserPic.ImageLocation = Application.StartupPath + "\\Default User.png";
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png"; //Add user page default image
+            pbUserPic.ImageLocation = Application.StartupPath + "\\Default User.png"; //Delete user page default image
             //loads default 'anonymous' photo on the Add User form
-            comPort = MagneticStripCode.getComPort();
+            comPort = MagneticStripCode.getComPort(); //Grabs the com port that the EzWriter is connected to
             
             Console.WriteLine(comPort);
-            foreach (TabPage tab in tabControl1.TabPages) {
+            foreach (TabPage tab in tabControl1.TabPages) { //Disables all tabs
                 tab.Enabled = false;
             }
-            tabControl1.TabPages[0].Enabled = true;
+            tabControl1.TabPages[0].Enabled = true; //except the first tab by default
 
         }
         #endregion
@@ -126,59 +127,61 @@ namespace IDPrinter {
                     return;  //return results displaying message that no printer is available
                 }
 
-                string nullMessage = "";
+                string nullMessage = ""; //Holds what we return to the user
 
-                if (txtFirstName.Text == "") {
+                if (txtFirstName.Text == "") { //If first name field is empty
                     nullMessage += "No data has been entered for First Name.\n";
                 }
-                if (txtLastName.Text == "") {
+                if (txtLastName.Text == "") { //If last name field is empty
                     nullMessage += "No data has been entered for Last Name.\n";
                 }
-                if (txtStreet.Text == "") {
+                if (txtStreet.Text == "") { //If street field is empty
                     nullMessage += "No data has been entered for Street.\n";
                 }
-                if (txtCity.Text == "") {
+                if (txtCity.Text == "") { //If city field is empty
                     nullMessage += "No data has been entered for City.\n";
                 }
-                if (cbState.Text == "") {
+                if (cbState.Text == "") { //If state field is empty
                     nullMessage += "No State has been selected.\n";
                 }
-                if (txtZip.Text == "") {
+                if (txtZip.Text == "") { //If zip field is empty
                     nullMessage += "No data has been entered for Zip Code.\n";
                 }
-                if (txtPhone.Text == "") {
+                if (txtPhone.Text == "") { //If phone field is empty
                     nullMessage += "No data has been entered for Phone Number.\n";
                 }
-                if (userSelectedFilePath == "") {
+                if (userSelectedFilePath == "") { //If user image field is empty
                     nullMessage += "No image has been selected.\n";
                 }
 
-                if (nullMessage != "") {
+                if (nullMessage != "") { //If null message is set
                     MessageBox.Show(nullMessage);
-                } else {
+                } else { //If null message was not set
 
                     graphics = new GraphicCode(); //creates new GraphicCode object and stores in graphics 
-                    graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, (Database.newUser() + 1).ToString(), userSelectedFilePath, cbAdmin.Checked, out message);
                     //call Print method of graphics object and pass (string driverName, string name, string userID, string userPicture, bool admin, bool back, string[] disclaimerSplit, out string msg)
+                    graphics.Print(cbPrinters.Text, txtFirstName.Text + " " + txtLastName.Text, (Database.newUser() + 1).ToString(), userSelectedFilePath, cbAdmin.Checked, out message);
                     if (message == "") { //if message string is empty, nothing is determined to have prevented the printer from functioning
                         PrinterReadyToStart(cbPrinters.Text, 60); //call to PrinterReadyToStart method passing user selected printer driver user selected from drop-down list on Add User tab, and 60 second timeout value
                         lblStatus.Text = "Printing the ID"; //change Status label on Add User tab to display "Printing the ID"
                     }
 
-                    string isAdmin;
+                    string isAdmin; //Is the user an admin format string.
 
                     if (cbAdmin.Checked == true) {
-                        isAdmin = "1";
+                        isAdmin = "1"; //Is admin
                     } else {
-                        isAdmin = "0";
+                        isAdmin = "0"; //Is not admin
                     }
+                    //Adds the user to the database(first name, last name, street, city, state, zip, phone number, user image, is an admin)
                     Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, isAdmin);
                     Console.WriteLine("add query was ran");
+                    //Messagebox to wait for the user to press okay before trying to write data to the card
                     DialogResult result = MessageBox.Show("Press okay and wait for the orange light on the EZWriter, then slide your card.", "Confirmation", MessageBoxButtons.OK);
-                    if (result == DialogResult.OK) {
-                        MagneticStripCode.writeCardData(Database.newUser().ToString());
+                    if (result == DialogResult.OK) { //Picked ok
+                        MagneticStripCode.writeCardData(Database.newUser().ToString()); //Writes card data
                     } else {
-                        Database.deleteUser(Database.newUser().ToString());
+                        Database.deleteUser(Database.newUser().ToString()); //Delete user that was added
                         MessageBox.Show("User was not created. Please retry.");
                     }
 
@@ -197,26 +200,27 @@ namespace IDPrinter {
         #endregion
 
         #region Delete User page
-        private void btnLookup_Click(object sender, EventArgs e) {
-            deletionID = txtDeleteUser.Text;
+        private void btnLookup_Click(object sender, EventArgs e) { //Click to lookup a user
+            deletionID = txtDeleteUser.Text; //Sets deletion ID
             if (deletionID != "") {
-                string[] data = Database.checkUser(deletionID);
-                txtName.Text = data[1] + " " + data[2];
-                lblID.Text = "User ID: " + data[0];
-                txtAddress.Text = data[3] + " " + data[4] + ", " + data[5] + " " + data[6];
-                txtNumber.Text = data[7];
-                pbUserPic.ImageLocation = data[8];
+                string[] data = Database.checkUser(deletionID); //All user's data database check
+                txtName.Text = data[1] + " " + data[2]; //Name
+                lblID.Text = "User ID: " + data[0]; //User's ID
+                txtAddress.Text = data[3] + " " + data[4] + ", " + data[5] + " " + data[6]; //address
+                txtNumber.Text = data[7]; //Phone number
+                pbUserPic.ImageLocation = data[8]; //Picture
             }
 
         }
 
         private void btnDeleteUser_click(object sender, EventArgs e) {
             if (deletionID != "") {
-                string[] data = Database.checkUser(deletionID);
+                string[] data = Database.checkUser(deletionID); //All user's data for the ID being deleted
+                //Make sure you want to delete the user
                 DialogResult result = MessageBox.Show("Do you want to delete the user shown?", "Confirmation", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
                     if (data[0] == txtDeleteUser.Text) {
-                        Database.deleteUser(deletionID);
+                        Database.deleteUser(deletionID); //Delete user
                         Refresh();
                     } else {
                         MessageBox.Show("User does not exist.");
@@ -242,8 +246,6 @@ namespace IDPrinter {
         }
 
         #endregion
-
-       
 
         #region Clear form
         private void btnClear_Click(object sender, EventArgs e) { //clear button on Add User tab
@@ -328,6 +330,19 @@ namespace IDPrinter {
             }
         }
 
+        private void btnClearLogs_Click(object sender, EventArgs e) {
+            Database.clearTimeTable();
+        }
+
+        private void btnClearDelete_Click(object sender, EventArgs e) {
+            txtName.Text = "";
+            txtNumber.Text = "";
+            txtAddress.Text = "";
+            txtDeleteUser.Text = "";
+            pbUserPic.ImageLocation = Application.StartupPath + "\\Default User.png";
+            lblID.Text = "User ID: 0000";
+        }
+
 
 
 
@@ -351,31 +366,32 @@ namespace IDPrinter {
 
 
         #endregion
+
         #region login/out
         private void btnLogin_Click(object sender, EventArgs e) {
             MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
             try {
                 readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                string cardID = readWriter.readCardData().ToString();
+                string cardID = readWriter.readCardData().ToString(); //Card ID set to string of whatever is read
                 Console.WriteLine(cardID);
                 //string last = cardID.Substring(cardID.LastIndexOf('%') + 1);
-                string last = Regex.Replace(cardID, "[^0-9]", "");
+                string last = Regex.Replace(cardID, "[^0-9]", ""); //Formatted card data without any special characters
                 Console.WriteLine("Fixed String: " + last);
                 if (last.Equals(null) || last.Equals("")) {
                     MessageBox.Show("Error reading card. Press Okay and try again?");
                     MagneticStripCode.clearBuffer();
-                    cardID = readWriter.readCardData().ToString();
-                    last = Regex.Replace(cardID, "[^0-9]", "");
-                    string dbID = Database.checkUser(last)[0];
+                    cardID = readWriter.readCardData().ToString(); //Card ID set to string of whatever is read
+                    last = Regex.Replace(cardID, "[^0-9]", ""); //Only grab numbers nos pecial characters
+                    string dbID = Database.checkUser(last)[0]; //Grabs ID from database using the formatted card ID
                     Console.WriteLine("DB ID: " + dbID);
                     if (last == dbID) { //User does exist
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
-                        Database.data(last, true);
-                        string isAdmin = Database.checkUser(last)[9];
-                        if (isAdmin.Equals("1")) {
-                            foreach (TabPage tab in tabControl1.TabPages) {
+                        Database.data(last, true); //Inputs timeclock data to DB
+                        string isAdmin = Database.checkUser(last)[9]; //Returns if the user is admin or not
+                        if (isAdmin.Equals("1")) { //Is admin
+                            foreach (TabPage tab in tabControl1.TabPages) { //Enable all pages
                                 tab.Enabled = true;
                             }
                         }
@@ -384,16 +400,16 @@ namespace IDPrinter {
                         lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
                     }
                 } else {
-                    string dbID = Database.checkUser(last)[0];
+                    string dbID = Database.checkUser(last)[0]; //Grabs ID from database using the formatted card ID
                     Console.WriteLine("DB ID: " + dbID);
                     if (last == dbID) { //User does exist
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
-                        Database.data(last, true);
-                        string isAdmin = Database.checkUser(last)[9];
+                        Database.data(last, true);  //Inputs timeclock data to DB
+                        string isAdmin = Database.checkUser(last)[9]; //Returns if the user is admin or not
                         if (isAdmin.Equals("1")) {
-                            foreach (TabPage tab in tabControl1.TabPages) {
+                            foreach (TabPage tab in tabControl1.TabPages) { //Enable all pages
                                 tab.Enabled = true;
                             }
                         }
@@ -417,46 +433,46 @@ namespace IDPrinter {
                 string cardID = readWriter.readCardData().ToString();
                 Console.WriteLine(cardID);
                 //string last = cardID.Substring(cardID.LastIndexOf('%') + 1);
-                string last = Regex.Replace(cardID, "[^0-9]", "");
+                string last = Regex.Replace(cardID, "[^0-9]", ""); //Only grab numbers no special characters
                 Console.WriteLine("Fixed String: " + last);
                 if (last.Equals(null) || last.Equals("")) {
                     MessageBox.Show("Error reading card. Press Okay and try again?");
                     MagneticStripCode.clearBuffer();
                     cardID = readWriter.readCardData().ToString();
-                    last = Regex.Replace(cardID, "[^0-9]", "");
-                    string dbID = Database.checkUser(last)[0];
+                    last = Regex.Replace(cardID, "[^0-9]", ""); //Only grab numbers no special characters
+                    string dbID = Database.checkUser(last)[0]; //Grabs ID from database using the formatted card ID
                     Console.WriteLine("DB ID: " + dbID);
                     if (last == dbID) { //User does exist
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
-                        string isAdmin = Database.checkUser(last)[9];
+                        string isAdmin = Database.checkUser(last)[9]; //Returns if the user is admin or not
                         if (isAdmin.Equals("1")) {
-                            foreach (TabPage tab in tabControl1.TabPages) {
+                            foreach (TabPage tab in tabControl1.TabPages) { //disable all pages
                                 tab.Enabled = false;
                             }
-                            tabControl1.TabPages[0].Enabled = true;
+                            tabControl1.TabPages[0].Enabled = true; //except page 1
                         }
-                        Database.data(last, false);
+                        Database.data(last, false); //Inputs timeclock data to DB
                         lbUserLog.Items.Add("User " + last + " logged out.");
                     } else { //User doesn't exist
                         lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
                     }
                 } else {
-                    string dbID = Database.checkUser(last)[0];
+                    string dbID = Database.checkUser(last)[0]; //Grabs ID from database using the formatted card ID
                     Console.WriteLine("DB ID: " + dbID);
                     if (last == dbID) { //User does exist
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
-                        string isAdmin = Database.checkUser(last)[9];
+                        string isAdmin = Database.checkUser(last)[9]; //Returns if the user is admin or not
                         if (isAdmin.Equals("1")) {
-                            foreach (TabPage tab in tabControl1.TabPages) {
+                            foreach (TabPage tab in tabControl1.TabPages) { //disable all pages
                                 tab.Enabled = false;
                             }
-                            tabControl1.TabPages[0].Enabled = true;
+                            tabControl1.TabPages[0].Enabled = true; //except page1
                         }
-                        Database.data(last, false);
+                        Database.data(last, false); //Inputs timeclock data to DB
                         lbUserLog.Items.Add("User " + last + " logged out.");
                     } else { //User doesn't exist
                         lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
