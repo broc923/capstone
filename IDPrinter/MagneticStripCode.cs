@@ -7,7 +7,6 @@ using System.Threading;
 namespace IDPrinter {
     class MagneticStripCode {
         public static AutoResetEvent signalEvent = new AutoResetEvent(false);
-        //public static SerialPort sp = new SerialPort(getComPort(), 9600, Parity.None, 8);
         public static SerialPort sp = new SerialPort();
         public static byte[] comTest = new byte[] { 0x1B, 0x65 };
         public static byte[] resetBuffer = new byte[] { 0x1B, 0x61 };
@@ -58,7 +57,6 @@ namespace IDPrinter {
                 } catch (Exception error) {
                     Console.WriteLine(error);
                 }
-                //Console.WriteLine(data);
                 sp.Close();
                 sp.Dispose();
                 signalEvent.Set();
@@ -96,7 +94,6 @@ namespace IDPrinter {
             sp.Close();
             sp.Dispose();
             signalEvent.Set();
-            //clearBuffer();
         }
         #endregion
 

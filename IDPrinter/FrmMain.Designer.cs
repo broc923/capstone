@@ -71,6 +71,8 @@ namespace IDPrinter {
             this.lblGraphicsVersion = new System.Windows.Forms.Label();
             this.btnReport = new System.Windows.Forms.Button();
             this.openUserImage = new System.Windows.Forms.OpenFileDialog();
+            this.btnClearLogs = new System.Windows.Forms.Button();
+            this.btnClearDelete = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabAddUser.SuspendLayout();
@@ -432,6 +434,7 @@ namespace IDPrinter {
             // 
             // tabDeleteUser
             // 
+            this.tabDeleteUser.Controls.Add(this.btnClearLogs);
             this.tabDeleteUser.Controls.Add(this.groupBox3);
             this.tabDeleteUser.Controls.Add(this.groupBox2);
             this.tabDeleteUser.Controls.Add(this.pbUserPic);
@@ -482,6 +485,7 @@ namespace IDPrinter {
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnClearDelete);
             this.groupBox2.Controls.Add(this.btnDeleteUser);
             this.groupBox2.Controls.Add(this.lblID);
             this.groupBox2.Controls.Add(this.txtName);
@@ -512,9 +516,9 @@ namespace IDPrinter {
             this.lblID.AutoSize = true;
             this.lblID.Location = new System.Drawing.Point(134, 13);
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(103, 13);
+            this.lblID.Size = new System.Drawing.Size(73, 13);
             this.lblID.TabIndex = 26;
-            this.lblID.Text = "User ID: 000000000";
+            this.lblID.Text = "User ID: 0000";
             // 
             // txtName
             // 
@@ -620,6 +624,26 @@ namespace IDPrinter {
             // 
             this.openUserImage.FileName = "openUserImage";
             // 
+            // btnClearLogs
+            // 
+            this.btnClearLogs.Location = new System.Drawing.Point(8, 248);
+            this.btnClearLogs.Name = "btnClearLogs";
+            this.btnClearLogs.Size = new System.Drawing.Size(107, 23);
+            this.btnClearLogs.TabIndex = 33;
+            this.btnClearLogs.Text = "Clear Time Logs";
+            this.btnClearLogs.UseVisualStyleBackColor = true;
+            this.btnClearLogs.Click += new System.EventHandler(this.btnClearLogs_Click);
+            // 
+            // btnClearDelete
+            // 
+            this.btnClearDelete.Location = new System.Drawing.Point(155, 107);
+            this.btnClearDelete.Name = "btnClearDelete";
+            this.btnClearDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnClearDelete.TabIndex = 30;
+            this.btnClearDelete.Text = "Clear";
+            this.btnClearDelete.UseVisualStyleBackColor = true;
+            this.btnClearDelete.Click += new System.EventHandler(this.btnClearDelete_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -700,5 +724,7 @@ namespace IDPrinter {
         private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnClearLogs;
+        private System.Windows.Forms.Button btnClearDelete;
     }
 }
