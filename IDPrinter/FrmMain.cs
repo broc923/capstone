@@ -24,11 +24,16 @@ namespace IDPrinter {
             GetSDKVersions(); //calls to method to retrieve current SDK software versions
             CheckForPrinters(); //calls to method to check for printers found and populate drop-down list
             userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png";
+            pbUserPic.ImageLocation = Application.StartupPath + "\\Default User.png";
             //loads default 'anonymous' photo on the Add User form
             comPort = MagneticStripCode.getComPort();
             
             Console.WriteLine(comPort);
-            
+            foreach (TabPage tab in tabControl1.TabPages) {
+                tab.Enabled = false;
+            }
+            tabControl1.TabPages[0].Enabled = true;
+
         }
         #endregion
 
@@ -58,7 +63,7 @@ namespace IDPrinter {
                 lblGraphicsVersion.Text = "Graphics Version: " + graphicsSDKVersion; //displays the information stored in graphisSDKVersion in lblGraphicsVersion on About tab
                 lblPrinterVersion.Text = "Printer Version: " + printerSDKVersion; //displays the information stored in printerSDKVersion in lblPrinterVersion on About tab
             } catch (Exception e) { //exception handler
-                MessageBox.Show(e.ToString(), "Broc Screwed up the SDK Version Grabber"); //catches and displays resulting errors to prevent program crash
+                MessageBox.Show(e.ToString(), "SDK Version Grabber had errors. Please contact an administrator."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 graphics = null; //sets graphics object to null after it has been used to obtain graphics and printer verion information
             }
@@ -186,6 +191,7 @@ namespace IDPrinter {
                     lblStatus.Text = message; //set the Status label to display the contents of message string
                 }
                 graphics = null; //sets graphics object to null after it has finished being used
+                FrmMain_Load(sender, args);
             }
         }
         #endregion
@@ -230,42 +236,30 @@ namespace IDPrinter {
             System.Windows.Forms.DialogResult dr = openUserImage.ShowDialog(); //dr variable represents the result of the form when used as a dialog box with ShowDialog method of openUserImage
             if (dr == DialogResult.OK) {//if OK button is selected
                 userSelectedFilePath = openUserImage.InitialDirectory + openUserImage.FileName; //obtain and store the image filepath into userSelectedFilePath variable
-                lblImageLocation.Text = userSelectedFilePath; //display the contents of userSelectedFilePath as a string in lblImagelocation label on Add User tab
+                //lblImageLocation.Text = userSelectedFilePath; //display the contents of userSelectedFilePath as a string in lblImagelocation label on Add User tab
                 userImageBox.ImageLocation = userSelectedFilePath; //display the user selected image in the image box in place of the default 'anonymous' image
             }
         }
 
         #endregion
 
-        #region Testing
-        //***NOTE*** This is solely for testing purposes
-        private void button3_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
+       
 
-            /*IEnumerable data = Database.selectUser();
-            foreach (Object obj in data)
-                Console.Write("   {0}", obj);*/
-
-            /*MagneticStripCode readWriter; //creates readWriter variable from the MagneticStripCode.cs class
-            try {
-                readWriter = new MagneticStripCode(); //creates new MagneticStripcCode object and stores in readWriter
-                readWriter.readCardData();
-            } catch (Exception ex) { //exception handler
-                MessageBox.Show(ex.ToString(), "Error with reading from card."); //catches and displays resulting errors to prevent program crash
-            } finally { //finally block runs whether there is an exception or not
-                readWriter = null; //sets readWriter object to null after it has been used
-            }*/
-            Database.data("1000000000", false);
+        #region Clear form
+        private void btnClear_Click(object sender, EventArgs e) { //clear button on Add User tab
+            txtFirstName.Clear(); //clears the first name textbox
+            txtLastName.Clear(); //clears the last name textbox
+            txtPhone.Clear(); //clears the phone number textbox
+            txtStreet.Clear(); //clears the street textbox
+            txtCity.Clear(); //clears the city textbox
+            txtZip.Clear(); //clears the zipcode textbox
+            cbAdmin.Checked = false; //unckecks the admin checkbox
+            cbState.SelectedIndex = -1; //Resets the index of first item in the current selection to the default value of -1
+            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png"; //resets the image to the default 'anonymous' image
+            txtFirstName.Focus(); //resets the focus to the First Name textbox if she form clear button is clicked
         }
-        private void button4_Click(object sender, EventArgs e) { //click event for Read/Write test button on Add User tab
 
-            //Database.data("1000000000", true);
-            //Database.addUser(txtFirstName.Text, txtLastName.Text, txtStreet.Text, txtCity.Text, cbState.Text, txtZip.Text, txtPhone.Text, userSelectedFilePath, "1");
-            /*try {
-                int userID = Database.newUser();
-                MagneticStripCode.writeCardData(userID.ToString());
-            } catch (Exception ex) { //exception handler
-                MessageBox.Show(ex.ToString(), "Error with writing to card."); //catches and displays resulting errors to prevent program crash
-            } */
+        private void btnReport_Click(object sender, EventArgs e) {
             Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
 
             if (xlApp == null) {
@@ -282,7 +276,7 @@ namespace IDPrinter {
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
             xlWorkSheet.Cells[1, 1] = "Student ID";
             xlWorkSheet.Cells[1, 2] = "Time Logged";
-            xlWorkSheet.Cells[1, 3] = "Login / Out";
+            xlWorkSheet.Cells[1, 3] = "Login = 1 / Logout = 0";
             xlWorkSheet.Cells[1, 4] = "Total Time";
             Excel.Range er = xlWorkSheet.get_Range("A:D", System.Type.Missing);
 
@@ -304,8 +298,8 @@ namespace IDPrinter {
                 if (userCount == 3) {
                     int temp = rowCount + 1;
                     //xlWorkSheet.Cells[rowCount, colCount] = value;
-                    xlWorkSheet.Cells[rowCount,colCount].NumberFormat = "hh:mm:ss";
-                    xlWorkSheet.Cells[rowCount, colCount] = "=IF($C"+ rowCount + "=0,$B" + temp + "-$B" + rowCount + ",0)";
+                    xlWorkSheet.Cells[rowCount, colCount].NumberFormat = "hh:mm:ss";
+                    xlWorkSheet.Cells[rowCount, colCount] = "=IF($C" + rowCount + "=1,$B" + temp + "-$B" + rowCount + ",0)";
                     rowCount++;
                     colCount = 1;
                     userCount = 0;
@@ -333,24 +327,11 @@ namespace IDPrinter {
                 GC.Collect();
             }
         }
-        #endregion
-
-        #region Clear form
-        private void btnClear_Click(object sender, EventArgs e) { //clear button on Add User tab
-            txtFirstName.Clear(); //clears the first name textbox
-            txtLastName.Clear(); //clears the last name textbox
-            txtPhone.Clear(); //clears the phone number textbox
-            txtStreet.Clear(); //clears the street textbox
-            txtCity.Clear(); //clears the city textbox
-            txtZip.Clear(); //clears the zipcode textbox
-            cbAdmin.Checked = false; //unckecks the admin checkbox
-            cbState.SelectedIndex = -1; //Resets the index of first item in the current selection to the default value of -1
-            userImageBox.ImageLocation = Application.StartupPath + "\\Default User.png"; //resets the image to the default 'anonymous' image
-            txtFirstName.Focus(); //resets the focus to the First Name textbox if she form clear button is clicked
-        }
 
 
-       
+
+
+
 
 
         #endregion
@@ -392,6 +373,12 @@ namespace IDPrinter {
                         Console.WriteLine("User exists");
                         //call method to add to database
                         Database.data(last, true);
+                        string isAdmin = Database.checkUser(last)[9];
+                        if (isAdmin.Equals("1")) {
+                            foreach (TabPage tab in tabControl1.TabPages) {
+                                tab.Enabled = true;
+                            }
+                        }
                         lbUserLog.Items.Add("User " + last + " logged in.");
                     } else { //User doesn't exist
                         lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
@@ -404,13 +391,19 @@ namespace IDPrinter {
                         Console.WriteLine("User exists");
                         //call method to add to database
                         Database.data(last, true);
+                        string isAdmin = Database.checkUser(last)[9];
+                        if (isAdmin.Equals("1")) {
+                            foreach (TabPage tab in tabControl1.TabPages) {
+                                tab.Enabled = true;
+                            }
+                        }
                         lbUserLog.Items.Add("User " + last + " logged in.");
                     } else { //User doesn't exist
                         lbUserLog.Items.Add("User " + last + " not found. Contact an administrator.");
                     }
                 }
             } catch (Exception ex) { //exception handler
-                MessageBox.Show(ex.ToString(), "Broc Screwed up the login."); //catches and displays resulting errors to prevent program crash
+                MessageBox.Show(ex.ToString(), "Something broke in the login. Please contact an administrator."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 readWriter = null; //sets readWriter object to null after it has been used
                 //MagneticStripCode.clearBuffer();
@@ -437,6 +430,13 @@ namespace IDPrinter {
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
+                        string isAdmin = Database.checkUser(last)[9];
+                        if (isAdmin.Equals("1")) {
+                            foreach (TabPage tab in tabControl1.TabPages) {
+                                tab.Enabled = false;
+                            }
+                            tabControl1.TabPages[0].Enabled = true;
+                        }
                         Database.data(last, false);
                         lbUserLog.Items.Add("User " + last + " logged out.");
                     } else { //User doesn't exist
@@ -449,6 +449,13 @@ namespace IDPrinter {
                                         //login
                         Console.WriteLine("User exists");
                         //call method to add to database
+                        string isAdmin = Database.checkUser(last)[9];
+                        if (isAdmin.Equals("1")) {
+                            foreach (TabPage tab in tabControl1.TabPages) {
+                                tab.Enabled = false;
+                            }
+                            tabControl1.TabPages[0].Enabled = true;
+                        }
                         Database.data(last, false);
                         lbUserLog.Items.Add("User " + last + " logged out.");
                     } else { //User doesn't exist
@@ -456,7 +463,7 @@ namespace IDPrinter {
                     }
                 }
             } catch (Exception ex) { //exception handler
-                MessageBox.Show(ex.ToString(), "Broc Screwed up the logout."); //catches and displays resulting errors to prevent program crash
+                MessageBox.Show(ex.ToString(), "Something broke in the logout. Please contact an administrator."); //catches and displays resulting errors to prevent program crash
             } finally { //finally block runs whether there is an exception or not
                 readWriter = null; //sets readWriter object to null after it has been used
                 //MagneticStripCode.clearBuffer();
